@@ -219,59 +219,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h3>Цветовая палитра</h3>
           <div class="tz-colors">
             <div class="color-item">
-              <div class="color-swatch" style="background:#f5f4f0;border:1px solid #ddd;"></div>
+              <div class="color-swatch" style="background:#24272e;"></div>
               <p class="color-name">Фон страницы</p>
-              <code>#f5f4f0</code>
+              <code>#24272e</code>
             </div>
             <div class="color-item">
-              <div class="color-swatch" style="background:#ffffff;border:1px solid #ddd;"></div>
+              <div class="color-swatch" style="background:#2d3038;border:1px solid rgba(255,255,255,0.1);"></div>
               <p class="color-name">Поверхность</p>
+              <code>#2d3038</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#3d4048;border:1px solid rgba(255,255,255,0.08);"></div>
+              <p class="color-name">Поверхность +1</p>
+              <code>#3d4048</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#ffffff;border:1px solid #eee;"></div>
+              <p class="color-name">Текст основной</p>
               <code>#ffffff</code>
             </div>
             <div class="color-item">
-              <div class="color-swatch" style="background:#f5f4e8;"></div>
-              <p class="color-name">Текст основной</p>
-              <code>#f5f4e8</code>
-            </div>
-            <div class="color-item">
-              <div class="color-swatch" style="background:#8b8678;"></div>
+              <div class="color-swatch" style="background:rgba(255,255,255,0.85);border:1px solid #eee;"></div>
               <p class="color-name">Текст вторичный</p>
-              <code>#8b8678</code>
+              <code>rgba(255,255,255, 0.85)</code>
             </div>
             <div class="color-item">
-              <div class="color-swatch" style="background:#d4a574;"></div>
+              <div class="color-swatch" style="background:rgba(255,255,255,0.6);border:1px solid #eee;"></div>
+              <p class="color-name">Текст приглушён</p>
+              <code>rgba(255,255,255, 0.6)</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#9669d8;"></div>
               <p class="color-name">Акцент CTA</p>
-              <code>#d4a574</code>
+              <code>#9669d8</code>
             </div>
             <div class="color-item">
-              <div class="color-swatch" style="background:#c8965f;"></div>
+              <div class="color-swatch" style="background:#8555c4;"></div>
               <p class="color-name">Акцент hover</p>
-              <code>#c8965f</code>
+              <code>#8555c4</code>
             </div>
             <div class="color-item">
-              <div class="color-swatch" style="background:#4a9b8e;"></div>
-              <p class="color-name">Зелёный бирюза</p>
-              <code>#4a9b8e</code>
+              <div class="color-swatch" style="background:rgba(150,105,216,0.2);border:1px solid rgba(150,105,216,0.3);"></div>
+              <p class="color-name">Акцент soft</p>
+              <code>rgba(150,105,216, 0.2)</code>
             </div>
             <div class="color-item">
-              <div class="color-swatch" style="background:#5a7a6a;"></div>
-              <p class="color-name">Зелёный лесной</p>
-              <code>#5a7a6a</code>
-            </div>
-            <div class="color-item">
-              <div class="color-swatch" style="background:#6b7d5a;"></div>
-              <p class="color-name">Оливковый</p>
-              <code>#6b7d5a</code>
-            </div>
-            <div class="color-item">
-              <div class="color-swatch" style="background:#d4c4a8;"></div>
-              <p class="color-name">Бежевый светлый</p>
-              <code>#d4c4a8</code>
-            </div>
-            <div class="color-item">
-              <div class="color-swatch" style="background:#9b8a6e;"></div>
-              <p class="color-name">Бежевый средний</p>
-              <code>#9b8a6e</code>
+              <div class="color-swatch" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);"></div>
+              <p class="color-name">Glass bg</p>
+              <code>rgba(255,255,255, 0.06)</code>
             </div>
             <div class="color-item">
               <div class="color-swatch" style="background:#3f8f6b;"></div>
@@ -291,7 +286,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <div class="tz-note">
-            <strong>Glass tint:</strong> <code>rgba(74, 155, 142, 0.05)</code> — никогда не чисто белый.
+            <strong>Glass tint:</strong> <code>rgba(150, 105, 216, 0.08)</code> — фиолетовый подтон, не чисто белый.<br/>
+            <strong>Border:</strong> <code>rgba(255, 255, 255, 0.12)</code> — единый для всех рамок на тёмном фоне.
           </div>
 
           <h3>Типографика</h3>
@@ -320,18 +316,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="tz-card">
               <p class="card-label">Primary CTA</p>
               <ul class="tz-list tz-list--sm">
-                <li>Фон: <code>linear-gradient(135deg, #e8c5a0, #d4a574)</code></li>
+                <li>Фон: <code>#9669d8</code></li>
+                <li>Hover: <code>#8555c4</code></li>
+                <li>Shadow: <code>0 2px 8px rgba(150,105,216,0.35)</code></li>
                 <li>Текст: белый</li>
                 <li>Border-radius: 12px</li>
                 <li>Padding: 14px 24px</li>
-                <li>Hover: чуть темнее + <code>translateY(-1px)</code></li>
+                <li>Hover: <code>translateY(-1px)</code> без агрессии</li>
               </ul>
             </div>
             <div class="tz-card">
               <p class="card-label">Secondary</p>
               <ul class="tz-list tz-list--sm">
-                <li>Outline или нейтральный фон</li>
-                <li>Используется редко</li>
+                <li>Фон: <code>transparent</code></li>
+                <li>Border: <code>1px solid #9669d8</code></li>
+                <li>Текст: <code>#9669d8</code></li>
+                <li>Hover: <code>rgba(150,105,216,0.2)</code> фон</li>
               </ul>
             </div>
           </div>
@@ -355,13 +355,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
           <h3>Типы карточек</h3>
           <table class="tz-table">
-            <thead><tr><th>Тип</th><th>Описание</th><th>Применение</th></tr></thead>
+            <thead><tr><th>Тип</th><th>Фон</th><th>Применение</th></tr></thead>
             <tbody>
-              <tr><td><code>card-solid</code></td><td>Белый фон, лёгкая тень</td><td>Основной рабочий элемент</td></tr>
-              <tr><td><code>card-glass</code></td><td>Полупрозрачный</td><td>Только смысловые акценты, не в списках</td></tr>
-              <tr><td><code>card-green</code></td><td>Лесной зелёный <code>#5a7a6a</code></td><td>Природная атмосфера</td></tr>
-              <tr><td><code>card-brown</code></td><td>Коричневый <code>#9b8a6e</code></td><td>Природная атмосфера</td></tr>
-              <tr><td><code>card-brown-light</code></td><td>Светлый бежевый <code>#d4c4a8</code></td><td>Природная атмосфера</td></tr>
+              <tr><td><code>card-solid</code></td><td><code>#2d3038</code> + border <code>rgba(255,255,255,0.12)</code></td><td>Основной рабочий элемент</td></tr>
+              <tr><td><code>card-glass</code></td><td><code>rgba(255,255,255,0.06)</code> + blur 8px</td><td>Только смысловые акценты, не в списках</td></tr>
+              <tr><td><code>card-green</code></td><td><code>#2d3038</code> (переменная <code>--color-green-forest</code>)</td><td>Тёмная поверхность</td></tr>
+              <tr><td><code>card-brown</code></td><td><code>#2d3038</code> (переменная <code>--color-brown-medium</code>)</td><td>Тёмная поверхность</td></tr>
+              <tr><td><code>card-brown-light</code></td><td><code>#3d4048</code> (переменная <code>--color-brown-light</code>)</td><td>Поверхность +1</td></tr>
             </tbody>
           </table>
 
