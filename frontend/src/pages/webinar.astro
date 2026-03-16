@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WebinarForm from '../components/WebinarForm.svelte';
+---
+
+<BaseLayout title="Вебинар: Почему устойчивость = деньги - МЭТЧ" description="Зарегистрируйтесь на вебинар о том, как устойчивость команд влияет на эффективность бизнеса.">
+  <main>
+    <section class="webinar-hero section hero-pattern-gradient">
+      <div class="container">
+        <div class="glass-container">
+          <h1>Почему устойчивость = деньги</h1>
+          <p class="webinar-subtitle">
+            Узнайте, как развитие устойчивости команд напрямую влияет на финансовые результаты компании
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="webinar-info section">
+      <div class="container">
+        <div class="webinar-content">
+          <div class="webinar-benefits card-solid">
+            <h2>Кому будет полезно</h2>
+            <ul>
+              <li>HR-директорам и HR BP</li>
+              <li>Руководителям отделов</li>
+              <li>Владельцам бизнеса</li>
+              <li>Тем, кто отвечает за обучение персонала</li>
+            </ul>
+          </div>
+
+          <div class="webinar-speaker card-solid">
+            <h2>Кто ведёт</h2>
+            <p>
+              Эксперты МЭТЧ с опытом работы с командами различных компаний.
+              Мы помогли десяткам организаций повысить устойчивость и эффективность.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="webinar-form-section section">
+      <div class="container">
+        <WebinarForm client:load />
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .webinar-hero {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .webinar-hero .glass-container {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .webinar-hero h1 {
+    color: #fff;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--text-2xl);
+  }
+
+  @media (min-width: 768px) {
+    .webinar-hero h1 {
+      font-size: var(--text-3xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .webinar-hero h1 {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .webinar-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--text-base);
+    line-height: var(--lh-loose);
+  }
+
+  @media (min-width: 768px) {
+    .webinar-subtitle {
+      font-size: var(--text-lg);
+    }
+  }
+
+  .webinar-info {
+    background: var(--color-bg);
+  }
+
+  .webinar-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .webinar-content {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .webinar-benefits,
+  .webinar-speaker {
+    padding: var(--spacing-2xl);
+  }
+
+  .webinar-benefits h2,
+  .webinar-speaker h2 {
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-accent);
+  }
+
+  .webinar-benefits ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .webinar-benefits li {
+    padding: var(--spacing-sm) 0;
+    padding-left: var(--spacing-xl);
+    position: relative;
+    color: var(--color-text-secondary);
+  }
+
+  .webinar-benefits li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: var(--fw-bold);
+  }
+
+  .webinar-form-section {
+    background: var(--color-bg);
+    background-image:
+      linear-gradient(
+        rgba(79, 127, 106, 0.06) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(79, 127, 106, 0.06) 1px,
+        transparent 1px
+      );
+    background-size: 48px 48px;
+  }
+</style>

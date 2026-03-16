@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: met4-frontend
+    ports:
+      - "80:80"
+    environment:
+      - PUBLIC_API_URL=http://bot:3000
+    depends_on:
+      - bot
+    restart: unless-stopped
+    networks:
+      - met4-network
+
+  bot:
+    build:
+      context: ./bot
+      dockerfile: Dockerfile
+    container_name: met4-bot
+    ports:
+      - "3000:3000"
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - CHAT_ID=${CHAT_ID}
+      - PORT=3000
+    restart: unless-stopped
+    networks:
+      - met4-network
+
+networks:
+  met4-network:
+    driver: bridge

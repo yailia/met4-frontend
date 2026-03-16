@@ -1,0 +1,524 @@
+---
+---
+
+<section class="stats-chart-section section section-grid-bg">
+  <div class="container">
+    <h2>Динамика стресса и вовлечённости</h2>
+    
+    <!-- График -->
+    <div class="stats-chart-container">
+      <h3 class="chart-title">Уровень ежедневного стресса</h3>
+      <div class="stats-chart">
+          <div class="chart-content">
+            <!-- Оси X и Y -->
+            <svg class="chart-axes-svg" viewBox="-20 -10 440 260" preserveAspectRatio="none">
+              <!-- Ось Y (вертикальная) - только до оси X -->
+              <line
+                x1="0"
+                y1="240"
+                x2="0"
+                y2="0"
+                stroke="rgba(255, 255, 255, 0.2)"
+                stroke-width="1"
+              />
+              <!-- Ось X (горизонтальная) -->
+              <line
+                x1="0"
+                y1="240"
+                x2="400"
+                y2="240"
+                stroke="rgba(255, 255, 255, 0.2)"
+                stroke-width="1"
+              />
+            </svg>
+            <div class="chart-lines">
+              <!-- Линейный график -->
+              <svg class="chart-line-svg" viewBox="-20 -10 440 260" preserveAspectRatio="none">
+                <!-- Линия стресса (плавная кривая Безье) -->
+                <!-- Точки: 2021(0,126), 2022(100,144), 2023(200,150), 2025(400,0) -->
+                <!-- Расчет: y = 240 - (value/40) * 240 -->
+                <path
+                  d="M 0 126 Q 50 135 100 144 T 200 150 T 400 0"
+                  fill="none"
+                  stroke="var(--color-accent)"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <!-- Точки данных -->
+                <!-- 2021: 19% = y=240-114=126 -->
+                <circle cx="0" cy="126" r="5" fill="var(--color-accent)" />
+                <!-- 2022: 16% = y=240-96=144 -->
+                <circle cx="100" cy="144" r="5" fill="var(--color-accent)" />
+                <!-- 2023: 15% = y=240-90=150 -->
+                <circle cx="200" cy="150" r="5" fill="var(--color-accent)" />
+                <!-- 2025: 40% = y=240-240=0 (выделенный красным) -->
+                <circle cx="400" cy="0" r="6" fill="var(--color-error)" />
+              </svg>
+              <!-- Годы и проценты над точками -->
+              <div class="chart-point-labels">
+                <div class="point-label" style="left: 0%;">
+                  <span class="point-year">2021</span>
+                  <span class="value-stress">19%</span>
+                </div>
+                <div class="point-label" style="left: 25%;">
+                  <span class="point-year">2022</span>
+                  <span class="value-stress">16%</span>
+                </div>
+                <div class="point-label" style="left: 50%;">
+                  <span class="point-year">2023</span>
+                  <span class="value-stress">15%</span>
+                </div>
+                <div class="point-label" style="left: 100%;">
+                  <span class="point-year">2025</span>
+                  <span class="value-stress value-error">40%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-legend">
+        <div class="legend-item">
+          <span class="legend-color" style="background: var(--color-accent);"></span>
+          <span class="legend-label">Ежедневный стресс</span>
+        </div>
+      </div>
+      <div class="chart-source">
+        <a href="https://www.gallup.com/workplace/697904/state-of-the-global-workplace-global-data.asp" target="_blank" rel="noopener noreferrer" class="source-link">
+          Источник: Gallup State of the Global Workplace 2025
+        </a>
+      </div>
+    </div>
+
+    <!-- Буллеты с выжимкой -->
+    <div class="stats-summary">
+      <ul class="stats-bullets">
+        <li class="stats-bullet bullet-dark">
+          <span class="bullet-number">$438 млрд</span>
+          <span class="bullet-text">потери в год</span>
+        </li>
+        <li class="stats-bullet bullet-accent">
+          <span class="bullet-number">40%</span>
+          <span class="bullet-text">испытывают стресс каждый день</span>
+        </li>
+        <li class="stats-bullet bullet-dark">
+          <span class="bullet-number">21%</span>
+          <span class="bullet-text">вовлечены в работу</span>
+        </li>
+        <li class="stats-bullet bullet-error">
+          <span class="bullet-number">77%</span>
+          <span class="bullet-text">жалуются на проблемы со здоровьем</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats-chart-section {
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .stats-chart-section h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  /* Mobile First - базовые стили для мобильных */
+  .stats-chart-container {
+    padding: var(--spacing-lg);
+    max-width: 100%;
+    margin: 0 auto var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+  }
+
+  .chart-title {
+    color: var(--color-text-primary);
+    font-size: var(--text-base);
+    font-weight: var(--fw-semibold);
+    margin-bottom: var(--spacing-md);
+    text-align: left;
+  }
+
+  .stats-chart {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+  }
+
+
+  .chart-content {
+    position: relative;
+    padding: 50px 0 10px;
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 2 / 1;
+    min-height: 180px;
+    width: 100%;
+    overflow: visible;
+  }
+
+
+  .chart-axes-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+
+
+  .chart-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .chart-line-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .chart-point-labels {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+  }
+
+  .point-label {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: -12px;
+    gap: 4px;
+  }
+
+  .point-year {
+    font-size: var(--text-xs);
+    color: var(--color-text-primary);
+    font-weight: var(--fw-semibold);
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .point-label .value-stress {
+    font-size: var(--text-xs);
+    color: var(--color-accent);
+    font-weight: var(--fw-semibold);
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .point-label .value-error {
+    color: var(--color-error);
+  }
+
+  .engagement-line {
+    opacity: 0.9;
+  }
+
+  .chart-x-axis {
+    display: flex;
+    justify-content: space-between;
+    gap: 0;
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-xs);
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .x-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    flex: 1;
+    position: relative;
+    min-width: 0;
+  }
+
+  .x-year {
+    font-size: var(--text-xs);
+    color: var(--color-text-primary);
+    font-weight: var(--fw-semibold);
+    letter-spacing: -0.01em;
+  }
+
+  .x-value {
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+    margin-top: 2px;
+  }
+
+  .value-stress {
+    color: var(--color-accent);
+    font-weight: var(--fw-semibold);
+  }
+
+  .x-label:nth-child(5) .value-stress {
+    color: var(--color-error);
+  }
+
+  .chart-legend {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 8px;
+    transition: background 0.2s ease;
+  }
+
+  .legend-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .legend-color {
+    width: 20px;
+    height: 3px;
+    border-radius: 2px;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .legend-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-primary);
+    font-weight: var(--fw-medium);
+  }
+
+  .chart-source {
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .source-link {
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .source-link:hover {
+    color: var(--color-accent);
+  }
+
+  .source-link::after {
+    content: "↗";
+    font-size: 10px;
+    opacity: 0.7;
+  }
+
+  /* Буллеты статистики */
+  .stats-summary {
+    padding: var(--spacing-2xl);
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+  }
+
+  .stats-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .stats-bullet {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .stats-bullet:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .bullet-dark {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .bullet-accent {
+    background: var(--color-accent);
+    border: 1px solid var(--color-accent);
+  }
+
+  .bullet-error {
+    background: var(--color-error);
+    border: 1px solid var(--color-error);
+  }
+
+  .bullet-number {
+    font-weight: var(--fw-bold);
+    color: var(--color-text-primary);
+    font-size: var(--text-xl);
+    line-height: 1.1;
+  }
+
+  .bullet-text {
+    font-size: var(--text-xs);
+    line-height: var(--lh-normal);
+    color: var(--color-text-secondary);
+  }
+
+  .bullet-accent .bullet-text,
+  .bullet-error .bullet-text {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Tablet и выше */
+  @media (min-width: 768px) {
+    .stats-chart-container {
+      padding: var(--spacing-2xl);
+      max-width: 1000px;
+    }
+
+    .chart-title {
+      font-size: var(--text-lg);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .stats-chart {
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+      padding: var(--spacing-md) 0;
+    }
+
+    .chart-wrapper {
+      gap: var(--spacing-lg);
+    }
+
+
+    .chart-content {
+      aspect-ratio: 2 / 1;
+      min-height: 240px;
+      padding: 8px 0;
+    }
+
+    .point-label {
+      margin-top: -40px;
+    }
+
+    .point-label .point-year {
+      font-size: var(--text-sm);
+    }
+
+    .point-label .value-stress {
+      font-size: var(--text-sm);
+    }
+
+    .chart-vertical-grid {
+      top: 8px;
+      bottom: 8px;
+    }
+
+    .chart-grid {
+      top: 8px;
+      bottom: 8px;
+    }
+
+    .chart-x-axis {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 0;
+      margin-top: var(--spacing-lg);
+      padding-top: var(--spacing-md);
+    }
+
+    .x-label {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .x-year {
+      font-size: var(--text-sm);
+    }
+
+    .x-value {
+      font-size: var(--text-xs);
+      gap: 3px;
+    }
+
+    .chart-legend {
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: var(--spacing-xl);
+    }
+
+    .stats-bullets {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+    }
+
+    .stats-bullet {
+      padding: var(--spacing-lg);
+      gap: var(--spacing-sm);
+    }
+
+    .bullet-number {
+      font-size: var(--text-2xl);
+    }
+
+    .bullet-text {
+      font-size: var(--text-sm);
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .stats-chart-container {
+      max-width: 1200px;
+    }
+
+    .stats-bullets {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

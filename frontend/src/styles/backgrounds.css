@@ -1,0 +1,95 @@
+/* Background Patterns */
+
+/* Сеточная геометрия (фаворит) */
+.section-grid-bg {
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(
+      rgba(79, 127, 106, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(79, 127, 106, 0.06) 1px,
+      transparent 1px
+    );
+  background-size: 48px 48px;
+}
+
+/* Мягкие диагонали (для динамики) */
+.section-diagonal-bg {
+  background-color: var(--color-bg);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(79, 127, 106, 0.05) 0,
+    rgba(79, 127, 106, 0.05) 1px,
+    transparent 1px,
+    transparent 64px
+  );
+}
+
+/* Модульные блоки (архитектура) */
+.section-modular-bg {
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(79, 127, 106, 0.04) 25%,
+      transparent 25%
+    ),
+    linear-gradient(
+      rgba(79, 127, 106, 0.04) 25%,
+      transparent 25%
+    );
+  background-size: 120px 120px;
+}
+
+/* Точки (тихий паттерн) */
+.section-dots-bg {
+  background-color: var(--color-bg);
+  background-image: radial-gradient(
+    rgba(79, 127, 106, 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+}
+
+/* Градиентные фоны для Hero - природная палитра */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    #4a9b8e 0%,      /* бирюзово-зеленый слева */
+    #5a7a6a 50%,     /* лесной зеленый */
+    #6b5d4a 100%     /* темный коричневый справа */
+  );
+}
+
+.hero-gradient-subtle {
+  background: linear-gradient(
+    135deg,
+    #f5f4f0 0%,      /* теплый серо-бежевый */
+    #e8f0e8 50%,     /* мягкий зеленый */
+    #f0ebe0 100%     /* мягкий коричневый */
+  );
+}
+
+/* Комбинированные фоны (паттерн + градиент) - природная палитра */
+.hero-pattern-gradient {
+  background-color: #4a9b8e;  /* бирюзово-зеленый */
+  background-image:
+    linear-gradient(
+      rgba(74, 155, 142, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(74, 155, 142, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      135deg,
+      rgba(90, 122, 106, 0.5) 0%,    /* лесной зеленый */
+      rgba(107, 93, 74, 0.8) 100%     /* темный коричневый */
+    );
+  background-size: 48px 48px, 48px 48px, 100% 100%;
+}

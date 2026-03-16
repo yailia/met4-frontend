@@ -1,0 +1,105 @@
+---
+---
+
+<section class="cause-effect-section section section-grid-bg">
+  <div class="container">
+    <h2>Что реально происходит с компанией</h2>
+    <div class="chain-container">
+      <div class="chain-item glass-light">
+        <div class="chain-number">1</div>
+        <h3>Стресс и неопределённость</h3>
+        <p>Постоянные изменения, неясные цели, высокая нагрузка</p>
+      </div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-item glass-light">
+        <div class="chain-number">2</div>
+        <h3>Выгорание</h3>
+        <p>Эмоциональное истощение, снижение мотивации, усталость</p>
+      </div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-item glass-light">
+        <div class="chain-number">3</div>
+        <h3>Падение качества решений</h3>
+        <p>Ошибки, задержки, снижение продуктивности</p>
+      </div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-item glass-light">
+        <div class="chain-number">4</div>
+        <h3>Потери времени и денег</h3>
+        <p>Текучка, переделки, упущенные возможности</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cause-effect-section {
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .cause-effect-section h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .chain-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .chain-container {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .chain-container {
+      flex-wrap: nowrap;
+    }
+  }
+
+  .chain-item {
+    flex: 1;
+    min-width: 200px;
+    padding: var(--spacing-xl);
+    text-align: center;
+    position: relative;
+  }
+
+  .chain-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--fw-bold);
+    margin: 0 auto var(--spacing-md);
+  }
+
+  .chain-arrow {
+    font-size: var(--text-2xl);
+    color: var(--color-accent);
+    font-weight: var(--fw-bold);
+    transform: rotate(90deg);
+  }
+
+  @media (min-width: 768px) {
+    .chain-arrow {
+      transform: rotate(0deg);
+    }
+  }
+
+  .chain-item h3 {
+    margin-bottom: var(--spacing-sm);
+  }
+</style>

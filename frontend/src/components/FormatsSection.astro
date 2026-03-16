@@ -1,0 +1,82 @@
+---
+---
+
+<section class="formats-section section">
+  <div class="container">
+    <h2>Продукты и решения</h2>
+    <div class="formats-grid grid grid-mobile">
+      <div class="format-card glass-light">
+        <h3>Тренинг по устойчивости</h3>
+        <p>Системное развитие навыков работы с нагрузкой</p>
+      </div>
+      <div class="format-card glass-light">
+        <h3>Тренинг по продуктивности</h3>
+        <p>Фокус, приоритеты, управление энергией</p>
+      </div>
+      <div class="format-card glass-light">
+        <h3>Работа с поколением Z</h3>
+        <p>Адаптация подходов взаимодействия</p>
+      </div>
+      <div class="format-card glass-light">
+        <h3>Коучинг руководителей</h3>
+        <p>Индивидуальная работа с управленцами</p>
+      </div>
+      <div class="format-card glass-light">
+        <h3>Индивидуальные планы развития</h3>
+        <p>Программы под конкретные задачи компании</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .formats-section {
+    background: var(--color-bg);
+  }
+
+  .formats-section h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .formats-grid {
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .formats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .formats-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .formats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .format-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .format-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .format-card {
+    padding: var(--spacing-xl);
+  }
+
+  .format-card h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-accent);
+  }
+</style>

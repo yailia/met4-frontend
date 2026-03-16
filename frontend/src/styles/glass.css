@@ -1,0 +1,93 @@
+/* Glass Morphism Effects - более мягкий стиль */
+
+.glass {
+  background: rgba(255, 255, 255, 0.5);  /* более прозрачный */
+  backdrop-filter: blur(6px) saturate(150%);  /* уменьшенный blur */
+  -webkit-backdrop-filter: blur(6px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.3);  /* более мягкая граница */
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);  /* более мягкая тень */
+  position: relative;
+  isolation: isolate;
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.6);  /* более воздушный */
+  backdrop-filter: blur(4px) saturate(150%);  /* минимальный blur */
+  -webkit-backdrop-filter: blur(4px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);  /* очень мягкая тень */
+  position: relative;
+  isolation: isolate;
+}
+
+.glass-accent {
+  background: rgba(255, 255, 255, 0.55);  /* слегка более непрозрачный для акцента */
+  backdrop-filter: blur(8px) saturate(150%);  /* умеренный blur */
+  -webkit-backdrop-filter: blur(8px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 24px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);  /* мягкая тень */
+  position: relative;
+  isolation: isolate;
+}
+
+.glass-accent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(74, 155, 142, 0.03), transparent);  /* более мягкий оттенок */
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Glass Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.5);  /* более прозрачный */
+  backdrop-filter: blur(6px) saturate(150%);  /* уменьшенный blur */
+  -webkit-backdrop-filter: blur(6px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: var(--spacing-xl);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);  /* более мягкая тень */
+  position: relative;
+  isolation: isolate;
+}
+
+/* Glass Container */
+.glass-container {
+  background: rgba(255, 255, 255, 0.5);  /* более прозрачный */
+  backdrop-filter: blur(16px) saturate(150%);  /* более глубокий blur */
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  padding: var(--spacing-2xl);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);  /* более мягкая тень */
+  position: relative;
+  isolation: isolate;
+}
+
+/* Responsive: упрощение glass на мобильных для производительности */
+@media (max-width: 767px) {
+  .glass,
+  .glass-light,
+  .glass-card {
+    backdrop-filter: blur(4px);  /* еще более мягкий на мобильных */
+    -webkit-backdrop-filter: blur(4px);
+  }
+  
+  .glass-container {
+    backdrop-filter: blur(12px);  /* более глубокий blur на мобильных */
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  .glass-accent {
+    backdrop-filter: blur(6px);  /* умеренный blur на мобильных */
+    -webkit-backdrop-filter: blur(6px);
+  }
+}

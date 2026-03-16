@@ -1,0 +1,91 @@
+---
+---
+
+<section class="webinar-section section section-diagonal-bg">
+  <div class="container">
+    <div class="webinar-content glass-card">
+      <div class="webinar-text">
+        <h2>Онлайн-разбор / вебинар</h2>
+        <p class="webinar-audience">Для HR и руководителей</p>
+        <ul class="webinar-topics">
+          <li>Влияние устойчивости на производительность</li>
+          <li>Практические способы повышения уровня команды</li>
+          <li>Ошибки и их последствия</li>
+        </ul>
+        <p class="webinar-format">Формат: разбор с кейсами и метриками</p>
+        <div class="webinar-cta">
+          <a href="/webinar" class="button-primary">Зарегистрироваться на разбор</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .webinar-section {
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .webinar-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .webinar-text {
+    text-align: center;
+  }
+
+  .webinar-section h2 {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+    font-size: var(--text-2xl);
+  }
+
+  @media (min-width: 768px) {
+    .webinar-section h2 {
+      font-size: var(--text-3xl);
+    }
+  }
+
+  .webinar-audience {
+    font-size: var(--text-lg);
+    color: var(--color-accent);
+    font-weight: var(--fw-semibold);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .webinar-topics {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto var(--spacing-xl);
+    max-width: 600px;
+    text-align: left;
+  }
+
+  .webinar-topics li {
+    padding: var(--spacing-sm) 0;
+    padding-left: var(--spacing-xl);
+    position: relative;
+    color: var(--color-text-secondary);
+    line-height: var(--lh-loose);
+  }
+
+  .webinar-topics li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: var(--fw-bold);
+  }
+
+  .webinar-format {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    margin-bottom: var(--spacing-xl);
+    font-style: italic;
+  }
+
+  .webinar-cta {
+    margin-top: var(--spacing-xl);
+  }
+</style>

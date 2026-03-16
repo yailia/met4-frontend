@@ -1,0 +1,111 @@
+---
+---
+
+<section class="resilience-metrics-section section">
+  <div class="container">
+    <h2>Устойчивость как бизнес-показатель</h2>
+    <div class="metrics-grid grid grid-mobile">
+      <div class="metric-card glass-light">
+        <div class="metric-label">Эффективность</div>
+        <h3>Прямая корреляция с продуктивностью</h3>
+        <p>Устойчивые команды показывают стабильно высокие результаты даже под нагрузкой</p>
+      </div>
+      <div class="metric-card glass-light">
+        <div class="metric-label">Выгорание</div>
+        <h3>Меньше рисков истощения</h3>
+        <p>Устойчивые команды менее подвержены выгоранию и текучести (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5287440/" target="_blank" rel="noopener noreferrer" class="metric-link">PMC, 2017</a>)</p>
+      </div>
+      <div class="metric-card glass-light">
+        <div class="metric-label">Адаптивность</div>
+        <h3>Быстрое принятие решений</h3>
+        <p>Способность сохранять результат под нагрузкой и неопределенностью напрямую влияет на вовлеченность</p>
+      </div>
+    </div>
+    <p class="metrics-intro text-center">
+      Устойчивость = способность сохранять результат под нагрузкой и неопределенностью
+    </p>
+  </div>
+</section>
+
+<style>
+  .resilience-metrics-section {
+    padding: var(--spacing-3xl) 0;
+    background: var(--color-surface);
+  }
+
+  .resilience-metrics-section h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .metrics-grid {
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  @media (min-width: 768px) {
+    .metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .metrics-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .metric-card {
+    padding: var(--spacing-2xl);
+  }
+
+  .metric-label {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    border-radius: 20px;
+    font-size: var(--text-xs);
+    font-weight: var(--fw-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .metric-card h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+    font-size: var(--text-lg);
+  }
+
+  .metric-card p {
+    color: var(--color-text-secondary);
+    line-height: var(--lh-loose);
+    font-size: var(--text-sm);
+  }
+
+  .metric-link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .metric-link:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .metrics-intro {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+
+  @media (min-width: 768px) {
+    .metrics-intro {
+      font-size: var(--text-lg);
+    }
+  }
+</style>

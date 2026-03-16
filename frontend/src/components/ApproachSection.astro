@@ -1,0 +1,76 @@
+---
+---
+
+<section class="approach-section section">
+  <div class="container">
+    <h2>Наш подход</h2>
+    <div class="approach-grid grid grid-mobile">
+      <div class="approach-card card-solid">
+        <div class="approach-icon">1</div>
+        <h3>Диагностика</h3>
+        <p>Оценка текущего состояния команды, выявление зон риска и возможностей</p>
+      </div>
+      <div class="approach-card card-solid">
+        <div class="approach-icon">2</div>
+        <h3>Развитие</h3>
+        <p>Целенаправленное развитие навыков устойчивости и адаптивности</p>
+      </div>
+      <div class="approach-card card-solid">
+        <div class="approach-icon">3</div>
+        <h3>Внедрение</h3>
+        <p>Интеграция практик устойчивости в ежедневную работу команды</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .approach-section {
+    background: var(--color-surface);
+  }
+
+  .approach-section h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .approach-grid {
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .approach-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .approach-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .approach-card {
+    padding: var(--spacing-2xl);
+    text-align: center;
+  }
+
+  .approach-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-bold);
+    margin: 0 auto var(--spacing-lg);
+  }
+
+  .approach-card h3 {
+    margin-bottom: var(--spacing-md);
+  }
+</style>

@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Продукты - МЭТЧ" description="Тренинги, коучинг и индивидуальные планы развития для повышения устойчивости команд.">
+  <main>
+    <section class="products-hero section">
+      <div class="container">
+        <h1>Наши продукты</h1>
+        <p class="products-intro">
+          Комплексные решения для развития устойчивости команд и сотрудников
+        </p>
+      </div>
+    </section>
+
+    <section class="products-content section">
+      <div class="container">
+        <div class="products-grid grid grid-mobile">
+          <div class="product-card card-solid">
+            <h2>Тренинги</h2>
+            <p>
+              Групповые сессии для развития навыков устойчивости, работы в команде и управления стрессом.
+              Программы адаптированы под специфику вашей компании.
+            </p>
+            <ul class="product-features">
+              <li>Групповой формат</li>
+              <li>Практические инструменты</li>
+              <li>Измеримые результаты</li>
+            </ul>
+          </div>
+
+          <div class="product-card card-solid">
+            <h2>Коучинг</h2>
+            <p>
+              Индивидуальная поддержка для руководителей и ключевых сотрудников.
+              Развитие лидерских качеств и навыков управления командой в условиях неопределенности.
+            </p>
+            <ul class="product-features">
+              <li>Индивидуальный подход</li>
+              <li>Гибкий график</li>
+              <li>Фокус на результатах</li>
+            </ul>
+          </div>
+
+          <div class="product-card card-solid">
+            <h2>Индивидуальные планы развития</h2>
+            <p>
+              Персонализированные программы развития для каждого участника команды.
+              Учет индивидуальных особенностей и целей компании.
+            </p>
+            <ul class="product-features">
+              <li>Персонализация</li>
+              <li>Долгосрочная поддержка</li>
+              <li>Отслеживание прогресса</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="products-cta text-center">
+          <p class="cta-text">
+            Хотите узнать больше о наших продуктах?
+          </p>
+          <a href="/assessment" class="button-primary">Связаться с нами</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .products-hero {
+    background: var(--color-bg);
+    text-align: center;
+  }
+
+  .products-hero h1 {
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--text-2xl);
+  }
+
+  @media (min-width: 768px) {
+    .products-hero h1 {
+      font-size: var(--text-3xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .products-hero h1 {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .products-intro {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+  }
+
+  @media (min-width: 768px) {
+    .products-intro {
+      font-size: var(--text-lg);
+    }
+  }
+
+  .products-content {
+    background: var(--color-surface);
+  }
+
+  .products-grid {
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  @media (min-width: 768px) {
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .products-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .product-card {
+    padding: var(--spacing-2xl);
+  }
+
+  .product-card h2 {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-accent);
+    font-size: var(--text-xl);
+  }
+
+  .product-card p {
+    margin-bottom: var(--spacing-lg);
+    line-height: var(--lh-loose);
+  }
+
+  .product-features {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--spacing-lg);
+  }
+
+  .product-features li {
+    padding: var(--spacing-sm) 0;
+    padding-left: var(--spacing-xl);
+    position: relative;
+    color: var(--color-text-secondary);
+  }
+
+  .product-features li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: var(--fw-bold);
+    font-size: var(--text-lg);
+  }
+
+  .products-cta {
+    margin-top: var(--spacing-3xl);
+  }
+
+  .cta-text {
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+  }
+</style>

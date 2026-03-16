@@ -1,0 +1,1558 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Дизайн-бриф — МЭТЧ" description="Техническое задание для дизайнера сайта МЭТЧ">
+  <main class="tz-page">
+
+    <div class="tz-cover">
+      <div class="container">
+        <p class="tz-label">Техническое задание</p>
+        <h1>Дизайн-бриф: МЭТЧ</h1>
+        <p class="tz-meta">Версия 1.0 &nbsp;·&nbsp; Март 2026</p>
+      </div>
+    </div>
+
+    <div class="tz-body">
+      <div class="container tz-container">
+
+        <nav class="tz-toc">
+          <p class="toc-title">Содержание</p>
+          <ol>
+            <li><a href="#product">О продукте</a></li>
+            <li><a href="#audience">Целевая аудитория</a></li>
+            <li><a href="#funnel">Воронка и сценарии</a></li>
+            <li><a href="#sitemap">Сайтмап</a></li>
+            <li><a href="#design-system">Дизайн-система</a></li>
+            <li><a href="#principles">Принципы дизайна</a></li>
+            <li><a href="#visuals">Направление по визуалам</a></li>
+            <li><a href="#pages">Страницы — структура и копирайт</a></li>
+            <li><a href="#states">Состояния компонентов</a></li>
+            <li><a href="#needed">Что нужно от клиента</a></li>
+          </ol>
+        </nav>
+
+        <!-- 1. О продукте -->
+        <section class="tz-section" id="product">
+          <h2><span class="section-num">01</span> О продукте</h2>
+
+          <div class="tz-grid-2">
+            <div class="tz-card">
+              <p class="card-label">Название</p>
+              <p class="card-value">МЭТЧ</p>
+            </div>
+            <div class="tz-card">
+              <p class="card-label">Тип</p>
+              <p class="card-value">B2B лендинг + воронка лидогенерации</p>
+            </div>
+            <div class="tz-card">
+              <p class="card-label">Язык</p>
+              <p class="card-value">Русский</p>
+            </div>
+            <div class="tz-card">
+              <p class="card-label">Цель сайта</p>
+              <p class="card-value">Получить лид и довести до первой сделки</p>
+            </div>
+          </div>
+
+          <div class="tz-offer">
+            <p class="card-label">Офер (первый экран)</p>
+            <blockquote>
+              Повышаем эффективность компании, снижая выгорание и потери продуктивности через развитие устойчивости персонала.
+            </blockquote>
+          </div>
+
+          <p>Консалтинг и обучение для компаний — тренинги, коучинг, диагностика команд. Фокус: снижение выгорания, рост вовлечённости и продуктивности. Не «психология» — а измеримый бизнес-результат.</p>
+        </section>
+
+        <!-- 2. ЦА -->
+        <section class="tz-section" id="audience">
+          <h2><span class="section-num">02</span> Целевая аудитория</h2>
+
+          <div class="tz-card tz-card--highlight">
+            <p class="card-label">Кто</p>
+            <p class="card-value">HRD / HR BP / Head of HR в средних и крупных компаниях</p>
+          </div>
+
+          <h3>Боли аудитории</h3>
+          <ul class="tz-list">
+            <li>Растёт текучка</li>
+            <li>Команды выгорают</li>
+            <li>Давление сверху «покажи эффект от обучения»</li>
+            <li>KPI по вовлечённости</li>
+            <li>«Зумеры не такие как раньше»</li>
+          </ul>
+
+          <h3>Язык коммуникации</h3>
+          <div class="tz-lang-table">
+            <div class="lang-row lang-row--bad">
+              <span class="lang-icon">✗</span>
+              <span>«Развиваем устойчивость личности»</span>
+            </div>
+            <div class="lang-row lang-row--good">
+              <span class="lang-icon">✓</span>
+              <span>«Снижаем выгорание и потери продуктивности»</span>
+            </div>
+            <div class="lang-row lang-row--bad">
+              <span class="lang-icon">✗</span>
+              <span>«Психологическая безопасность»</span>
+            </div>
+            <div class="lang-row lang-row--good">
+              <span class="lang-icon">✓</span>
+              <span>«Команды работают стабильнее в стрессе»</span>
+            </div>
+          </div>
+
+          <h3>Что ЦА хочет от сайта</h3>
+          <ul class="tz-list">
+            <li>Показать руководству осмысленный подход</li>
+            <li>Получить цифры (диагностика)</li>
+            <li>Снять с себя риск «неэффективного тренинга»</li>
+          </ul>
+        </section>
+
+        <!-- 3. Воронка -->
+        <section class="tz-section" id="funnel">
+          <h2><span class="section-num">03</span> Воронка и сценарии</h2>
+
+          <h3>Три сценария входа</h3>
+          <div class="tz-grid-3">
+            <div class="tz-card">Холодный трафик<br/><small>Контекст, SEO</small></div>
+            <div class="tz-card">Тёплый трафик<br/><small>Telegram, рекомендации</small></div>
+            <div class="tz-card">HR / собственник<br/><small>«Просто посмотреть»</small></div>
+          </div>
+
+          <h3>Путь пользователя (5 этапов)</h3>
+          <div class="tz-funnel">
+            <div class="funnel-step">
+              <div class="funnel-num">1</div>
+              <div class="funnel-content">
+                <p class="funnel-title">Вход</p>
+                <p class="funnel-thought">«Это про нас?»</p>
+                <p class="funnel-action">За 5 секунд показать: мы про компанию и результат</p>
+              </div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-num">2</div>
+              <div class="funnel-content">
+                <p class="funnel-title">Осознание проблемы</p>
+                <p class="funnel-thought">«Вот что у нас ломается»</p>
+                <p class="funnel-action">Причинно-следственная цепочка: стресс → выгорание → потери</p>
+              </div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-num">3</div>
+              <div class="funnel-content">
+                <p class="funnel-title">Рационализация</p>
+                <p class="funnel-thought">«Почему вам верить?»</p>
+                <p class="funnel-action">Подход + форматы + живые люди. Не продаём — снимаем тревогу</p>
+              </div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-num">4</div>
+              <div class="funnel-content">
+                <p class="funnel-title">Безопасный шаг</p>
+                <p class="funnel-thought">«Не готов покупать, но могу проверить»</p>
+                <p class="funnel-action">Бесплатная диагностика или вебинар</p>
+              </div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-num">5</div>
+              <div class="funnel-content">
+                <p class="funnel-title">Конверсия</p>
+                <p class="funnel-thought">«Давайте поговорим»</p>
+                <p class="funnel-action">Результаты диагностики + предложение созвона</p>
+              </div>
+            </div>
+          </div>
+
+          <h3>Главные CTA (только два)</h3>
+          <div class="tz-grid-2">
+            <div class="tz-card tz-card--cta">
+              <p class="card-label">Primary</p>
+              <p class="card-value">«Пройти оценку устойчивости команды»</p>
+              <p class="card-sub">→ /assessment</p>
+            </div>
+            <div class="tz-card tz-card--cta">
+              <p class="card-label">Secondary</p>
+              <p class="card-value">«Зарегистрироваться на разбор»</p>
+              <p class="card-sub">→ /webinar</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Сайтмап -->
+        <section class="tz-section" id="sitemap">
+          <h2><span class="section-num">04</span> Сайтмап</h2>
+          <div class="tz-sitemap">
+            <div class="sitemap-item sitemap-item--main">
+              <code>/</code>
+              <span>Главная (лендинг)</span>
+            </div>
+            <div class="sitemap-item sitemap-item--key">
+              <code>/assessment</code>
+              <span>Оценка устойчивости команды <em>— ключевой конвертер</em></span>
+            </div>
+            <div class="sitemap-item">
+              <code>/webinar</code>
+              <span>Онлайн-разбор для HR и руководителей</span>
+            </div>
+            <div class="sitemap-item">
+              <code>/products</code>
+              <span>Продукты и форматы работы</span>
+            </div>
+            <div class="sitemap-item">
+              <code>/blog</code>
+              <span>Блог (SEO + экспертиза)</span>
+            </div>
+            <div class="sitemap-item">
+              <code>/contact</code>
+              <span>Контакт</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Дизайн-система -->
+        <section class="tz-section" id="design-system">
+          <h2><span class="section-num">05</span> Дизайн-система</h2>
+
+          <h3>Цветовая палитра</h3>
+          <div class="tz-colors">
+            <div class="color-item">
+              <div class="color-swatch" style="background:#f5f4f0;border:1px solid #ddd;"></div>
+              <p class="color-name">Фон страницы</p>
+              <code>#f5f4f0</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#ffffff;border:1px solid #ddd;"></div>
+              <p class="color-name">Поверхность</p>
+              <code>#ffffff</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#f5f4e8;"></div>
+              <p class="color-name">Текст основной</p>
+              <code>#f5f4e8</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#8b8678;"></div>
+              <p class="color-name">Текст вторичный</p>
+              <code>#8b8678</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#d4a574;"></div>
+              <p class="color-name">Акцент CTA</p>
+              <code>#d4a574</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#c8965f;"></div>
+              <p class="color-name">Акцент hover</p>
+              <code>#c8965f</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#4a9b8e;"></div>
+              <p class="color-name">Зелёный бирюза</p>
+              <code>#4a9b8e</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#5a7a6a;"></div>
+              <p class="color-name">Зелёный лесной</p>
+              <code>#5a7a6a</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#6b7d5a;"></div>
+              <p class="color-name">Оливковый</p>
+              <code>#6b7d5a</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#d4c4a8;"></div>
+              <p class="color-name">Бежевый светлый</p>
+              <code>#d4c4a8</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#9b8a6e;"></div>
+              <p class="color-name">Бежевый средний</p>
+              <code>#9b8a6e</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#3f8f6b;"></div>
+              <p class="color-name">Success</p>
+              <code>#3f8f6b</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#d9a441;"></div>
+              <p class="color-name">Warning</p>
+              <code>#d9a441</code>
+            </div>
+            <div class="color-item">
+              <div class="color-swatch" style="background:#c85b5b;"></div>
+              <p class="color-name">Error</p>
+              <code>#c85b5b</code>
+            </div>
+          </div>
+
+          <div class="tz-note">
+            <strong>Glass tint:</strong> <code>rgba(74, 155, 142, 0.05)</code> — никогда не чисто белый.
+          </div>
+
+          <h3>Типографика</h3>
+          <p><strong>Шрифт:</strong> Inter. Запасной: Manrope / IBM Plex Sans. Без декоративных гарнитур.</p>
+          <table class="tz-table">
+            <thead><tr><th>Стиль</th><th>Desktop</th><th>Mobile</th><th>Вес</th><th>Line-height</th></tr></thead>
+            <tbody>
+              <tr><td>H1</td><td>48px</td><td>28px</td><td>600</td><td>1.15</td></tr>
+              <tr><td>H2</td><td>36px</td><td>—</td><td>600</td><td>1.15</td></tr>
+              <tr><td>H3</td><td>22px</td><td>—</td><td>600</td><td>1.45</td></tr>
+              <tr><td>Body</td><td>16–18px</td><td>—</td><td>400</td><td>1.65</td></tr>
+              <tr><td>Small</td><td>14px</td><td>—</td><td>400</td><td>1.45</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Сетка и отступы</h3>
+          <ul class="tz-list">
+            <li>Базовый модуль: 8px</li>
+            <li>Большие вертикальные отступы между секциями (80–120px)</li>
+            <li>Карточки: внутренние отступы увеличены — ощущение надёжности</li>
+            <li>Контент дышит, ничего не липнет</li>
+          </ul>
+
+          <h3>Кнопки</h3>
+          <div class="tz-grid-2">
+            <div class="tz-card">
+              <p class="card-label">Primary CTA</p>
+              <ul class="tz-list tz-list--sm">
+                <li>Фон: <code>linear-gradient(135deg, #e8c5a0, #d4a574)</code></li>
+                <li>Текст: белый</li>
+                <li>Border-radius: 12px</li>
+                <li>Padding: 14px 24px</li>
+                <li>Hover: чуть темнее + <code>translateY(-1px)</code></li>
+              </ul>
+            </div>
+            <div class="tz-card">
+              <p class="card-label">Secondary</p>
+              <ul class="tz-list tz-list--sm">
+                <li>Outline или нейтральный фон</li>
+                <li>Используется редко</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Glass-контейнеры</h3>
+          <div class="tz-note tz-note--warning">
+            Используются строго ограниченно. Только: Hero, Диагностика, Формы, Финальный CTA.
+            <br/>Запрещено: Блог, длинные тексты, кейсы, описание услуг.
+          </div>
+          <table class="tz-table">
+            <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+            <tbody>
+              <tr><td>Blur</td><td>4–8px</td></tr>
+              <tr><td>Opacity</td><td>50–60%</td></tr>
+              <tr><td>Border</td><td>тонкий, светлый, 30% прозрачности</td></tr>
+              <tr><td>Border-radius</td><td>крупный, не «пузырь»</td></tr>
+              <tr><td>Saturate</td><td>150%</td></tr>
+              <tr><td>Тени</td><td>мягкие, малоконтрастные</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Типы карточек</h3>
+          <table class="tz-table">
+            <thead><tr><th>Тип</th><th>Описание</th><th>Применение</th></tr></thead>
+            <tbody>
+              <tr><td><code>card-solid</code></td><td>Белый фон, лёгкая тень</td><td>Основной рабочий элемент</td></tr>
+              <tr><td><code>card-glass</code></td><td>Полупрозрачный</td><td>Только смысловые акценты, не в списках</td></tr>
+              <tr><td><code>card-green</code></td><td>Лесной зелёный <code>#5a7a6a</code></td><td>Природная атмосфера</td></tr>
+              <tr><td><code>card-brown</code></td><td>Коричневый <code>#9b8a6e</code></td><td>Природная атмосфера</td></tr>
+              <tr><td><code>card-brown-light</code></td><td>Светлый бежевый <code>#d4c4a8</code></td><td>Природная атмосфера</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Текстуры фона</h3>
+          <div class="tz-grid-2">
+            <div class="tz-card">
+              <p class="card-label">★ Фаворит — Сеточная геометрия</p>
+              <p>Едва заметная сетка 48×48px, низкий контраст. Ассоциация: система есть, но живая.</p>
+            </div>
+            <div class="tz-card">
+              <p class="card-label">Мягкие диагонали</p>
+              <p>Очень лёгкие, большой шаг. Только для Hero или Диагностики.</p>
+            </div>
+            <div class="tz-card">
+              <p class="card-label">Модульные блоки</p>
+              <p>Крупные почти невидимые прямоугольники. Хорошо под glass.</p>
+            </div>
+            <div class="tz-card">
+              <p class="card-label">Точки</p>
+              <p>Редкие, ощущение «данных». Для самых тихих секций.</p>
+            </div>
+          </div>
+
+          <h3>Иконки</h3>
+          <p>Простые, линейные или мягко-залитые. Один стиль на весь проект.</p>
+
+          <h3>Анимации</h3>
+          <p>Fade, Slide — только как подтверждение действия. Никаких сложных таймлайнов и пружинящих анимаций.</p>
+        </section>
+
+        <!-- 6. Принципы -->
+        <section class="tz-section" id="principles">
+          <h2><span class="section-num">06</span> Принципы дизайна</h2>
+          <div class="tz-principles">
+            <div class="principle">
+              <span class="principle-num">1</span>
+              <div>
+                <strong>Стабильность &gt; эффект</strong>
+                <p>Если выбор между «вау» и «понятно и спокойно» — всегда второе.</p>
+              </div>
+            </div>
+            <div class="principle">
+              <span class="principle-num">2</span>
+              <div>
+                <strong>Glass — акцент, не система</strong>
+                <p>Стекло подчёркивает смысл, а не заменяет структуру.</p>
+              </div>
+            </div>
+            <div class="principle">
+              <span class="principle-num">3</span>
+              <div>
+                <strong>Контент первичен</strong>
+                <p>Любой блок должен читаться на сером фоне без эффектов. Если без glass ломается — дизайн плохой.</p>
+              </div>
+            </div>
+            <div class="principle">
+              <span class="principle-num">4</span>
+              <div>
+                <strong>Метафора: управляемая прозрачность</strong>
+                <p>Просматриваемость процессов, ясность, контроль в неопределённости. Слои, мягкие переходы, минимум резких контрастов.</p>
+              </div>
+            </div>
+            <div class="principle">
+              <span class="principle-num">5</span>
+              <div>
+                <strong>Корпоративно, но не мертво</strong>
+                <p>Живые фото, человеческий масштаб. Без PowerPoint-эстетики и канцелярита в UI.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Визуалы -->
+        <section class="tz-section" id="visuals">
+          <h2><span class="section-num">07</span> Направление по визуалам</h2>
+
+          <h3>Фотографии</h3>
+          <ul class="tz-list">
+            <li>Живые люди на тренингах / в работе — не стоковые рукопожатия</li>
+            <li>Без фильтров, без glass поверх фото</li>
+            <li>Максимум реальности → доверие</li>
+          </ul>
+          <p><strong>Нужны от клиента:</strong> фото тренингов, фото команды/спикеров, фото рабочего процесса.</p>
+
+          <h3>Иллюстрации / графики</h3>
+          <ul class="tz-list">
+            <li>Инфографика с цифрами (KPI, статистика)</li>
+            <li>Линейные графики (динамика стресса, вовлечённости)</li>
+            <li>Абстрактная лёгкая геометрия для фонов</li>
+          </ul>
+
+          <h3>Что НЕ нужно</h3>
+          <ul class="tz-list tz-list--no">
+            <li>Радужные переливы</li>
+            <li>NFT-эстетика</li>
+            <li>Кислотные цвета</li>
+            <li>Инфобизнес-стиль (яркие стрелки, восклицания)</li>
+            <li>Стоковые фото «рукопожатия» и «улыбающиеся в офисе»</li>
+            <li>Агрессивные анимации</li>
+          </ul>
+
+          <div class="tz-note tz-note--accent">
+            <strong>Настроение одним словом:</strong> Устойчивость.
+          </div>
+        </section>
+
+        <!-- 8. Страницы -->
+        <section class="tz-section" id="pages">
+          <h2><span class="section-num">08</span> Страницы — структура и копирайт</h2>
+
+          <!-- Главная -->
+          <div class="page-block">
+            <div class="page-block-header">
+              <code>/</code>
+              <h3>Главная</h3>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Секция 1 — Hero</p>
+              <div class="copy-block">
+                <p class="copy-label">Заголовок</p>
+                <p class="copy-text">Устойчивость персонала напрямую влияет на производительность и управляемость компании</p>
+              </div>
+              <div class="copy-block">
+                <p class="copy-label">Подзаголовок</p>
+                <p class="copy-text">Сотрудники с высокой устойчивостью реже выгорают, сохраняют продуктивность и быстрее адаптируются к изменениям.</p>
+              </div>
+              <div class="copy-block">
+                <p class="copy-label">CTA</p>
+                <p class="copy-text">Primary: «Экспресс-оценка устойчивости команды»<br/>Secondary: «Онлайн-разбор для HR и руководителей»</p>
+              </div>
+              <div class="design-note">
+                <strong>Дизайн:</strong> Glass-панель под текст на фоне геометрической абстракции. Смысл: внешняя среда сложная, внутри — структура.
+              </div>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Секция 2 — Проблема</p>
+              <p class="copy-label">Заголовок</p>
+              <p class="copy-text">Когда это становится проблемой</p>
+              <p class="copy-label" style="margin-top:12px;">Статистика (инфографика)</p>
+              <ul class="tz-list">
+                <li><strong>40%</strong> сотрудников испытывают сильный стресс ежедневно <em>(Gallup, 2025)</em></li>
+                <li><strong>21%</strong> — уровень глобальной вовлечённости в 2024 г. <em>(снижение с 23%)</em></li>
+                <li><strong>$438 млрд</strong> — потери от низкой вовлечённости</li>
+                <li><strong>77%</strong> говорят, что стресс влияет на физическое здоровье</li>
+                <li><strong>45%</strong> рассматривали смену работы из-за стресса</li>
+              </ul>
+              <div class="design-note">
+                <strong>Дизайн:</strong> Solid-фон, сетка, иконки. Без glass — якорь стабильности.
+              </div>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Секция 3 — Причинно-следственная цепочка</p>
+              <div class="chain">
+                <span>Стресс и неопределённость</span>
+                <span class="chain-arrow">→</span>
+                <span>Выгорание</span>
+                <span class="chain-arrow">→</span>
+                <span>Падение качества решений</span>
+                <span class="chain-arrow">→</span>
+                <span>Потери времени и денег</span>
+              </div>
+              <div class="design-note">
+                <strong>Дизайн:</strong> Полупрозрачные карточки, последовательность, визуальный ритм.
+              </div>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Секция 4 — Наш подход</p>
+              <div class="tz-grid-3">
+                <div class="tz-card">
+                  <p class="card-label">Шаг 1</p>
+                  <p class="card-value">Диагностика</p>
+                  <p>Измеряем состояние команды</p>
+                </div>
+                <div class="tz-card">
+                  <p class="card-label">Шаг 2</p>
+                  <p class="card-value">Развитие</p>
+                  <p>Тренинги и коучинг под задачи</p>
+                </div>
+                <div class="tz-card">
+                  <p class="card-label">Шаг 3</p>
+                  <p class="card-value">Внедрение</p>
+                  <p>Интегрируем в процессы компании</p>
+                </div>
+              </div>
+              <div class="design-note">
+                <strong>Дизайн:</strong> Solid карточки, лёгкие тени. Про надёжность.
+              </div>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Секция 5 — Диагностика <span class="badge">Ключевой акцент</span></p>
+              <div class="copy-block">
+                <p class="copy-label">Заголовок</p>
+                <p class="copy-text">Оцените устойчивость вашей команды</p>
+              </div>
+              <div class="copy-block">
+                <p class="copy-label">Текст</p>
+                <p class="copy-text">Онлайн-инструмент измеряет ключевые показатели устойчивости команды.<br/>10–15 минут. Результаты сразу. Без обязательств.<br/>Выявляет зоны риска и точки влияния руководства.</p>
+              </div>
+              <div class="copy-block">
+                <p class="copy-label">CTA</p>
+                <p class="copy-text">«Пройти оценку устойчивости»</p>
+              </div>
+              <div class="design-note">
+                <strong>Дизайн:</strong> Glass разрешён. Карточки с показателями. Ощущение «мы смотрим внутрь системы».
+              </div>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Секция 6 — Вебинар</p>
+              <div class="copy-block">
+                <p class="copy-label">Заголовок</p>
+                <p class="copy-text">Онлайн-разбор: Почему устойчивость = деньги</p>
+              </div>
+              <div class="copy-block">
+                <p class="copy-label">Текст</p>
+                <p class="copy-text">Для HR и руководителей. Разбор с кейсами и метриками:<br/>— Как устойчивость влияет на производительность<br/>— Практические способы повышения уровня команды<br/>— Ошибки и их последствия</p>
+              </div>
+              <div class="copy-block">
+                <p class="copy-label">CTA</p>
+                <p class="copy-text">«Зарегистрироваться на разбор»</p>
+              </div>
+              <div class="design-note">
+                <strong>Дизайн:</strong> Glass card с иллюстрацией аудитории и графиками.
+              </div>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Секция 7 — Продукты (кратко)</p>
+              <div class="tz-grid-3">
+                <div class="tz-card"><p class="card-label">Тренинг по устойчивости</p><p>Системное развитие навыков работы с нагрузкой</p></div>
+                <div class="tz-card"><p class="card-label">Тренинг по продуктивности</p><p>Фокус, приоритеты, управление энергией</p></div>
+                <div class="tz-card"><p class="card-label">Работа с поколением Z</p><p>Адаптация подходов взаимодействия</p></div>
+                <div class="tz-card"><p class="card-label">Коучинг руководителей</p><p>Индивидуальная работа с управленцами</p></div>
+                <div class="tz-card"><p class="card-label">Индивидуальные планы</p><p>Программы под задачи компании</p></div>
+              </div>
+              <div class="design-note">
+                <strong>Дизайн:</strong> Сетка карточек 3–4 в ряд, solid. Не продаём — страница доверия.
+              </div>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Секция 8 — Галерея / Доказательства</p>
+              <p>Фото с реальных тренингов. Онлайн и офлайн форматы. Без glass, без фильтров.</p>
+              <div class="tz-note tz-note--warning">Нужны реальные фотографии от клиента.</div>
+              <div class="design-note">
+                <strong>Дизайн:</strong> Галерея с фильтром по типам. Overlay при hover с кратким описанием.
+              </div>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Секция 9 — Блог (тизер)</p>
+              <p>3 последних поста — мини-карточки с датой и ключевым инсайтом. CTA: «Читать блог».</p>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Секция 10 — Финальный CTA</p>
+              <div class="copy-block">
+                <p class="copy-text">«Проверить уровень устойчивости вашей команды»<br/>«Обсудить задачи компании напрямую»</p>
+              </div>
+              <div class="design-note">
+                <strong>Дизайн:</strong> Панель полной ширины с glass (как в Hero — визуально замкнуть страницу). Кнопки крупные.
+              </div>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Футер</p>
+              <p>О компании МЭТЧ · Контакты · Telegram · Политика конфиденциальности</p>
+              <div class="design-note">
+                <strong>Дизайн:</strong> Тёмная прозрачная панель, контрастный текст, минимальные иконки.
+              </div>
+            </div>
+          </div>
+
+          <!-- /assessment -->
+          <div class="page-block">
+            <div class="page-block-header">
+              <code>/assessment</code>
+              <h3>Оценка устойчивости <span class="badge badge--key">Главный конвертер</span></h3>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Hero</p>
+              <div class="copy-block">
+                <p class="copy-label">Заголовок</p>
+                <p class="copy-text">Оценка устойчивости команды</p>
+              </div>
+              <div class="copy-block">
+                <p class="copy-label">Текст</p>
+                <p class="copy-text">Пройдите Q12-диагностику по методике Gallup — узнайте уровень вовлечённости вашей команды.<br/>10 минут. Результат сразу. Без обязательств.</p>
+              </div>
+              <div class="copy-block">
+                <p class="copy-label">Что получите</p>
+                <ul class="tz-list">
+                  <li>Уровень вовлечённости команды в %</li>
+                  <li>Зоны риска и точки роста</li>
+                  <li>Рекомендации по следующему шагу</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Форма (перед тестом) — на glass-панели</p>
+              <p>Поля: Имя, Email, Телефон, Telegram</p>
+              <p>CTA: «Начать оценку»</p>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Q12 — 12 вопросов (да/нет)</p>
+              <ol class="tz-list tz-list--ordered">
+                <li>Знаете ли вы, чего ожидает от вас работодатель?</li>
+                <li>У вас есть материалы и инструменты для качественной работы?</li>
+                <li>У вас есть возможность каждый день делать то, что вы умеете лучше всего?</li>
+                <li>За последние 7 дней вы получали признание или похвалу за хорошую работу?</li>
+                <li>Считаете ли вы, что ваш руководитель заботится о вас как о личности?</li>
+                <li>Кто-нибудь на работе способствует вашему развитию?</li>
+                <li>Учитывается ли ваша точка зрения?</li>
+                <li>Миссия компании заставляет вас чувствовать, что ваша работа важна?</li>
+                <li>Считают ли ваши коллеги своей обязанностью качественно выполнять работу?</li>
+                <li>У вас есть лучший друг на работе?</li>
+                <li>За последние полгода кто-нибудь говорил с вами о ваших успехах?</li>
+                <li>В прошлом году у вас были возможности учиться и расти на работе?</li>
+              </ol>
+              <p class="copy-label" style="margin-top:12px;">UX-элементы</p>
+              <ul class="tz-list">
+                <li>Прогресс-бар (N из 12)</li>
+                <li>Навигация вперёд/назад</li>
+                <li>Экран завершения с результатом</li>
+              </ul>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Результаты (3 варианта экрана)</p>
+              <table class="tz-table">
+                <thead><tr><th>Уровень</th><th>Условие</th><th>Сообщение</th></tr></thead>
+                <tbody>
+                  <tr><td>Высокий</td><td>&gt;70% «да»</td><td>Высокий уровень вовлечённости. Есть точки для роста.</td></tr>
+                  <tr><td>Удовлетворительный</td><td>50–70% «да»</td><td>Удовлетворительный результат. Есть над чем работать.</td></tr>
+                  <tr><td>Критический</td><td>&lt;50% «да»</td><td>Критический уровень. Рекомендуем срочную диагностику.</td></tr>
+                </tbody>
+              </table>
+              <p>После результата: предложение созвона / следующего шага (не «купите тренинг»).</p>
+            </div>
+          </div>
+
+          <!-- /webinar -->
+          <div class="page-block">
+            <div class="page-block-header">
+              <code>/webinar</code>
+              <h3>Вебинар</h3>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Hero</p>
+              <div class="copy-block">
+                <p class="copy-label">Заголовок</p>
+                <p class="copy-text">Почему устойчивость = деньги</p>
+              </div>
+              <div class="copy-block">
+                <p class="copy-label">Подзаголовок</p>
+                <p class="copy-text">Онлайн-разбор для HR и руководителей с кейсами и метриками</p>
+              </div>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Для кого</p>
+              <ul class="tz-list">
+                <li>HR BP и HRD, которым нужны цифры для руководства</li>
+                <li>Руководители команд в периоде роста или турбулентности</li>
+                <li>Все, кто хочет системный подход вместо «ещё одного тренинга»</li>
+              </ul>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Спикер / Команда</p>
+              <div class="tz-note tz-note--warning">Нужны: фото спикера, имя, должность, краткое bio. Акцент на живое фото, не иконка.</div>
+            </div>
+
+            <div class="section-block">
+              <p class="section-label">Форма регистрации — на glass-панели</p>
+              <p>Поля: Имя, Email, Компания, Должность</p>
+              <p>CTA: «Зарегистрироваться»</p>
+            </div>
+          </div>
+
+          <!-- /products -->
+          <div class="page-block">
+            <div class="page-block-header">
+              <code>/products</code>
+              <h3>Продукты</h3>
+            </div>
+            <div class="copy-block">
+              <p class="copy-label">Заголовок</p>
+              <p class="copy-text">Форматы работы</p>
+            </div>
+            <div class="section-block">
+              <div class="tz-grid-2">
+                <div class="tz-card">
+                  <p class="card-label">Тренинг по устойчивости · Группа</p>
+                  <p>Системное развитие навыков работы с нагрузкой и стрессом</p>
+                  <p class="card-result">Результат: команды работают стабильнее в неопределённости</p>
+                </div>
+                <div class="tz-card">
+                  <p class="card-label">Тренинг по продуктивности · Группа</p>
+                  <p>Фокус, приоритеты, управление энергией</p>
+                  <p class="card-result">Результат: рост эффективности без выгорания</p>
+                </div>
+                <div class="tz-card">
+                  <p class="card-label">Работа с поколением Z · Группа</p>
+                  <p>Адаптация подходов управления и взаимодействия</p>
+                  <p class="card-result">Результат: снижение конфликтов и текучки среди молодых</p>
+                </div>
+                <div class="tz-card">
+                  <p class="card-label">Коучинг руководителей · Индивидуально</p>
+                  <p>Развитие устойчивости и ресурсности лидера</p>
+                  <p class="card-result">Результат: руководитель не выгорает и ведёт команду в стрессе</p>
+                </div>
+                <div class="tz-card">
+                  <p class="card-label">Индивидуальные планы развития · Индивидуально</p>
+                  <p>Программы под конкретные задачи компании</p>
+                  <p class="card-result">Результат: персонализированный путь роста</p>
+                </div>
+              </div>
+              <p style="margin-top:16px;">Финальный CTA: «Обсудить задачи вашей компании» → /contact</p>
+            </div>
+          </div>
+
+          <!-- /blog -->
+          <div class="page-block">
+            <div class="page-block-header">
+              <code>/blog</code>
+              <h3>Блог</h3>
+            </div>
+            <div class="section-block">
+              <p><strong>Тип контента:</strong> аналитика по выгоранию, практика для HR, кейсы МЭТЧ, разбор исследований (Gallup, ADP).</p>
+              <p><strong>Карточка поста:</strong> дата, заголовок, ключевой инсайт (1 строка), кнопка «Читать».</p>
+              <div class="tz-note tz-note--warning">Нужны реальные статьи от клиента. Пока — 3 заглушки.</div>
+              <div class="design-note">
+                <strong>Дизайн:</strong> Без glass, solid карточки, чистый читабельный макет.
+              </div>
+            </div>
+          </div>
+
+          <!-- /contact -->
+          <div class="page-block">
+            <div class="page-block-header">
+              <code>/contact</code>
+              <h3>Контакт</h3>
+            </div>
+            <div class="section-block">
+              <div class="copy-block">
+                <p class="copy-label">Заголовок</p>
+                <p class="copy-text">Обсудим задачи вашей компании</p>
+              </div>
+              <p>Поля: Имя, Email, Телефон, Telegram</p>
+              <p>CTA: «Отправить»</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. Состояния -->
+        <section class="tz-section" id="states">
+          <h2><span class="section-num">09</span> Состояния компонентов</h2>
+
+          <h3>Кнопки</h3>
+          <table class="tz-table">
+            <thead><tr><th>Состояние</th><th>Описание</th></tr></thead>
+            <tbody>
+              <tr><td>Default</td><td>Персиково-оранжевый градиент</td></tr>
+              <tr><td>Hover</td><td>Чуть темнее + translateY(-1px), без агрессии</td></tr>
+              <tr><td>Active</td><td>Нажатое — чуть темнее hover</td></tr>
+              <tr><td>Disabled</td><td>Непрозрачность 40–50%, cursor: not-allowed</td></tr>
+              <tr><td>Loading</td><td>Спиннер внутри кнопки, текст скрыт</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Поля форм</h3>
+          <table class="tz-table">
+            <thead><tr><th>Состояние</th><th>Описание</th></tr></thead>
+            <tbody>
+              <tr><td>Default</td><td>Чёткий лейбл, нейтральная рамка</td></tr>
+              <tr><td>Focus</td><td>Рамка цвета акцента (персик), без тени-«взрыва»</td></tr>
+              <tr><td>Error</td><td>Рамка #c85b5b, сообщение под полем — без красной истерики</td></tr>
+              <tr><td>Success</td><td>Зелёная рамка #3f8f6b</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Q12 тест</h3>
+          <table class="tz-table">
+            <thead><tr><th>Состояние</th><th>Описание</th></tr></thead>
+            <tbody>
+              <tr><td>Вопрос</td><td>Текст вопроса + две кнопки «Да» / «Нет»</td></tr>
+              <tr><td>Выбрано «Да»</td><td>Кнопка активна (акцентный цвет)</td></tr>
+              <tr><td>Выбрано «Нет»</td><td>Кнопка активна (нейтральный)</td></tr>
+              <tr><td>Прогресс</td><td>Прогресс-бар сверху (N из 12)</td></tr>
+              <tr><td>Результат</td><td>Экран с процентом + интерпретацией + CTA</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Карточки продуктов</h3>
+          <table class="tz-table">
+            <thead><tr><th>Состояние</th><th>Описание</th></tr></thead>
+            <tbody>
+              <tr><td>Default</td><td>Solid, лёгкая тень</td></tr>
+              <tr><td>Hover</td><td>Тень усиливается, лёгкий подъём translateY(-2px)</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 10. Что нужно -->
+        <section class="tz-section" id="needed">
+          <h2><span class="section-num">10</span> Что нужно от клиента</h2>
+          <div class="tz-note tz-note--warning">
+            Дизайнер не может двигаться без этих материалов.
+          </div>
+          <table class="tz-table">
+            <thead><tr><th>Материал</th><th>Статус</th></tr></thead>
+            <tbody>
+              <tr><td>Логотип (вектор, SVG/AI)</td><td class="status-need">❓ Нужен</td></tr>
+              <tr><td>Фото спикеров / команды</td><td class="status-need">❓ Нужно</td></tr>
+              <tr><td>Фото с реальных тренингов</td><td class="status-need">❓ Нужно</td></tr>
+              <tr><td>Реальные статьи для блога</td><td class="status-need">❓ Нужны</td></tr>
+              <tr><td>Финальное название компании</td><td class="status-ok">✅ МЭТЧ</td></tr>
+              <tr><td>Копирайт для всех секций</td><td class="status-ok">✅ В этом документе</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  /* ── Layout ── */
+  .tz-page {
+    background: #f5f4f0;
+    min-height: 100vh;
+    color: #2c2b28;
+  }
+
+  .tz-cover {
+    background: #2c2b28;
+    padding: 80px 0 60px;
+    color: #f5f4e8;
+  }
+
+  .tz-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #d4a574;
+    margin-bottom: 16px;
+  }
+
+  .tz-cover h1 {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 700;
+    color: #f5f4e8;
+    margin-bottom: 12px;
+  }
+
+  .tz-meta {
+    font-size: 14px;
+    color: #8b8678;
+  }
+
+  .tz-body {
+    padding: 60px 0 120px;
+  }
+
+  .tz-container {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .tz-container {
+      grid-template-columns: 1fr;
+    }
+    .tz-toc {
+      display: none;
+    }
+  }
+
+  /* ── TOC ── */
+  .tz-toc {
+    position: sticky;
+    top: 24px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e8e4dc;
+  }
+
+  .toc-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8b8678;
+    margin-bottom: 12px;
+  }
+
+  .tz-toc ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    counter-reset: toc;
+  }
+
+  .tz-toc li { counter-increment: toc; }
+
+  .tz-toc a {
+    font-size: 13px;
+    color: #5a5650;
+    text-decoration: none;
+    display: block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .tz-toc a:hover {
+    background: #f0ebe0;
+    color: #d4a574;
+  }
+
+  /* ── Sections ── */
+  .tz-section {
+    margin-bottom: 72px;
+  }
+
+  .tz-section h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1917;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #e8e4dc;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-num {
+    font-size: 13px;
+    font-weight: 700;
+    color: #d4a574;
+    letter-spacing: 0.05em;
+    min-width: 28px;
+  }
+
+  .tz-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c2b28;
+    margin: 28px 0 12px;
+  }
+
+  .tz-section p {
+    color: #4a4844;
+    line-height: 1.65;
+  }
+
+  /* ── Cards ── */
+  .tz-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  .tz-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  .tz-card {
+    background: #fff;
+    border: 1px solid #e8e4dc;
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .tz-card p { margin: 0 0 4px; }
+  .tz-card small { color: #8b8678; font-size: 13px; }
+
+  .tz-card--highlight {
+    border-color: #d4a574;
+    background: #fdf8f2;
+  }
+
+  .tz-card--cta {
+    background: #fdf8f2;
+    border-color: #d4c4a8;
+  }
+
+  .card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8b8678;
+    margin-bottom: 6px !important;
+  }
+
+  .card-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1917;
+    margin-bottom: 4px !important;
+  }
+
+  .card-sub {
+    font-size: 13px;
+    color: #d4a574;
+  }
+
+  .card-result {
+    font-size: 13px;
+    color: #4a9b8e;
+    margin-top: 8px !important;
+  }
+
+  /* ── Offer ── */
+  .tz-offer {
+    background: #2c2b28;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 16px 0 20px;
+  }
+
+  .tz-offer .card-label { color: #8b8678; }
+
+  .tz-offer blockquote {
+    font-size: 18px;
+    font-weight: 500;
+    color: #f5f4e8;
+    line-height: 1.5;
+    margin: 8px 0 0;
+    padding: 0;
+    border: none;
+  }
+
+  /* ── Lang table ── */
+  .tz-lang-table {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0 20px;
+  }
+
+  .lang-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+
+  .lang-row--bad {
+    background: #fdf0f0;
+    color: #7a3535;
+    text-decoration: line-through;
+    text-decoration-color: #c85b5b;
+  }
+
+  .lang-row--good {
+    background: #f0fdf4;
+    color: #1a4a30;
+  }
+
+  .lang-icon {
+    font-size: 16px;
+    font-weight: 700;
+    min-width: 20px;
+  }
+
+  /* ── Funnel ── */
+  .tz-funnel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 16px 0 24px;
+  }
+
+  .funnel-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .funnel-num {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    background: #d4a574;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .funnel-step:not(:last-child) .funnel-num::after {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: calc(100% + 16px);
+    background: #e8e4dc;
+    z-index: 0;
+  }
+
+  .funnel-content {
+    background: #fff;
+    border: 1px solid #e8e4dc;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+    flex: 1;
+  }
+
+  .funnel-title {
+    font-weight: 600;
+    color: #1a1917;
+    margin-bottom: 2px !important;
+  }
+
+  .funnel-thought {
+    font-size: 13px;
+    color: #8b8678;
+    font-style: italic;
+    margin-bottom: 4px !important;
+  }
+
+  .funnel-action {
+    font-size: 14px;
+    color: #4a4844;
+    margin: 0 !important;
+  }
+
+  /* ── Sitemap ── */
+  .tz-sitemap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 16px 0;
+  }
+
+  .sitemap-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    background: #fff;
+    border: 1px solid #e8e4dc;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #4a4844;
+  }
+
+  .sitemap-item code {
+    font-size: 13px;
+    color: #5a7a6a;
+    background: #f0fdf4;
+    padding: 2px 8px;
+    border-radius: 4px;
+    min-width: 140px;
+  }
+
+  .sitemap-item--main {
+    border-color: #d4a574;
+    background: #fdf8f2;
+  }
+
+  .sitemap-item--key {
+    border-color: #4a9b8e;
+    background: #f0fdf9;
+  }
+
+  .sitemap-item em { font-size: 13px; color: #4a9b8e; }
+
+  /* ── Colors ── */
+  .tz-colors {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .color-item {
+    text-align: center;
+  }
+
+  .color-swatch {
+    width: 100%;
+    height: 52px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+  }
+
+  .color-name {
+    font-size: 11px;
+    color: #8b8678;
+    margin-bottom: 2px !important;
+    line-height: 1.3;
+  }
+
+  .color-item code {
+    font-size: 11px;
+    color: #5a5650;
+  }
+
+  /* ── Table ── */
+  .tz-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 14px;
+  }
+
+  .tz-table th {
+    text-align: left;
+    padding: 10px 14px;
+    background: #f0ebe0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #6b5d4a;
+    border-bottom: 1px solid #e8e4dc;
+  }
+
+  .tz-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f0ece4;
+    color: #4a4844;
+    vertical-align: top;
+  }
+
+  .tz-table tr:last-child td { border-bottom: none; }
+
+  .status-ok { color: #3f8f6b; font-weight: 600; }
+  .status-need { color: #d9a441; font-weight: 600; }
+
+  /* ── Lists ── */
+  .tz-list {
+    padding-left: 20px;
+    margin: 8px 0 16px;
+    color: #4a4844;
+    line-height: 1.7;
+  }
+
+  .tz-list--sm { font-size: 14px; }
+
+  .tz-list--no li::marker { content: '✗  '; color: #c85b5b; }
+
+  .tz-list--ordered {
+    list-style: decimal;
+  }
+
+  /* ── Notes ── */
+  .tz-note {
+    background: #f5f3ef;
+    border-left: 3px solid #d4c4a8;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #4a4844;
+    margin: 12px 0 20px;
+  }
+
+  .tz-note--warning {
+    background: #fdf8ec;
+    border-left-color: #d9a441;
+  }
+
+  .tz-note--accent {
+    background: #fdf8f2;
+    border-left-color: #d4a574;
+    font-size: 16px;
+  }
+
+  /* ── Principles ── */
+  .tz-principles {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  .principle {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px solid #e8e4dc;
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+
+  .principle-num {
+    font-size: 20px;
+    font-weight: 700;
+    color: #d4c4a8;
+    min-width: 24px;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .principle strong {
+    display: block;
+    font-size: 15px;
+    color: #1a1917;
+    margin-bottom: 4px;
+  }
+
+  .principle p {
+    font-size: 14px;
+    color: #6b6660;
+    margin: 0;
+  }
+
+  /* ── Page blocks ── */
+  .page-block {
+    border: 1px solid #e8e4dc;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    background: #fff;
+  }
+
+  .page-block-header {
+    background: #2c2b28;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .page-block-header code {
+    font-size: 13px;
+    color: #4a9b8e;
+    background: rgba(74,155,142,0.15);
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+
+  .page-block-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #f5f4e8;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-block {
+    padding: 20px 24px;
+    border-bottom: 1px solid #f0ece4;
+  }
+
+  .section-block:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8b8678;
+    margin-bottom: 12px !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .copy-block {
+    background: #fdf8f2;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+  }
+
+  .copy-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #d4a574;
+    margin-bottom: 4px !important;
+  }
+
+  .copy-text {
+    font-size: 15px;
+    color: #2c2b28;
+    line-height: 1.6;
+    margin: 0 !important;
+  }
+
+  .design-note {
+    font-size: 13px;
+    color: #5a5650;
+    background: #f5f3ef;
+    border-left: 3px solid #d4c4a8;
+    padding: 8px 12px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 12px;
+  }
+
+  /* ── Chain ── */
+  .chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0;
+  }
+
+  .chain span {
+    background: #f0fdf9;
+    border: 1px solid #4a9b8e;
+    color: #1a3d34;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .chain-arrow {
+    color: #9b8a6e;
+    background: none !important;
+    border: none !important;
+    font-size: 18px;
+    padding: 0 !important;
+  }
+
+  /* ── Badge ── */
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #f0ebe0;
+    color: #6b5d4a;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    vertical-align: middle;
+  }
+
+  .badge--key {
+    background: rgba(74,155,142,0.15);
+    color: #2a6b60;
+  }
+
+  /* ── Container ── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── Code ── */
+  code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    background: #f0ebe0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #5a4030;
+  }
+</style>

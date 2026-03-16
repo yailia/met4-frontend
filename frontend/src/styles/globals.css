@@ -1,0 +1,331 @@
+/* Design System - Global Styles */
+
+:root {
+  /* Base Colors - природная палитра */
+  --color-bg: #24272e;
+  --color-surface: #2d3038;
+  --color-border: rgba(255, 255, 255, 0.12);
+
+  /* Text - белый */
+  --color-text-primary: #ffffff;
+  --color-text-on-dark: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.85);
+  --color-text-muted: rgba(255, 255, 255, 0.6);
+
+  /* Accent */
+  --color-accent: #9669d8;
+  --color-accent-hover: #8555c4;
+  --color-accent-soft: rgba(150, 105, 216, 0.2);
+  --color-accent-2: #24272e;
+
+  /* Совместимость */
+  --color-green-turquoise: #9669d8;
+  --color-green-forest: #2d3038;
+  --color-green-olive: #3d4048;
+  --color-green-soft: rgba(150, 105, 216, 0.12);
+
+  --color-brown-light: #3d4048;
+  --color-brown-medium: #2d3038;
+  --color-brown-dark: #24272e;
+  --color-brown-soft: rgba(255, 255, 255, 0.06);
+
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-tint: rgba(150, 105, 216, 0.08);
+
+  /* States */
+  --color-success: #3f8f6b;
+  --color-warning: #d9a441;
+  --color-error: #c85b5b;
+
+  /* Shadows - более мягкие тени */
+  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --shadow-glass: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --shadow-button: 0 2px 8px rgba(150, 105, 216, 0.35);
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Font Sizes - Mobile First */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 36px;
+  --text-4xl: 48px;
+
+  /* Line Heights */
+  --lh-tight: 1.15;
+  --lh-normal: 1.45;
+  --lh-loose: 1.65;
+
+  /* Font Weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Spacing - 8px system */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  --spacing-4xl: 96px;
+}
+
+/* Tablet Typography */
+@media (min-width: 768px) {
+  :root {
+    --text-2xl: 30px;
+    --text-3xl: 40px;
+    --text-4xl: 48px;
+  }
+}
+
+/* Desktop Typography */
+@media (min-width: 1024px) {
+  :root {
+    --text-base: 18px;
+    --text-lg: 20px;
+    --text-xl: 24px;
+    --text-2xl: 36px;
+    --text-3xl: 48px;
+    --text-4xl: 56px;
+  }
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--lh-normal);
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+}
+
+/* Typography */
+h1 {
+  font-size: var(--text-2xl);
+  line-height: var(--lh-tight);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);  /* цвет слоновой кости */
+  margin-bottom: var(--spacing-md);
+}
+
+h2 {
+  font-size: var(--text-xl);
+  line-height: var(--lh-tight);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);  /* цвет слоновой кости */
+  margin-bottom: var(--spacing-md);
+}
+
+h3 {
+  font-size: var(--text-lg);
+  line-height: var(--lh-tight);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);  /* цвет слоновой кости */
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Заголовки на темном фоне */
+h1.on-dark,
+h2.on-dark,
+h3.on-dark {
+  color: var(--color-text-on-dark);
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: var(--lh-normal);
+  margin-bottom: var(--spacing-md);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  padding: 0 var(--spacing-md);
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--spacing-3xl);
+    max-width: 1980px;
+  }
+}
+
+/* Buttons */
+.button-primary {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-size: var(--text-base);
+  font-weight: var(--fw-medium);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  box-shadow: var(--shadow-button);
+}
+
+.button-primary:hover {
+  background: var(--color-accent-hover);
+  box-shadow: 0 4px 12px rgba(150, 105, 216, 0.4);
+  transform: translateY(-1px);
+}
+
+.button-primary:active {
+  transform: translateY(1px);
+}
+
+.button-secondary {
+  display: inline-block;
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-size: var(--text-base);
+  font-weight: var(--fw-medium);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.button-secondary:hover {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent-hover);
+}
+
+/* Cards */
+.card {
+  background: var(--color-surface);
+  border-radius: 16px;
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-soft);
+}
+
+.card-solid {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: var(--spacing-xl);
+}
+
+/* Природные карточки с зелеными и коричневыми фонами */
+.card-green {
+  background: var(--color-green-forest);
+  color: var(--color-text-on-dark);
+  border-radius: 16px;
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-soft);
+}
+
+.card-brown {
+  background: var(--color-brown-medium);
+  color: var(--color-text-on-dark);
+  border-radius: 16px;
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-soft);
+}
+
+.card-brown-light {
+  background: var(--color-brown-light);
+  color: var(--color-text-primary);
+  border-radius: 16px;
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Sections */
+.section {
+  padding: var(--spacing-3xl) 0;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: var(--spacing-4xl) 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: calc(var(--spacing-4xl) * 1.5) 0;
+  }
+}
+
+/* Utilities */
+.text-center {
+  text-align: center;
+}
+
+.mb-sm {
+  margin-bottom: var(--spacing-sm);
+}
+
+.mb-md {
+  margin-bottom: var(--spacing-md);
+}
+
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
+
+.mb-xl {
+  margin-bottom: var(--spacing-xl);
+}
+
+.mt-sm {
+  margin-top: var(--spacing-sm);
+}
+
+.mt-md {
+  margin-top: var(--spacing-md);
+}
+
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
+
+.mt-xl {
+  margin-top: var(--spacing-xl);
+}

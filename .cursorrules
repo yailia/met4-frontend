@@ -1,0 +1,201 @@
+# Правила обработки изображений в Astro
+
+## Основные принципы
+
+### Использование компонентов Astro для изображений
+
+1. **Для обычных изображений** всегда используй компонент `<Image />` из `astro:assets`:
+   ```astro
+   import { Image } from 'astro:assets';
+   import myImage from '../assets/my_image.png';
+   
+   <Image src={myImage} alt="Описание изображения" />
+   ```
+
+2. **Для изображений с несколькими форматами** используй компонент `<Picture />`:
+   ```astro
+   import { Picture } from 'astro:assets';
+   import myImage from '../assets/my_image.png';
+   
+   <Picture src={myImage} formats={['avif', 'webp']} alt="Описание" />
+   ```
+
+### Обработка изображений для фона
+
+3. **Для фоновых изображений** используй функцию `getImage()` из `astro:assets`:
+   ```astro
+   ---
+   import { getImage } from "astro:assets";
+   import myBackground from "../background.png";
+   
+   const optimizedBackground = await getImage({
+     src: myBackground,
+     format: 'avif'
+   });
+   ---
+   
+   <div style={`background-image: url(${optimizedBackground.src});`}>
+     <slot />
+   </div>
+   ```
+
+4. **Для фоновых изображений с srcSet** (адаптивные фоны):
+   ```astro
+   ---
+   import { getImage } from "astro:assets";
+   import myBackground from "../background.png";
+   
+   const optimizedBackground = await getImage({
+     src: myBackground,
+     widths: [640, 750, 828, 1080, 1280, 1600],
+     format: 'avif'
+   });
+   ---
+   
+   <div 
+     style={`
+       background-image: url(${optimizedBackground.src});
+       background-image: -webkit-image-set(
+         ${optimizedBackground.srcSet.values.map(v => `url("${v.url}") ${v.descriptor || ''}`).join(', ')}
+       );
+       background-image: image-set(
+         ${optimizedBackground.srcSet.values.map(v => `url("${v.url}") ${v.descriptor || ''}`).join(', ')}
+       );
+     `}
+   >
+     <slot />
+   </div>
+   ```
+
+### Параметры getImage() для фоновых изображений
+
+5. **Рекомендуемые параметры для getImage()**:
+   - `src` (обязательно): ImageMetadata | string | Promise<{ default: ImageMetadata }>
+   - `widths`: number[] - массив ширин для генерации srcset (например, [640, 1280, 1920])
+   - `densities`: (number | string)[] - альтернатива widths для плотности пикселей (например, [1, 1.5, 2])
+   - `format`: 'avif' | 'webp' | 'png' | 'jpg' - предпочтительно 'avif' для лучшего сжатия
+   - `quality`: 'low' | 'mid' | 'high' | 'max' | number (0-100) - качество изображения
+   - `fit`: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down' - как обрезать изображение
+   - `position`: string - позиция обрезки (например, 'center', 'top left')
+
+### Важные ограничения
+
+6. **getImage() работает только на сервере** - НЕ используй в клиентском коде или UI-фреймворках (React, Svelte и т.д.)
+
+7. **widths и densities нельзя использовать одновременно** - выбери один вариант
+
+8. **Для удаленных изображений** необходимо настроить в `astro.config.mjs`:
+   ```js
+   export default defineConfig({
+     image: {
+       domains: ["example.com"],
+       // или
+       remotePatterns: [{ protocol: "https", hostname: "example.com" }]
+     }
+   });
+   ```
+
+### Структура результата getImage()
+
+9. **GetImageResult содержит**:
+   - `src`: string - URL оптимизированного изображения
+   - `srcSet`: объект с `values` (массив вариантов) и `attribute` (готовая строка для srcset)
+   - `attributes`: Record<string, any> - дополнительные HTML атрибуты
+   - `options`: ImageTransform - примененные настройки трансформации
+
+### Где хранить изображения
+
+10. **Локальные изображения**:
+    - Храни в `src/` для автоматической оптимизации
+    - Импортируй через относительный путь: `import image from '../assets/image.png'`
+    - Используй напрямую в компонентах: `<Image src={image} alt="..." />`
+
+11. **Изображения в public/**:
+    - Используй только если нужно избежать обработки
+    - Указывай путь относительно public: `src="/images/image.jpg"`
+    - Требуется указать `width` и `height` вручную
+
+12. **Удаленные изображения**:
+    - Используй полный URL: `src="https://example.com/image.jpg"`
+    - Настрой авторизацию доменов в конфиге для оптимизации
+
+### Responsive изображения
+
+13. **Для адаптивных изображений** используй свойство `layout`:
+    ```astro
+    <Image 
+      src={myImage} 
+      alt="..." 
+      layout="constrained" 
+      width={800} 
+      height={600} 
+    />
+    ```
+    - `constrained` - масштабируется вниз, но не больше указанных размеров
+    - `full-width` - масштабируется на всю ширину контейнера
+    - `fixed` - фиксированный размер
+    - `none` - без автоматической адаптивности
+
+### Примеры использования
+
+14. **Простое фоновое изображение**:
+    ```astro
+    ---
+    import { getImage } from "astro:assets";
+    import heroBg from "../assets/hero-bg.jpg";
+    
+    const bg = await getImage({ src: heroBg, format: 'avif' });
+    ---
+    
+    <section style={`background-image: url(${bg.src});`}>
+      <!-- контент -->
+    </section>
+    ```
+
+15. **Адаптивное фоновое изображение с srcSet**:
+    ```astro
+    ---
+    import { getImage } from "astro:assets";
+    import heroBg from "../assets/hero-bg.jpg";
+    
+    const bg = await getImage({ 
+      src: heroBg, 
+      widths: [640, 1280, 1920],
+      format: 'avif',
+      quality: 'high'
+    });
+    ---
+    
+    <section 
+      class="hero-section"
+      style={`
+        --bg-src: url(${bg.src});
+        --bg-srcset: ${bg.srcSet.attribute};
+      `}
+    >
+      <!-- контент -->
+    </section>
+    
+    <style>
+      .hero-section {
+        background-image: var(--bg-src);
+        background-image: image-set(
+          var(--bg-srcset)
+        );
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+    ```
+
+### Best Practices
+
+16. **Всегда указывай alt-текст** для доступности (обязательно для `<Image />` и `<Picture />`)
+
+17. **Используй современные форматы**: предпочитай 'avif', затем 'webp' для лучшего сжатия
+
+18. **Генерируй несколько размеров** через `widths` для адаптивности и производительности
+
+19. **Для фоновых изображений используй CSS image-set()** для поддержки браузерами разных разрешений
+
+20. **Кэшируй результаты getImage()** если изображение используется в нескольких местах

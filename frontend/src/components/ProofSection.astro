@@ -1,0 +1,91 @@
+---
+---
+
+<section class="proof-section section">
+  <div class="container">
+    <h2>Доказательства и кейсы</h2>
+    <p class="proof-intro text-center">
+      Фото с реальных тренингов. Онлайн и офлайн форматы. Демонстрация практики, без общих слов.
+    </p>
+    <div class="proof-grid grid grid-mobile">
+      <div class="proof-item">
+        <div class="proof-placeholder">
+          <p>Фото мероприятий</p>
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-placeholder">
+          <p>Фрагменты процессов</p>
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-placeholder">
+          <p>Живые люди</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .proof-section {
+    background: var(--color-surface);
+  }
+
+  .proof-section h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .proof-intro {
+    max-width: 600px;
+    margin: 0 auto var(--spacing-2xl);
+    color: var(--color-text-secondary);
+  }
+
+  .proof-grid {
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .proof-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .proof-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .proof-item {
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .proof-placeholder {
+    background: var(--color-bg);
+    border: 2px dashed var(--color-border);
+    padding: var(--spacing-3xl);
+    text-align: center;
+    color: var(--color-text-muted);
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    .proof-placeholder {
+      min-height: 250px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .proof-placeholder {
+      min-height: 300px;
+    }
+  }
+</style>

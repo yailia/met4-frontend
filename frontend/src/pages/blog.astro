@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = [
+  {
+    slug: 'ustoychivost-komand',
+    title: 'Устойчивость команд: что это и зачем',
+    excerpt: 'Разбираемся в понятии устойчивости команд и её влиянии на эффективность бизнеса.',
+    date: '2024-01-15'
+  },
+  {
+    slug: 'vygoranie-sotrudnikov',
+    title: 'Выгорание сотрудников: признаки и решения',
+    excerpt: 'Как распознать выгорание в команде и что делать для его предотвращения.',
+    date: '2024-01-10'
+  },
+  {
+    slug: 'diagnostika-komandy',
+    title: 'Диагностика команды: первые шаги',
+    excerpt: 'С чего начать оценку состояния команды и какие метрики использовать.',
+    date: '2024-01-05'
+  }
+];
+---
+
+<BaseLayout title="Блог - МЭТЧ" description="Статьи о устойчивости команд, выгорании, диагностике и развитии персонала.">
+  <main>
+    <section class="blog-hero section">
+      <div class="container">
+        <h1>Блог</h1>
+        <p class="blog-intro">
+          Полезные материалы о устойчивости команд, выгорании и развитии персонала
+        </p>
+      </div>
+    </section>
+
+    <section class="blog-content section">
+      <div class="container">
+        <div class="blog-posts">
+          {posts.map((post) => (
+            <article class="blog-post card-solid">
+              <h2><a href={`/blog/${post.slug}`}>{post.title}</a></h2>
+              <p class="post-excerpt">{post.excerpt}</p>
+              <div class="post-meta">
+                <time datetime={post.date}>{new Date(post.date).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+                <a href={`/blog/${post.slug}`} class="read-more">Читать далее →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .blog-hero {
+    background: var(--color-bg);
+    text-align: center;
+  }
+
+  .blog-hero h1 {
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--text-2xl);
+  }
+
+  @media (min-width: 768px) {
+    .blog-hero h1 {
+      font-size: var(--text-3xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .blog-hero h1 {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .blog-intro {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+  }
+
+  @media (min-width: 768px) {
+    .blog-intro {
+      font-size: var(--text-lg);
+    }
+  }
+
+  .blog-content {
+    background: var(--color-surface);
+  }
+
+  .blog-posts {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  .blog-post {
+    padding: var(--spacing-2xl);
+  }
+
+  .blog-post h2 {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .blog-post h2 a {
+    color: var(--color-text-primary);
+    transition: color 0.2s ease;
+  }
+
+  .blog-post h2 a:hover {
+    color: var(--color-accent);
+  }
+
+  .post-excerpt {
+    margin-bottom: var(--spacing-md);
+    line-height: var(--lh-loose);
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .read-more {
+    color: var(--color-accent);
+    font-weight: var(--fw-medium);
+  }
+
+  .read-more:hover {
+    color: var(--color-accent-hover);
+  }
+</style>

@@ -1,0 +1,155 @@
+/* Responsive Utilities - Mobile First */
+
+/* Hide/Show utilities */
+.hide-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hide-mobile {
+    display: block;
+  }
+  
+  .hide-tablet {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hide-tablet {
+    display: block;
+  }
+  
+  .hide-desktop {
+    display: none;
+  }
+}
+
+/* Grid utilities */
+.grid {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.grid-mobile {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid-desktop-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Flex utilities */
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+.gap-lg {
+  gap: var(--spacing-lg);
+}
+
+.gap-xl {
+  gap: var(--spacing-xl);
+}
+
+/* Spacing responsive */
+@media (min-width: 768px) {
+  .gap-md-tablet {
+    gap: var(--spacing-lg);
+  }
+  
+  .gap-lg-tablet {
+    gap: var(--spacing-xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gap-md-desktop {
+    gap: var(--spacing-xl);
+  }
+  
+  .gap-lg-desktop {
+    gap: var(--spacing-2xl);
+  }
+}
+
+/* Text responsive */
+.text-responsive {
+  font-size: var(--text-base);
+}
+
+@media (min-width: 768px) {
+  .text-responsive {
+    font-size: var(--text-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-responsive {
+    font-size: var(--text-xl);
+  }
+}
+
+/* Width utilities */
+.w-full {
+  width: 100%;
+}
+
+.w-auto {
+  width: auto;
+}
+
+@media (min-width: 768px) {
+  .w-tablet-auto {
+    width: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .w-desktop-auto {
+    width: auto;
+  }
+  
+  .max-w-container {
+    max-width: 1980px;
+    margin: 0 auto;
+  }
+}

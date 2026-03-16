@@ -1,0 +1,83 @@
+---
+---
+
+<section class="problems-section section section-grid-bg">
+  <div class="container">
+    <h2>Проблема — данные и исследования</h2>
+    <div class="problems-grid grid grid-mobile">
+      <div class="problem-item glass-light">
+        <div class="problem-number">90%+</div>
+        <h3>Компаний фиксируют влияние стресса</h3>
+        <p>Более 90% компаний фиксируют влияние стресса и выгорания на бизнес, но менее половины предпринимают системные действия (<a href="https://iz.ru/1902391/2025-06-13/rossianam-rasskazali-o-metodah-borby-rabotodatelei-s-vygoraniem-sotrudnikov" target="_blank" rel="noopener noreferrer" class="problem-link">Izvestia, 2025</a>)</p>
+      </div>
+      <div class="problem-item glass-light">
+        <div class="problem-number">$</div>
+        <h3>Триллионы долларов потерь</h3>
+        <p>Потери производственных дней из-за выгорания и депрессии оцениваются в триллионы долларов ежегодно на глобальном уровне (<a href="https://www.ft.com/content/81eedab5-3dd0-41cb-802b-2390f9aa6f4e" target="_blank" rel="noopener noreferrer" class="problem-link">FT, 2021</a>)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .problems-section {
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .problems-section h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .problems-grid {
+    gap: var(--spacing-xl);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .problems-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .problem-item {
+    padding: var(--spacing-2xl);
+    text-align: center;
+  }
+
+  .problem-number {
+    font-size: var(--text-4xl);
+    font-weight: var(--fw-bold);
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+    line-height: 1;
+  }
+
+  @media (min-width: 768px) {
+    .problem-number {
+      font-size: 56px;
+    }
+  }
+
+  .problem-item h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+    font-size: var(--text-lg);
+  }
+
+  .problem-item p {
+    color: var(--color-text-secondary);
+    line-height: var(--lh-loose);
+  }
+
+  .problem-link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .problem-link:hover {
+    color: var(--color-accent-hover);
+  }
+</style>
