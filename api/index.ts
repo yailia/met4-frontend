@@ -48,6 +48,7 @@ app.post('/sessions', async (c) => {
       <p><a href="${employeeLink}">${employeeLink}</a></p>
       <p>Когда все пройдут, откройте отчёт здесь:<br>
       <a href="${reportLink}">${reportLink}</a></p>
+      <p>Если хотите обсудить детали — <a href="https://calendly.com/bolkunatz/30min">запланируйте встречу</a>.</p>
       <p>— Команда МЭТЧ</p>
     `,
   });
