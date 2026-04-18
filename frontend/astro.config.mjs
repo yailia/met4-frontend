@@ -8,5 +8,6 @@ export default defineConfig({
   site: 'https://yailia.github.io',
   base: '/met4-frontend',
   output: 'static',
+  trailingSlash: 'always',
   integrations: [svelte()]
 });
