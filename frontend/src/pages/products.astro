@@ -1,173 +1,171 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const products = [
+  {
+    format: 'Групповой формат',
+    h: 'Тренинг по устойчивости',
+    p: 'Системное развитие навыков работы с нагрузкой и стрессом.',
+    result: 'Команды работают стабильнее в неопределённости.',
+  },
+  {
+    format: 'Групповой формат',
+    h: 'Тренинг по продуктивности',
+    p: 'Фокус, приоритеты, управление энергией.',
+    result: 'Рост эффективности без выгорания.',
+  },
+  {
+    format: 'Групповой формат',
+    h: 'Работа с поколением Z',
+    p: 'Адаптация подходов управления и взаимодействия.',
+    result: 'Снижение конфликтов и текучки среди молодых сотрудников.',
+  },
+  {
+    format: 'Индивидуальный формат',
+    h: 'Коучинг руководителей',
+    p: 'Развитие устойчивости и ресурсности лидера.',
+    result: 'Руководитель не выгорает и ведёт команду в стрессе.',
+  },
+  {
+    format: 'Индивидуальный формат',
+    h: 'Индивидуальные планы развития',
+    p: 'Программы под конкретные задачи компании.',
+    result: 'Персонализированный путь роста для ключевых сотрудников.',
+  },
+];
 ---
 
-<BaseLayout title="Продукты - МЭТЧ" description="Тренинги, коучинг и индивидуальные планы развития для повышения устойчивости команд.">
+<BaseLayout title="Форматы работы — МЭТЧ" description="Тренинги, коучинг и индивидуальные планы развития для повышения устойчивости команд.">
   <main>
-    <section class="products-hero section">
-      <div class="container">
-        <h1>Наши продукты</h1>
-        <p class="products-intro">
-          Комплексные решения для развития устойчивости команд и сотрудников
-        </p>
+    <div class="container products-wrap">
+      <div class="page-header">
+        <span class="eyebrow">Продукты</span>
+        <h1>Форматы работы</h1>
+        <p class="section-lead">Пять форматов под разные задачи команд и руководителей.</p>
       </div>
-    </section>
 
-    <section class="products-content section">
-      <div class="container">
-        <div class="products-grid grid grid-mobile">
+      <div class="products-grid">
+        {products.map((p) => (
           <div class="product-card card-solid">
-            <h2>Тренинги</h2>
-            <p>
-              Групповые сессии для развития навыков устойчивости, работы в команде и управления стрессом.
-              Программы адаптированы под специфику вашей компании.
-            </p>
-            <ul class="product-features">
-              <li>Групповой формат</li>
-              <li>Практические инструменты</li>
-              <li>Измеримые результаты</li>
-            </ul>
+            <div class="product-format eyebrow">{p.format}</div>
+            <h3>{p.h}</h3>
+            <p>{p.p}</p>
+            <div class="product-result">
+              <span class="result-label">Результат</span>
+              <span class="result-value">{p.result}</span>
+            </div>
           </div>
-
-          <div class="product-card card-solid">
-            <h2>Коучинг</h2>
-            <p>
-              Индивидуальная поддержка для руководителей и ключевых сотрудников.
-              Развитие лидерских качеств и навыков управления командой в условиях неопределенности.
-            </p>
-            <ul class="product-features">
-              <li>Индивидуальный подход</li>
-              <li>Гибкий график</li>
-              <li>Фокус на результатах</li>
-            </ul>
-          </div>
-
-          <div class="product-card card-solid">
-            <h2>Индивидуальные планы развития</h2>
-            <p>
-              Персонализированные программы развития для каждого участника команды.
-              Учет индивидуальных особенностей и целей компании.
-            </p>
-            <ul class="product-features">
-              <li>Персонализация</li>
-              <li>Долгосрочная поддержка</li>
-              <li>Отслеживание прогресса</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="products-cta text-center">
-          <p class="cta-text">
-            Хотите узнать больше о наших продуктах?
-          </p>
-          <a href="/assessment" class="button-primary">Связаться с нами</a>
-        </div>
+        ))}
       </div>
-    </section>
+
+      <div class="page-cta">
+        <a href="/contact" class="button-primary">Обсудить задачи напрямую</a>
+        <a href="/assessment" class="button-secondary">Пройти диагностику</a>
+      </div>
+    </div>
   </main>
 </BaseLayout>
 
 <style>
-  .products-hero {
-    background: var(--color-bg);
+  .products-wrap {
+    padding: 48px 0 80px;
+  }
+
+  @media (min-width: 720px) { .products-wrap { padding: 64px 0 96px; } }
+
+  .page-header {
     text-align: center;
+    max-width: 760px;
+    margin: 0 auto 48px;
   }
 
-  .products-hero h1 {
-    margin-bottom: var(--spacing-lg);
-    font-size: var(--text-2xl);
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: inline-block;
   }
 
-  @media (min-width: 768px) {
-    .products-hero h1 {
-      font-size: var(--text-3xl);
-    }
+  .page-header h1 {
+    margin-bottom: 14px;
+    color: #fff;
   }
 
-  @media (min-width: 1024px) {
-    .products-hero h1 {
-      font-size: var(--text-4xl);
-    }
-  }
-
-  .products-intro {
-    max-width: 700px;
+  .section-lead {
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
     margin: 0 auto;
-    font-size: var(--text-base);
-    color: var(--color-text-secondary);
+    line-height: 1.6;
   }
 
-  @media (min-width: 768px) {
-    .products-intro {
-      font-size: var(--text-lg);
-    }
-  }
-
-  .products-content {
-    background: var(--color-surface);
-  }
+  @media (min-width: 720px) { .section-lead { font-size: 18px; } }
 
   .products-grid {
-    gap: var(--spacing-xl);
-    margin-bottom: var(--spacing-3xl);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 1000px;
+    margin: 0 auto 48px;
   }
 
-  @media (min-width: 768px) {
-    .products-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .products-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  @media (min-width: 720px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   }
 
   .product-card {
-    padding: var(--spacing-2xl);
+    padding: 28px;
   }
 
-  .product-card h2 {
-    margin-bottom: var(--spacing-md);
-    color: var(--color-accent);
-    font-size: var(--text-xl);
+  @media (min-width: 720px) { .product-card { padding: 32px; } }
+
+  .product-format {
+    margin-bottom: 12px;
+  }
+
+  .product-card h3 {
+    color: #fff;
+    margin-bottom: 10px;
+    margin-top: 0;
   }
 
   .product-card p {
-    margin-bottom: var(--spacing-lg);
-    line-height: var(--lh-loose);
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+    line-height: 1.55;
+    margin-bottom: 0;
   }
 
-  .product-features {
-    list-style: none;
-    padding: 0;
-    margin-top: var(--spacing-lg);
+  .product-result {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
-  .product-features li {
-    padding: var(--spacing-sm) 0;
-    padding-left: var(--spacing-xl);
-    position: relative;
-    color: var(--color-text-secondary);
+  .result-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
   }
 
-  .product-features li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: var(--color-accent);
-    font-weight: var(--fw-bold);
-    font-size: var(--text-lg);
+  .result-value {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1.45;
   }
 
-  .products-cta {
-    margin-top: var(--spacing-3xl);
-  }
-
-  .cta-text {
-    margin-bottom: var(--spacing-lg);
-    font-size: var(--text-lg);
-    color: var(--color-text-secondary);
+  .page-cta {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 </style>

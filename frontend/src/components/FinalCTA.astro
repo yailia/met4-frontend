@@ -1,89 +1,79 @@
 ---
 ---
 
-<section class="final-cta-section section hero-pattern-gradient">
+<section class="section section-shapes-bg final-cta">
   <div class="container">
-    <div class="glass-container">
-      <h2>Проверить уровень устойчивости вашей команды</h2>
-      <p class="final-cta-text">
-        Обсудить задачи компании напрямую
-      </p>
-      <div class="final-cta-buttons">
-        <a href="/assessment" class="button-primary">Проверить уровень устойчивости</a>
-        <a href="/contact" class="button-secondary">Обсудить задачи напрямую</a>
+    <div class="glass-container final-glass">
+      <span class="eyebrow">Готовы посмотреть на свою команду в цифрах?</span>
+      <h2>Проверим уровень устойчивости<br/>— или обсудим задачу напрямую</h2>
+      <p>Без скриптов, без автоворонок. Ответ в течение рабочего дня.</p>
+      <div class="final-buttons">
+        <a href="/assessment" class="button-primary">Пройти Q12 за 10 минут</a>
+        <a href="/contact" class="button-secondary light">Обсудить задачи напрямую</a>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  .final-cta-section {
-    padding: var(--spacing-3xl) 0;
-  }
+  .section-shapes-bg { background: transparent; }
 
-  @media (min-width: 768px) {
-    .final-cta-section {
-      padding: var(--spacing-4xl) 0;
-    }
-  }
+  .final-cta { padding: 96px 0; }
 
-  .final-cta-section .glass-container {
+  .final-glass {
     text-align: center;
-    max-width: 700px;
+    max-width: 760px;
     margin: 0 auto;
+    padding: 56px 40px;
   }
 
-  .final-cta-section h2 {
+  @media (max-width: 720px) {
+    .final-cta { padding: 64px 0; }
+    .final-glass { padding: 36px 24px; }
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: inline-block;
+  }
+
+  .final-glass h2 {
     color: #fff;
-    margin-bottom: var(--spacing-lg);
-    font-size: var(--text-xl);
+    margin-bottom: 14px;
+    line-height: 1.2;
+    font-size: 32px;
   }
 
-  @media (min-width: 768px) {
-    .final-cta-section h2 {
-      font-size: var(--text-2xl);
-    }
+  @media (min-width: 720px) { .final-glass h2 { font-size: 36px; } }
+
+  .final-glass p {
+    color: rgba(255,255,255,0.85);
+    font-size: 16px;
+    margin-bottom: 28px;
   }
 
-  @media (min-width: 1024px) {
-    .final-cta-section h2 {
-      font-size: var(--text-3xl);
-    }
-  }
+  @media (min-width: 720px) { .final-glass p { font-size: 18px; } }
 
-  .final-cta-text {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: var(--text-base);
-    margin-bottom: var(--spacing-xl);
-  }
-
-  @media (min-width: 768px) {
-    .final-cta-text {
-      font-size: var(--text-lg);
-    }
-  }
-
-  .final-cta-buttons {
+  .final-buttons {
     display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
-  @media (min-width: 768px) {
-    .final-cta-buttons {
-      flex-direction: row;
-      justify-content: center;
-    }
-  }
-
-  .final-cta-buttons .button-secondary {
+  .button-secondary.light {
     color: #fff;
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.08);
   }
 
-  .final-cta-buttons .button-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
+  .button-secondary.light:hover {
+    background: rgba(255,255,255,0.15);
     border-color: #fff;
   }
 </style>

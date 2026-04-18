@@ -43,7 +43,7 @@
   }
 </script>
 
-<div class="contact-form glass-card">
+<div class="contact-form">
   {#if submitted}
     <div class="success-message">
       <h3>Спасибо!</h3>
@@ -111,82 +111,85 @@
 
 <style>
   .contact-form {
-    max-width: 500px;
-    margin: 0 auto;
+    width: 100%;
   }
 
   .contact-form h3 {
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: 8px;
     text-align: center;
+    color: #fff;
   }
 
   .form-description {
     text-align: center;
-    margin-bottom: var(--spacing-xl);
-    color: var(--color-text-secondary);
-    font-size: var(--text-sm);
+    margin-bottom: 24px;
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
   }
 
   .form-group {
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: 16px;
   }
 
   label {
     display: block;
-    margin-bottom: var(--spacing-sm);
-    font-weight: var(--fw-medium);
-    color: var(--color-text-primary);
-    font-size: var(--text-sm);
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
   }
 
   input {
     width: 100%;
-    padding: 12px 16px;
-    border: 1px solid var(--color-border);
+    padding: 14px 16px;
+    border: 1px solid rgba(255,255,255,0.12);
     border-radius: 12px;
-    font-size: var(--text-base);
+    font-size: 15px;
     font-family: var(--font-sans);
-    background: var(--color-surface);
-    color: var(--color-text-primary);
-    transition: border-color 0.2s ease;
+    background: rgba(255,255,255,0.04);
+    color: #fff;
+    transition: border-color 0.15s ease;
+    min-height: 48px;
+    outline: none;
   }
 
   input:focus {
-    outline: none;
     border-color: var(--color-accent);
+    background: rgba(255,255,255,0.06);
   }
 
   input::placeholder {
-    color: var(--color-text-muted);
+    color: rgba(255,255,255,0.6);
   }
 
   button {
     width: 100%;
-    margin-top: var(--spacing-md);
+    margin-top: 16px;
   }
 
   button:disabled {
-    opacity: 0.6;
+    opacity: 0.45;
     cursor: not-allowed;
   }
 
   .success-message {
     text-align: center;
-    padding: var(--spacing-xl);
+    padding: 24px 0;
   }
 
   .success-message h3 {
     color: var(--color-success);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 10px;
   }
 
   .error-message {
-    background: var(--color-error);
-    color: #fff;
-    padding: var(--spacing-md);
+    background: rgba(200,91,91,0.15);
+    border: 1px solid var(--color-error);
+    color: #ff9090;
+    padding: 12px 16px;
     border-radius: 8px;
-    margin-bottom: var(--spacing-lg);
-    font-size: var(--text-sm);
+    margin-bottom: 16px;
+    font-size: 14px;
     text-align: center;
   }
 </style>

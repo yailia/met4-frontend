@@ -1,158 +1,106 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WebinarForm from '../components/WebinarForm.svelte';
+
+const audience = [
+  'HR BP и HRD, которым нужны цифры для руководства',
+  'Руководители команд в периоде роста или турбулентности',
+  'Все, кто хочет системный подход вместо «ещё одного тренинга»',
+];
 ---
 
-<BaseLayout title="Вебинар: Почему устойчивость = деньги - МЭТЧ" description="Зарегистрируйтесь на вебинар о том, как устойчивость команд влияет на эффективность бизнеса.">
+<BaseLayout title="Вебинар: Почему устойчивость = деньги — МЭТЧ" description="Зарегистрируйтесь на вебинар о том, как устойчивость команд влияет на эффективность бизнеса.">
   <main>
-    <section class="webinar-hero section hero-pattern-gradient">
-      <div class="container">
-        <div class="glass-container">
-          <h1>Почему устойчивость = деньги</h1>
-          <p class="webinar-subtitle">
-            Узнайте, как развитие устойчивости команд напрямую влияет на финансовые результаты компании
-          </p>
-        </div>
+    <div class="container webinar-wrap">
+      <div class="webinar-hero">
+        <span class="eyebrow">Онлайн-разбор</span>
+        <h1>Почему устойчивость = деньги</h1>
+        <p class="section-lead">
+          Для HR и руководителей — с кейсами и метриками.
+        </p>
       </div>
-    </section>
 
-    <section class="webinar-info section">
-      <div class="container">
-        <div class="webinar-content">
-          <div class="webinar-benefits card-solid">
-            <h2>Кому будет полезно</h2>
-            <ul>
-              <li>HR-директорам и HR BP</li>
-              <li>Руководителям отделов</li>
-              <li>Владельцам бизнеса</li>
-              <li>Тем, кто отвечает за обучение персонала</li>
-            </ul>
+      <div class="audience-grid">
+        {audience.map((t) => (
+          <div class="audience-card card-solid">
+            <div class="eyebrow">Для кого</div>
+            <p>{t}</p>
           </div>
-
-          <div class="webinar-speaker card-solid">
-            <h2>Кто ведёт</h2>
-            <p>
-              Эксперты МЭТЧ с опытом работы с командами различных компаний.
-              Мы помогли десяткам организаций повысить устойчивость и эффективность.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
-    </section>
 
-    <section class="webinar-form-section section">
-      <div class="container">
+      <div class="form-wrap glass-container">
         <WebinarForm client:load />
       </div>
-    </section>
+    </div>
   </main>
 </BaseLayout>
 
 <style>
-  .webinar-hero {
-    min-height: 50vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .webinar-wrap {
+    padding: 48px 0 80px;
   }
 
-  .webinar-hero .glass-container {
+  @media (min-width: 720px) { .webinar-wrap { padding: 64px 0 96px; } }
+
+  .webinar-hero {
     text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 760px;
+    margin: 0 auto 48px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: inline-block;
   }
 
   .webinar-hero h1 {
+    margin-bottom: 14px;
     color: #fff;
-    margin-bottom: var(--spacing-lg);
-    font-size: var(--text-2xl);
   }
 
-  @media (min-width: 768px) {
-    .webinar-hero h1 {
-      font-size: var(--text-3xl);
-    }
+  .section-lead {
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+    margin: 0 auto;
+    line-height: 1.6;
   }
 
-  @media (min-width: 1024px) {
-    .webinar-hero h1 {
-      font-size: var(--text-4xl);
-    }
-  }
+  @media (min-width: 720px) { .section-lead { font-size: 18px; } }
 
-  .webinar-subtitle {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: var(--text-base);
-    line-height: var(--lh-loose);
-  }
-
-  @media (min-width: 768px) {
-    .webinar-subtitle {
-      font-size: var(--text-lg);
-    }
-  }
-
-  .webinar-info {
-    background: var(--color-bg);
-  }
-
-  .webinar-content {
+  .audience-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--spacing-xl);
-    max-width: 900px;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  @media (min-width: 720px) {
+    .audience-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  }
+
+  .audience-card {
+    padding: 24px;
+  }
+
+  .audience-card .eyebrow {
+    margin-bottom: 12px;
+  }
+
+  .audience-card p {
+    color: #fff;
+    font-size: 15px;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .form-wrap {
+    max-width: 640px;
     margin: 0 auto;
-  }
-
-  @media (min-width: 768px) {
-    .webinar-content {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .webinar-benefits,
-  .webinar-speaker {
-    padding: var(--spacing-2xl);
-  }
-
-  .webinar-benefits h2,
-  .webinar-speaker h2 {
-    margin-bottom: var(--spacing-lg);
-    color: var(--color-accent);
-  }
-
-  .webinar-benefits ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .webinar-benefits li {
-    padding: var(--spacing-sm) 0;
-    padding-left: var(--spacing-xl);
-    position: relative;
-    color: var(--color-text-secondary);
-  }
-
-  .webinar-benefits li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--color-accent);
-    font-weight: var(--fw-bold);
-  }
-
-  .webinar-form-section {
-    background: var(--color-bg);
-    background-image:
-      linear-gradient(
-        rgba(79, 127, 106, 0.06) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        90deg,
-        rgba(79, 127, 106, 0.06) 1px,
-        transparent 1px
-      );
-    background-size: 48px 48px;
   }
 </style>

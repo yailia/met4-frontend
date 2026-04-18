@@ -1,83 +1,126 @@
 ---
 ---
 
-<section class="problems-section section section-grid-bg">
+<section class="section section-dots-bg">
   <div class="container">
-    <h2>Проблема — данные и исследования</h2>
-    <div class="problems-grid grid grid-mobile">
-      <div class="problem-item glass-light">
-        <div class="problem-number">90%+</div>
-        <h3>Компаний фиксируют влияние стресса</h3>
-        <p>Более 90% компаний фиксируют влияние стресса и выгорания на бизнес, но менее половины предпринимают системные действия (<a href="https://iz.ru/1902391/2025-06-13/rossianam-rasskazali-o-metodah-borby-rabotodatelei-s-vygoraniem-sotrudnikov" target="_blank" rel="noopener noreferrer" class="problem-link">Izvestia, 2025</a>)</p>
+    <div class="section-head">
+      <span class="eyebrow">Проблема — в цифрах</span>
+      <h2 class="section-h-left">Выгорание уже стоит бизнесу денег.<br/>Вопрос — сколько именно.</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card glass-light">
+        <div class="stat-n">90%+</div>
+        <h3>компаний фиксируют влияние стресса на бизнес</h3>
+        <p>но менее половины предпринимают системные действия</p>
+        <a class="stat-src" href="https://iz.ru/1902391/2025-06-13/rossianam-rasskazali-o-metodah-borby-rabotodatelei-s-vygoraniem-sotrudnikov" target="_blank" rel="noopener">
+          Источник: Izvestia, 2025 →
+        </a>
       </div>
-      <div class="problem-item glass-light">
-        <div class="problem-number">$</div>
-        <h3>Триллионы долларов потерь</h3>
-        <p>Потери производственных дней из-за выгорания и депрессии оцениваются в триллионы долларов ежегодно на глобальном уровне (<a href="https://www.ft.com/content/81eedab5-3dd0-41cb-802b-2390f9aa6f4e" target="_blank" rel="noopener noreferrer" class="problem-link">FT, 2021</a>)</p>
+      <div class="stat-card glass-light">
+        <div class="stat-n">≈$1T</div>
+        <h3>потерь ежегодно из-за выгорания и депрессии</h3>
+        <p>упущенные производственные дни на глобальном уровне</p>
+        <a class="stat-src" href="https://www.ft.com/content/81eedab5-3dd0-41cb-802b-2390f9aa6f4e" target="_blank" rel="noopener">
+          Источник: FT, 2021 →
+        </a>
+      </div>
+      <div class="stat-card glass-light">
+        <div class="stat-n">4.3×</div>
+        <h3>выше текучка в командах без поддержки устойчивости</h3>
+        <p>по сравнению с командами, где ведётся системная работа</p>
+        <a class="stat-src" href="https://gallup.com/" target="_blank" rel="noopener">
+          Источник: Gallup, 2024 →
+        </a>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  .problems-section {
-    padding: var(--spacing-3xl) 0;
+  .section-dots-bg {
+    background: transparent;
   }
 
-  .problems-section h2 {
-    text-align: center;
-    margin-bottom: var(--spacing-2xl);
+  .section-head {
+    margin-bottom: 40px;
+    max-width: 820px;
   }
 
-  .problems-grid {
-    gap: var(--spacing-xl);
-    max-width: 1000px;
-    margin: 0 auto;
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: inline-block;
   }
 
-  @media (min-width: 768px) {
-    .problems-grid {
-      grid-template-columns: repeat(2, 1fr);
+  .section-h-left {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.15;
+    margin-top: 6px;
+    color: #fff;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 900px) {
+    .section-h-left { font-size: 26px; }
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 720px) {
+    .stats-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  .problem-item {
-    padding: var(--spacing-2xl);
-    text-align: center;
+  .stat-card {
+    padding: 28px 28px 24px;
+    display: flex;
+    flex-direction: column;
   }
 
-  .problem-number {
-    font-size: var(--text-4xl);
-    font-weight: var(--fw-bold);
-    color: var(--color-accent);
-    margin-bottom: var(--spacing-md);
+  .stat-n {
+    font-size: 56px;
+    font-weight: 700;
     line-height: 1;
+    color: #d4b8ff;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    text-shadow: 0 0 24px rgba(180,140,255,0.25);
   }
 
-  @media (min-width: 768px) {
-    .problem-number {
-      font-size: 56px;
-    }
+  .stat-card h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+    line-height: 1.35;
+    color: #fff;
   }
 
-  .problem-item h3 {
-    margin-bottom: var(--spacing-md);
-    color: var(--color-text-primary);
-    font-size: var(--text-lg);
+  .stat-card p {
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    flex: 1;
   }
 
-  .problem-item p {
-    color: var(--color-text-secondary);
-    line-height: var(--lh-loose);
+  .stat-src {
+    display: inline-block;
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 12px;
+    width: 100%;
+    text-decoration: none;
   }
 
-  .problem-link {
-    color: var(--color-accent);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  .problem-link:hover {
-    color: var(--color-accent-hover);
-  }
+  .stat-src:hover { color: var(--color-accent); }
 </style>

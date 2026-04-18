@@ -3,142 +3,148 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const posts = [
   {
-    slug: 'ustoychivost-komand',
-    title: 'Устойчивость команд: что это и зачем',
-    excerpt: 'Разбираемся в понятии устойчивости команд и её влиянии на эффективность бизнеса.',
-    date: '2024-01-15'
+    date: '10 апреля 2026',
+    h: 'Когда обучение бесполезно: три диагностических сигнала',
+    tag: 'Аналитика',
+    insight: 'Если сотрудники не восстанавливаются между пиками, тренинг только усилит выгорание.',
   },
   {
-    slug: 'vygoranie-sotrudnikov',
-    title: 'Выгорание сотрудников: признаки и решения',
-    excerpt: 'Как распознать выгорание в команде и что делать для его предотвращения.',
-    date: '2024-01-10'
+    date: '28 марта 2026',
+    h: 'Q12 и бюджет: как объяснить CEO ценность вовлечённости',
+    tag: 'Практика',
+    insight: '4 метрики, которые переводят «мягкие» показатели в язык финансового отчёта.',
   },
   {
-    slug: 'diagnostika-komandy',
-    title: 'Диагностика команды: первые шаги',
-    excerpt: 'С чего начать оценку состояния команды и какие метрики использовать.',
-    date: '2024-01-05'
-  }
+    date: '14 марта 2026',
+    h: 'Gen Z в команде: что ломается и что на самом деле работает',
+    tag: 'Исследование',
+    insight: 'Разбор трёх типичных конфликтов и четырёх рабочих управленческих решений.',
+  },
 ];
 ---
 
-<BaseLayout title="Блог - МЭТЧ" description="Статьи о устойчивости команд, выгорании, диагностике и развитии персонала.">
+<BaseLayout title="Экспертиза — МЭТЧ" description="Аналитика, кейсы и разборы исследований по устойчивости, выгоранию и вовлечённости.">
   <main>
-    <section class="blog-hero section">
-      <div class="container">
-        <h1>Блог</h1>
-        <p class="blog-intro">
-          Полезные материалы о устойчивости команд, выгорании и развитии персонала
+    <div class="container blog-wrap">
+      <div class="page-header">
+        <span class="eyebrow">Экспертиза</span>
+        <h1>Разборы и исследования</h1>
+        <p class="section-lead">
+          Аналитика, кейсы и разборы исследований по устойчивости, выгоранию и вовлечённости.
         </p>
       </div>
-    </section>
 
-    <section class="blog-content section">
-      <div class="container">
-        <div class="blog-posts">
-          {posts.map((post) => (
-            <article class="blog-post card-solid">
-              <h2><a href={`/blog/${post.slug}`}>{post.title}</a></h2>
-              <p class="post-excerpt">{post.excerpt}</p>
-              <div class="post-meta">
-                <time datetime={post.date}>{new Date(post.date).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-                <a href={`/blog/${post.slug}`} class="read-more">Читать далее →</a>
-              </div>
-            </article>
-          ))}
-        </div>
+      <div class="blog-grid">
+        {posts.map((p) => (
+          <article class="blog-card card-solid">
+            <div class="blog-meta">
+              <span class="eyebrow">{p.tag}</span>
+              <span class="blog-date">{p.date}</span>
+            </div>
+            <h3>{p.h}</h3>
+            <p>{p.insight}</p>
+            <a href="#" class="blog-link">Читать →</a>
+          </article>
+        ))}
       </div>
-    </section>
+    </div>
   </main>
 </BaseLayout>
 
 <style>
-  .blog-hero {
-    background: var(--color-bg);
+  .blog-wrap {
+    padding: 48px 0 80px;
+  }
+
+  @media (min-width: 720px) { .blog-wrap { padding: 64px 0 96px; } }
+
+  .page-header {
     text-align: center;
+    max-width: 760px;
+    margin: 0 auto 48px;
   }
 
-  .blog-hero h1 {
-    margin-bottom: var(--spacing-lg);
-    font-size: var(--text-2xl);
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: inline-block;
   }
 
-  @media (min-width: 768px) {
-    .blog-hero h1 {
-      font-size: var(--text-3xl);
-    }
+  .page-header h1 {
+    margin-bottom: 14px;
+    color: #fff;
   }
 
-  @media (min-width: 1024px) {
-    .blog-hero h1 {
-      font-size: var(--text-4xl);
-    }
-  }
-
-  .blog-intro {
-    max-width: 700px;
+  .section-lead {
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
     margin: 0 auto;
-    font-size: var(--text-base);
-    color: var(--color-text-secondary);
+    line-height: 1.6;
   }
 
-  @media (min-width: 768px) {
-    .blog-intro {
-      font-size: var(--text-lg);
-    }
+  @media (min-width: 720px) { .section-lead { font-size: 18px; } }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .blog-content {
-    background: var(--color-surface);
+  @media (min-width: 720px) {
+    .blog-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
   }
 
-  .blog-posts {
-    max-width: 900px;
-    margin: 0 auto;
+  .blog-card {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xl);
+    padding: 28px;
   }
 
-  .blog-post {
-    padding: var(--spacing-2xl);
-  }
-
-  .blog-post h2 {
-    margin-bottom: var(--spacing-md);
-  }
-
-  .blog-post h2 a {
-    color: var(--color-text-primary);
-    transition: color 0.2s ease;
-  }
-
-  .blog-post h2 a:hover {
-    color: var(--color-accent);
-  }
-
-  .post-excerpt {
-    margin-bottom: var(--spacing-md);
-    line-height: var(--lh-loose);
-  }
-
-  .post-meta {
+  .blog-meta {
     display: flex;
+    align-items: baseline;
     justify-content: space-between;
-    align-items: center;
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    padding-top: var(--spacing-md);
-    border-top: 1px solid var(--color-border);
+    margin-bottom: 12px;
+    gap: 8px;
   }
 
-  .read-more {
+  .blog-meta .eyebrow { margin-bottom: 0; }
+
+  .blog-date {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    white-space: nowrap;
+  }
+
+  .blog-card h3 {
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  @media (min-width: 720px) {
+    .blog-card h3 { min-height: 54px; }
+  }
+
+  .blog-card p {
+    flex: 1;
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: 0;
+  }
+
+  .blog-link {
+    display: inline-block;
+    margin-top: 14px;
+    font-weight: 500;
+    font-size: 14px;
     color: var(--color-accent);
-    font-weight: var(--fw-medium);
+    text-decoration: none;
   }
 
-  .read-more:hover {
-    color: var(--color-accent-hover);
-  }
+  .blog-link:hover { color: var(--color-accent-hover); }
 </style>

@@ -1,91 +1,153 @@
 ---
 ---
 
-<section class="proof-section section">
+<section class="section section-grid-bg">
   <div class="container">
-    <h2>Доказательства и кейсы</h2>
-    <p class="proof-intro text-center">
-      Фото с реальных тренингов. Онлайн и офлайн форматы. Демонстрация практики, без общих слов.
-    </p>
-    <div class="proof-grid grid grid-mobile">
-      <div class="proof-item">
-        <div class="proof-placeholder">
-          <p>Фото мероприятий</p>
+    <div class="section-head">
+      <span class="eyebrow">Нам доверяют</span>
+      <h2 class="section-h-left">Работаем с командами от 50 до 5 000 человек</h2>
+    </div>
+    <div class="logos-row">
+      <div class="logo-ph"><span>лого клиента</span></div>
+      <div class="logo-ph"><span>лого клиента</span></div>
+      <div class="logo-ph"><span>лого клиента</span></div>
+      <div class="logo-ph"><span>лого клиента</span></div>
+      <div class="logo-ph"><span>лого клиента</span></div>
+      <div class="logo-ph"><span>лого клиента</span></div>
+    </div>
+    <div class="testimonial glass-container">
+      <div class="tm-quote">«</div>
+      <blockquote>
+        Тренинг оказался первым за много лет, после которого команда реально
+        изменила поведение в стрессовых ситуациях. Метрики вовлечённости
+        выросли на 18% за квартал.
+      </blockquote>
+      <div class="tm-author">
+        <div class="tm-avatar"></div>
+        <div>
+          <div class="tm-name">Имя Фамилия</div>
+          <div class="tm-role">HR-директор · Компания</div>
         </div>
       </div>
-      <div class="proof-item">
-        <div class="proof-placeholder">
-          <p>Фрагменты процессов</p>
-        </div>
-      </div>
-      <div class="proof-item">
-        <div class="proof-placeholder">
-          <p>Живые люди</p>
-        </div>
-      </div>
+      <div class="tm-note">отзыв-плейсхолдер · ждём реальный кейс от клиента</div>
     </div>
   </div>
 </section>
 
 <style>
-  .proof-section {
-    background: var(--color-surface);
+  .section-grid-bg { background: transparent; }
+
+  .section-head {
+    margin-bottom: 40px;
+    max-width: 820px;
   }
 
-  .proof-section h2 {
-    text-align: center;
-    margin-bottom: var(--spacing-md);
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: inline-block;
   }
 
-  .proof-intro {
-    max-width: 600px;
-    margin: 0 auto var(--spacing-2xl);
-    color: var(--color-text-secondary);
+  .section-h-left {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.15;
+    margin-top: 6px;
+    color: #fff;
+    margin-bottom: 0;
   }
 
-  .proof-grid {
-    gap: var(--spacing-lg);
+  @media (max-width: 900px) {
+    .section-h-left { font-size: 26px; }
   }
 
-  @media (min-width: 768px) {
-    .proof-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--spacing-xl);
-    }
+  .logos-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 48px;
   }
 
-  @media (min-width: 1024px) {
-    .proof-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
+  @media (min-width: 640px) { .logos-row { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 960px) { .logos-row { grid-template-columns: repeat(6, 1fr); } }
 
-  .proof-item {
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  .proof-placeholder {
-    background: var(--color-bg);
-    border: 2px dashed var(--color-border);
-    padding: var(--spacing-3xl);
-    text-align: center;
-    color: var(--color-text-muted);
-    min-height: 200px;
+  .logo-ph {
+    height: 72px;
+    border: 1px dashed rgba(255,255,255,0.18);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgba(255,255,255,0.02);
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    font-family: ui-monospace, Menlo, monospace;
+    letter-spacing: 0.04em;
   }
 
-  @media (min-width: 768px) {
-    .proof-placeholder {
-      min-height: 250px;
-    }
+  .testimonial {
+    position: relative;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 48px 40px 36px;
+    text-align: center;
   }
 
-  @media (min-width: 1024px) {
-    .proof-placeholder {
-      min-height: 300px;
-    }
+  @media (max-width: 720px) {
+    .testimonial { padding: 40px 24px 28px; }
+  }
+
+  .tm-quote {
+    position: absolute;
+    top: 8px;
+    left: 36px;
+    font-size: 96px;
+    line-height: 1;
+    color: var(--color-accent);
+    opacity: 0.45;
+    font-family: Georgia, serif;
+  }
+
+  .testimonial blockquote {
+    font-size: 19px;
+    line-height: 1.55;
+    color: #fff;
+    margin-bottom: 24px;
+    font-style: normal;
+  }
+
+  @media (max-width: 720px) {
+    .testimonial blockquote { font-size: 16px; }
+  }
+
+  .tm-author {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+  }
+
+  .tm-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(150,105,216,0.6), rgba(63,143,107,0.4));
+    border: 1px solid rgba(255,255,255,0.12);
+    flex-shrink: 0;
+  }
+
+  .tm-name { font-size: 14px; font-weight: 600; color: #fff; }
+  .tm-role { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+  .tm-note {
+    margin-top: 20px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    font-family: ui-monospace, Menlo, monospace;
+    opacity: 0.7;
   }
 </style>

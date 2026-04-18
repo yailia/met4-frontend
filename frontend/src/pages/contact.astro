@@ -3,64 +3,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.svelte';
 ---
 
-<BaseLayout title="Контакты - МЭТЧ" description="Свяжитесь с нами для обсуждения задач вашей компании.">
+<BaseLayout title="Контакты — МЭТЧ" description="Свяжитесь с нами для обсуждения задач вашей компании.">
   <main>
-    <section class="contact-hero section">
-      <div class="container">
-        <h1>Обсудить задачи компании напрямую</h1>
-        <p class="contact-intro">
-          Свяжитесь с нами, чтобы обсудить, как мы можем помочь повысить устойчивость и эффективность вашей команды
+    <div class="container contact-wrap">
+      <div class="page-header">
+        <span class="eyebrow">Без скриптов и автоворонок</span>
+        <h1>Обсудим задачи вашей компании</h1>
+        <p class="section-lead">
+          Оставьте контакты — свяжемся в рабочее время, ответ в течение рабочего дня.
         </p>
       </div>
-    </section>
 
-    <section class="contact-form-section section section-grid-bg">
-      <div class="container">
+      <div class="form-wrap glass-container">
         <ContactForm client:load />
       </div>
-    </section>
+    </div>
   </main>
 </BaseLayout>
 
 <style>
-  .contact-hero {
-    background: var(--color-bg);
+  .contact-wrap {
+    padding: 48px 0 80px;
+  }
+
+  @media (min-width: 720px) { .contact-wrap { padding: 64px 0 96px; } }
+
+  .page-header {
     text-align: center;
-    padding: var(--spacing-3xl) 0;
+    max-width: 700px;
+    margin: 0 auto 40px;
   }
 
-  .contact-hero h1 {
-    margin-bottom: var(--spacing-lg);
-    font-size: var(--text-2xl);
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: inline-block;
   }
 
-  @media (min-width: 768px) {
-    .contact-hero h1 {
-      font-size: var(--text-3xl);
-    }
+  .page-header h1 {
+    margin-bottom: 14px;
+    color: #fff;
   }
 
-  @media (min-width: 1024px) {
-    .contact-hero h1 {
-      font-size: var(--text-4xl);
-    }
+  .section-lead {
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+    margin: 0 auto;
+    line-height: 1.6;
   }
 
-  .contact-intro {
+  @media (min-width: 720px) { .section-lead { font-size: 18px; } }
+
+  .form-wrap {
     max-width: 700px;
     margin: 0 auto;
-    font-size: var(--text-base);
-    color: var(--color-text-secondary);
-    line-height: var(--lh-loose);
-  }
-
-  @media (min-width: 768px) {
-    .contact-intro {
-      font-size: var(--text-lg);
-    }
-  }
-
-  .contact-form-section {
-    padding: var(--spacing-3xl) 0;
   }
 </style>

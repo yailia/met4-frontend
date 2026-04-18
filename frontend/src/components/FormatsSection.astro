@@ -1,82 +1,109 @@
 ---
+const items = [
+  { kind: 'Групповой', h: 'Тренинг по устойчивости',       p: 'Системное развитие навыков работы с нагрузкой и стрессом.' },
+  { kind: 'Групповой', h: 'Тренинг по продуктивности',     p: 'Фокус, приоритеты, управление энергией.' },
+  { kind: 'Групповой', h: 'Работа с поколением Z',         p: 'Адаптация подходов управления и взаимодействия.' },
+  { kind: 'Индивид.',  h: 'Коучинг руководителей',         p: 'Индивидуальная работа с управленцами.' },
+  { kind: 'Индивид.',  h: 'Индивидуальные планы развития', p: 'Программы под конкретные задачи компании.' },
+];
 ---
 
-<section class="formats-section section">
+<section class="section section-hex-bg">
   <div class="container">
-    <h2>Продукты и решения</h2>
-    <div class="formats-grid grid grid-mobile">
-      <div class="format-card glass-light">
-        <h3>Тренинг по устойчивости</h3>
-        <p>Системное развитие навыков работы с нагрузкой</p>
-      </div>
-      <div class="format-card glass-light">
-        <h3>Тренинг по продуктивности</h3>
-        <p>Фокус, приоритеты, управление энергией</p>
-      </div>
-      <div class="format-card glass-light">
-        <h3>Работа с поколением Z</h3>
-        <p>Адаптация подходов взаимодействия</p>
-      </div>
-      <div class="format-card glass-light">
-        <h3>Коучинг руководителей</h3>
-        <p>Индивидуальная работа с управленцами</p>
-      </div>
-      <div class="format-card glass-light">
-        <h3>Индивидуальные планы развития</h3>
-        <p>Программы под конкретные задачи компании</p>
-      </div>
+    <div class="section-head">
+      <span class="eyebrow">Форматы работы</span>
+      <h2 class="section-h-left">Пять продуктов под разные задачи команды</h2>
+    </div>
+    <div class="formats-grid">
+      {items.map((it) => (
+        <div class="format-card glass-light">
+          <div class="format-kind">{it.kind}</div>
+          <h3>{it.h}</h3>
+          <p>{it.p}</p>
+          <a href="/products" class="format-link">Подробнее →</a>
+        </div>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-  .formats-section {
-    background: var(--color-bg);
+  .section-hex-bg { background: transparent; }
+
+  .section-head {
+    margin-bottom: 40px;
+    max-width: 820px;
   }
 
-  .formats-section h2 {
-    text-align: center;
-    margin-bottom: var(--spacing-2xl);
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: inline-block;
   }
+
+  .section-h-left {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.15;
+    margin-top: 6px;
+    color: #fff;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 900px) { .section-h-left { font-size: 26px; } }
 
   .formats-grid {
-    gap: var(--spacing-lg);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  @media (min-width: 768px) {
-    .formats-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--spacing-xl);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .formats-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .formats-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
+  @media (min-width: 720px)  { .formats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+  @media (min-width: 1024px) { .formats-grid { grid-template-columns: repeat(3, 1fr); } }
 
   .format-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 28px;
   }
 
-  .format-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-glass);
-  }
-
-  .format-card {
-    padding: var(--spacing-xl);
+  .format-kind {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 600;
+    color: #d4b8ff;
+    background: rgba(150,105,216,0.15);
+    border: 1px solid rgba(150,105,216,0.30);
+    border-radius: 999px;
+    padding: 4px 10px;
+    letter-spacing: 0.04em;
+    margin-bottom: 14px;
   }
 
   .format-card h3 {
-    margin-bottom: var(--spacing-md);
-    color: var(--color-accent);
+    color: #fff;
+    margin-bottom: 8px;
   }
+
+  .format-card p {
+    flex: 1;
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+
+  .format-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .format-link:hover { color: var(--color-accent-hover); }
 </style>
