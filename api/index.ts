@@ -38,7 +38,8 @@ app.post('/sessions', async (c) => {
   const employeeLink = `${base}/assessment?h=${hash}`;
   const reportLink   = `${base}/assessment?h=${hash}&report=1`;
 
-  await resend.emails.send({
+  console.log('[sessions] sending email to:', email, 'from:', FROM);
+  const emailResult = await resend.emails.send({
     from: FROM,
     to: email,
     subject: `МЭТЧ — ссылка для диагностики команды «${company}»`,
@@ -52,6 +53,7 @@ app.post('/sessions', async (c) => {
       <p>— Команда МЭТЧ</p>
     `,
   });
+  console.log('[sessions] resend result:', JSON.stringify(emailResult));
 
   return c.json({ ok: true });
 });
