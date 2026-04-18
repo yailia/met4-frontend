@@ -5,9 +5,21 @@ import { createClient } from '@libsql/client';
 import { Resend } from 'resend';
 
 const db = createClient({
-  url: process.env.TURSO_URL!,
-  authToken: process.env.TURSO_TOKEN!,
+  url: `file:${process.env.DB_PATH || './db.sqlite'}`,
 });
+
+await db.execute(`CREATE TABLE IF NOT EXISTS sessions (
+  hash TEXT PRIMARY KEY,
+  company TEXT NOT NULL,
+  email TEXT NOT NULL,
+  created_at INTEGER NOT NULL
+)`);
+await db.execute(`CREATE TABLE IF NOT EXISTS answers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  hash TEXT NOT NULL,
+  answers TEXT NOT NULL,
+  created_at INTEGER NOT NULL
+)`);
 
 const resend = new Resend(process.env.RESEND_KEY!);
 const FROM = 'МЭТЧ <noreply@met4.ru>';
