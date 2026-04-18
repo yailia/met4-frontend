@@ -10,7 +10,7 @@ const db = createClient({
 });
 
 const resend = new Resend(process.env.RESEND_KEY!);
-const FROM = 'МЭТЧ <onboarding@resend.dev>';
+const FROM = 'МЭТЧ <noreply@met4.ru>';
 const ORIGIN = process.env.FRONTEND_ORIGIN || '*';
 
 const app = new Hono();
