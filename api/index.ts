@@ -74,6 +74,39 @@ app.post('/answers', async (c) => {
     args: [hash, JSON.stringify(answers), Date.now()],
   });
 
+  const sessRes = await db.execute({
+    sql: 'SELECT company, email FROM sessions WHERE hash = ?',
+    args: [hash],
+  });
+  const session = sessRes.rows[0];
+
+  if (session) {
+    const base = process.env.FRONTEND_ORIGIN || 'https://yailia.github.io/met4-frontend';
+    const reportLink = `${base}/assessment?h=${hash}&report=1`;
+
+    const countRes = await db.execute({
+      sql: 'SELECT COUNT(*) as cnt FROM answers WHERE hash = ?',
+      args: [hash],
+    });
+    const count = Number(countRes.rows[0]?.cnt ?? 1);
+
+    console.log('[answers] notifying HR:', session.email, 'count:', count);
+    const emailResult = await resend.emails.send({
+      from: FROM,
+      to: session.email as string,
+      subject: `МЭТЧ — ещё один сотрудник прошёл Q12 (${session.company})`,
+      html: `
+        <p>Сотрудник компании «${session.company}» завершил опрос Q12.</p>
+        <p>Всего ответов: <strong>${count}</strong></p>
+        <p>Посмотреть текущий отчёт:<br>
+        <a href="${reportLink}">${reportLink}</a></p>
+        <p>Если хотите обсудить детали — <a href="https://calendly.com/bolkunatz/30min">запланируйте встречу</a>.</p>
+        <p>— Команда МЭТЧ</p>
+      `,
+    });
+    console.log('[answers] resend result:', JSON.stringify(emailResult));
+  }
+
   return c.json({ ok: true });
 });
 
