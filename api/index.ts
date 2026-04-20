@@ -51,19 +51,12 @@ app.post('/sessions', async (c) => {
   const reportLink   = `${base}/assessment?h=${hash}&report=1`;
 
   console.log('[sessions] sending email to:', email, 'from:', FROM);
-  const emailResult = await resend.emails.send({
+  const emailResult = await (resend.emails.send as any)({
     from: FROM,
     to: email,
     subject: `МЭТЧ — ссылка для диагностики команды «${company}»`,
-    html: `
-      <p>Здравствуйте!</p>
-      <p>Отправьте сотрудникам эту ссылку для прохождения Q12:</p>
-      <p><a href="${employeeLink}">${employeeLink}</a></p>
-      <p>Когда все пройдут, откройте отчёт здесь:<br>
-      <a href="${reportLink}">${reportLink}</a></p>
-      <p>Если хотите обсудить детали — <a href="https://calendly.com/bolkunatz/30min">запланируйте встречу</a>.</p>
-      <p>— Команда МЭТЧ</p>
-    `,
+    template_id: 'match-diagnostics',
+    variables: { employeeLink, reportLink },
   });
   console.log('[sessions] resend result:', JSON.stringify(emailResult));
 
@@ -106,15 +99,8 @@ app.post('/answers', async (c) => {
     const emailResult = await resend.emails.send({
       from: FROM,
       to: session.email as string,
-      subject: `МЭТЧ — ещё один сотрудник прошёл Q12 (${session.company})`,
-      html: `
-        <p>Сотрудник компании «${session.company}» завершил опрос Q12.</p>
-        <p>Всего ответов: <strong>${count}</strong></p>
-        <p>Посмотреть текущий отчёт:<br>
-        <a href="${reportLink}">${reportLink}</a></p>
-        <p>Если хотите обсудить детали — <a href="https://calendly.com/bolkunatz/30min">запланируйте встречу</a>.</p>
-        <p>— Команда МЭТЧ</p>
-      `,
+      subject: `МЭТЧ — новый ответ Q12 (${session.company})`,
+      html: answerSubmittedEmail({ company: session.company as string, count, reportLink }),
     });
     console.log('[answers] resend result:', JSON.stringify(emailResult));
   }
