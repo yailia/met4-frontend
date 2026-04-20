@@ -3,6 +3,8 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { createClient } from '@libsql/client';
 import { Resend } from 'resend';
+import { sessionCreatedEmail } from './emails/session-created.js';
+import { answerSubmittedEmail } from './emails/answer-submitted.js';
 
 const db = createClient({
   url: `file:${process.env.DB_PATH || './db.sqlite'}`,
@@ -51,12 +53,11 @@ app.post('/sessions', async (c) => {
   const reportLink   = `${base}/assessment?h=${hash}&report=1`;
 
   console.log('[sessions] sending email to:', email, 'from:', FROM);
-  const emailResult = await (resend.emails.send as any)({
+  const emailResult = await resend.emails.send({
     from: FROM,
     to: email,
     subject: `МЭТЧ — ссылка для диагностики команды «${company}»`,
-    template_id: 'match-diagnostics',
-    variables: { employeeLink, reportLink },
+    html: sessionCreatedEmail({ company, employeeLink, reportLink }),
   });
   console.log('[sessions] resend result:', JSON.stringify(emailResult));
 
@@ -102,6 +103,7 @@ app.post('/answers', async (c) => {
       subject: `МЭТЧ — новый ответ Q12 (${session.company})`,
       html: answerSubmittedEmail({ company: session.company as string, count, reportLink }),
     });
+
     console.log('[answers] resend result:', JSON.stringify(emailResult));
   }
 
