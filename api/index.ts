@@ -3,7 +3,6 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { createClient } from '@libsql/client';
 import { Resend } from 'resend';
-import { sessionCreatedEmail } from './emails/session-created.js';
 import { answerSubmittedEmail } from './emails/answer-submitted.js';
 
 const db = createClient({
@@ -53,11 +52,18 @@ app.post('/sessions', async (c) => {
   const reportLink   = `${base}/assessment?h=${hash}&report=1`;
 
   console.log('[sessions] sending email to:', email, 'from:', FROM);
-  const emailResult = await resend.emails.send({
+  const emailResult = await (resend.emails.send as any)({
     from: FROM,
     to: email,
     subject: `МЭТЧ — ссылка для диагностики команды «${company}»`,
-    html: sessionCreatedEmail({ company, employeeLink, reportLink }),
+    template: {
+      id: '93475ea2-0e94-4f1e-b87c-435ba8cc8a53',
+      variables: {
+        COMPANY: company,
+        EMPLOYEE_LINK: employeeLink,
+        REPORT_LINK: reportLink,
+      },
+    },
   });
   console.log('[sessions] resend result:', JSON.stringify(emailResult));
 
