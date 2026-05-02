@@ -1,0 +1,165 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { slugify } from '../../lib/blog-slug';
+
+const PAGE_SIZE = 12;
+const allPosts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+const posts = allPosts.slice(0, PAGE_SIZE);
+const lastPage = Math.max(1, Math.ceil(allPosts.length / PAGE_SIZE));
+
+const categoryCounts = new Map<string, number>();
+for (const p of allPosts) {
+  categoryCounts.set(p.data.category, (categoryCounts.get(p.data.category) || 0) + 1);
+}
+const categories = [...categoryCounts.entries()].sort((a, b) => b[1] - a[1]);
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="Блог МЭТЧ — устойчивость, выгорание, HR-практики"
+  description="Аналитика, кейсы и разборы исследований по устойчивости команд, выгоранию и вовлечённости. Авторы — Екатерина Чепурных и Елена Ривовна Иванова."
+>
+  <main>
+    <div class="container blog-wrap">
+      <header class="page-header">
+        <span class="eyebrow">Экспертиза</span>
+        <h1>Блог МЭТЧ</h1>
+        <p class="lead">
+          Разборы, кейсы и наблюдения о том, как команды становятся устойчивыми
+          и почему это меняет бизнес-метрики.
+        </p>
+      </header>
+
+      <nav class="cat-chips" aria-label="Категории">
+        <a class="chip active" href={`${base}blog/`}>Все · {allPosts.length}</a>
+        {categories.map(([cat, n]) => (
+          <a class="chip" href={`${base}blog/category/${slugify(cat)}/`}>{cat} · {n}</a>
+        ))}
+      </nav>
+
+      <div class="blog-grid">
+        {posts.map((post) => (
+          <BlogCard
+            href={`${base}blog/${post.id}/`}
+            title={post.data.title}
+            date={post.data.date}
+            category={post.data.category}
+            excerpt={post.data.excerpt}
+            cover={post.data.cover}
+            readingMinutes={post.data.readingMinutes}
+          />
+        ))}
+      </div>
+
+      {lastPage > 1 && (
+        <nav class="pager" aria-label="Постраничная навигация">
+          <span class="pager-link disabled">← Предыдущая</span>
+          <span class="pager-info">Страница 1 из {lastPage}</span>
+          <a class="pager-link" href={`${base}blog/page/2/`}>Следующая →</a>
+        </nav>
+      )}
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .blog-wrap { padding: 56px 0 80px; }
+  @media (min-width: 1024px) { .blog-wrap { padding: 80px 0 120px; } }
+
+  .page-header {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    text-align: center;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+  }
+  .page-header h1 {
+    margin: 8px 0 14px;
+    color: #fff;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  @media (min-width: 720px) { .page-header h1 { font-size: 48px; } }
+  .lead {
+    color: rgba(255,255,255,0.78);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .cat-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 24px auto 36px;
+    justify-content: center;
+    max-width: 920px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 999px;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+  }
+  .chip:hover {
+    background: rgba(150,105,216,0.12);
+    border-color: rgba(150,105,216,0.35);
+    color: #fff;
+  }
+  .chip.active {
+    background: rgba(150,105,216,0.20);
+    border-color: rgba(150,105,216,0.45);
+    color: #fff;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 720px) {
+    .blog-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  }
+  @media (min-width: 1024px) {
+    .blog-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  }
+
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 56px;
+    padding: 16px 0 0;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .pager-link {
+    color: #9669d8;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .pager-link:hover { color: #8555c4; }
+  .pager-link.disabled {
+    color: rgba(255,255,255,0.30);
+  }
+  .pager-info { font-size: 13px; color: rgba(255,255,255,0.6); }
+</style>

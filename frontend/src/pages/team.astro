@@ -1,0 +1,282 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import elenaPhoto from "../assets/experts/elena-ivanova.png";
+import ekaterinaPhoto from "../assets/experts/ekaterina-chepurnykh.png";
+
+const base = import.meta.env.BASE_URL;
+
+const experts = [
+  {
+    photo: ekaterinaPhoto,
+    name: "Екатерина Чепурных",
+    role: "Сооснователь · экс-HRD, эксперт по корпоративному well-being",
+    expertise: [
+      "Профилактика выгорания в командах 50–5 000 человек",
+      "Внедрение well-being по модели Gallup",
+      "HR-практики работы с токсичной средой и личными границами",
+    ],
+    experience: [
+      "10+ лет на позиции HRD в производственных и сервисных компаниях",
+      "Психолог, групповой терапевт",
+      "Автор и со-ведущая программы «6 граней устойчивости» для компаний",
+      "Спикер открытых практикумов по ментальной устойчивости",
+      "Корпоративные тренинги по эмоциональному интеллекту (включая Молодёжный кадровый резерв)",
+    ],
+  },
+  {
+    photo: elenaPhoto,
+    name: "Елена Ривовна Иванова",
+    role: "Сооснователь · КПТ-психолог, карьерный консультант",
+    expertise: [
+      "КПТ в работе с тревогой и выгоранием сотрудников",
+      "Эмоциональный интеллект и саморегуляция в команде",
+      "Карьерные треки и удержание ключевых специалистов",
+    ],
+    experience: [
+      "КПТ-психолог, групповой терапевт, карьерный консультант",
+      "Со-ведущая корпоративной программы «6 граней устойчивости»",
+      "Ведущая тренингов «Эмоциональный интеллект в профессиональной деятельности»",
+      "Автор практикумов по майндфулнес и работе с внутренним критиком",
+      "Действующий практик: личные консультации и групповые форматы для B2B-клиентов",
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Команда — МЭТЧ"
+  description="Сооснователи МЭТЧ — практики с опытом в HR-управлении и клинической психологии."
+>
+  <main>
+    <section class="team-hero">
+      <div class="container">
+        <span class="eyebrow">Команда</span>
+        <h1>Практики, а не теоретики</h1>
+        <p class="lead">
+          Мы — сооснователи МЭТЧ. Соединили 10+ лет опыта в HR-управлении и
+          клинической психологии, чтобы делать устойчивость команд измеримой
+          бизнес-метрикой.
+        </p>
+      </div>
+    </section>
+
+    <section class="team-list">
+      <div class="container">
+        {experts.map((p) => (
+          <article class="member">
+            <div class="member-photo">
+              <Image src={p.photo} alt={p.name} widths={[400, 600, 800]} />
+            </div>
+            <div class="member-body">
+              <h2>{p.name}</h2>
+              <div class="member-role">{p.role}</div>
+
+              <div class="member-block">
+                <h3>Экспертиза</h3>
+                <ul>
+                  {p.expertise.map((e) => <li>{e}</li>)}
+                </ul>
+              </div>
+
+              <div class="member-block">
+                <h3>Опыт и регалии</h3>
+                <ul>
+                  {p.experience.map((e) => <li>{e}</li>)}
+                </ul>
+              </div>
+
+              <div class="member-block certs">
+                <h3>Сертификаты</h3>
+                <p class="cert-pending">
+                  Готовим раздел с дипломами и сертификатами. Запросить копии
+                  можно через <a href={`${base}contact/`}>форму контактов</a>.
+                </p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="team-cta">
+      <div class="container">
+        <h2>Готовы оценить устойчивость своей команды?</h2>
+        <a class="button-primary" href={`${base}assessment/`}>
+          Пройти оценку устойчивости команды
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .team-hero {
+    padding: 80px 0 40px;
+  }
+  @media (min-width: 1024px) {
+    .team-hero { padding: 120px 0 56px; }
+  }
+
+  .team-hero h1 {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: #fff;
+    margin: 6px 0 18px;
+  }
+  @media (min-width: 720px)  { .team-hero h1 { font-size: 48px; } }
+  @media (min-width: 1024px) { .team-hero h1 { font-size: 56px; } }
+
+  .team-hero .lead {
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+    max-width: 720px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    display: inline-block;
+  }
+
+  .team-list {
+    padding: 32px 0 80px;
+  }
+  @media (min-width: 1024px) {
+    .team-list { padding: 40px 0 120px; }
+  }
+
+  .member {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    background: rgba(45,48,56,0.65);
+    backdrop-filter: blur(12px) saturate(150%);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  @media (min-width: 900px) {
+    .member {
+      grid-template-columns: 360px 1fr;
+      gap: 0;
+    }
+  }
+  @media (min-width: 1200px) {
+    .member { grid-template-columns: 440px 1fr; }
+  }
+
+  .member-photo {
+    aspect-ratio: 4 / 3;
+    background: #1f2228;
+    overflow: hidden;
+  }
+  @media (min-width: 900px) {
+    .member-photo { aspect-ratio: auto; height: 100%; min-height: 480px; }
+  }
+
+  .member-photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    display: block;
+  }
+
+  .member-body {
+    padding: 28px 24px 32px;
+  }
+  @media (min-width: 900px) {
+    .member-body { padding: 40px 40px 44px; }
+  }
+
+  .member-body h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+  @media (min-width: 720px) { .member-body h2 { font-size: 28px; } }
+
+  .member-role {
+    font-size: 14px;
+    font-weight: 500;
+    color: #9669d8;
+    margin-bottom: 24px;
+  }
+
+  .member-block {
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 18px;
+    margin-top: 18px;
+  }
+
+  .member-block h3 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.60);
+    margin: 0 0 12px;
+  }
+
+  .member-block ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .member-block li {
+    padding-left: 20px;
+    position: relative;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 8px;
+  }
+
+  .member-block li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 11px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #9669d8;
+  }
+
+  .cert-pending {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.60);
+    font-style: italic;
+  }
+  .cert-pending a {
+    color: #9669d8;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+
+  .team-cta {
+    padding: 60px 0 100px;
+    text-align: center;
+  }
+
+  .team-cta h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 24px;
+  }
+  @media (min-width: 720px) { .team-cta h2 { font-size: 36px; } }
+</style>

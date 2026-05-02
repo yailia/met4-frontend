@@ -1,0 +1,256 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import BlogCover from '../../components/BlogCover.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { slugify, formatRuDate } from '../../lib/blog-slug';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props as any;
+const { Content } = await render(post);
+
+// Related posts: same category first, then by shared tags. Exclude self.
+const all = (await getCollection('blog')).filter((p) => p.id !== post.id);
+const sameCat = all.filter((p) => p.data.category === post.data.category);
+const byTagOverlap = all
+  .map((p) => ({
+    p,
+    overlap: p.data.tags.filter((t: string) => post.data.tags.includes(t)).length,
+  }))
+  .filter((x) => x.overlap > 0)
+  .sort((a, b) => b.overlap - a.overlap)
+  .map((x) => x.p);
+
+const seen = new Set<string>();
+const related: any[] = [];
+for (const p of [...sameCat.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()), ...byTagOverlap]) {
+  if (related.length >= 3) break;
+  if (seen.has(p.id)) continue;
+  seen.add(p.id);
+  related.push(p);
+}
+
+const base = import.meta.env.BASE_URL;
+const dateStr = formatRuDate(post.data.date);
+---
+
+<BaseLayout
+  title={`${post.data.title} — Блог МЭТЧ`}
+  description={post.data.excerpt}
+>
+  <main>
+    <article class="post container">
+      <div class="post-head">
+        <a class="back-link" href={`${base}blog/`}>← Все статьи</a>
+        <div class="post-meta">
+          <a class="cat" href={`${base}blog/category/${slugify(post.data.category)}/`}>{post.data.category}</a>
+          <span class="dot">·</span>
+          <span>{dateStr}</span>
+          <span class="dot">·</span>
+          <span>{post.data.author}</span>
+          <span class="dot">·</span>
+          <span>{post.data.readingMinutes} мин чтения</span>
+        </div>
+        <h1>{post.data.title}</h1>
+      </div>
+
+      <div class="post-cover">
+        {post.data.cover
+          ? <Image src={post.data.cover} alt={post.data.title} widths={[600, 900, 1200]} />
+          : <BlogCover title={post.data.title} category={post.data.category} />}
+      </div>
+
+      <div class="post-body">
+        <Content />
+      </div>
+
+      {post.data.tags.length > 0 && (
+        <div class="post-tags">
+          {post.data.tags.map((t: string) => (
+            <a class="tag" href={`${base}blog/tag/${slugify(t)}/`}>#{t}</a>
+          ))}
+        </div>
+      )}
+    </article>
+
+    {related.length > 0 && (
+      <section class="related container">
+        <h2>Похожие статьи</h2>
+        <div class="related-grid">
+          {related.map((p) => (
+            <BlogCard
+              href={`${base}blog/${p.id}/`}
+              title={p.data.title}
+              date={p.data.date}
+              category={p.data.category}
+              excerpt={p.data.excerpt}
+              cover={p.data.cover}
+              readingMinutes={p.data.readingMinutes}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .post {
+    padding: 40px 0 64px;
+    max-width: 760px;
+  }
+  @media (min-width: 1024px) { .post { padding: 64px 0 80px; } }
+
+  .back-link {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 24px;
+  }
+  .back-link:hover { color: #fff; }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 14px;
+  }
+  .post-meta .cat {
+    color: #d4b8ff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    text-decoration: none;
+  }
+  .post-meta .cat:hover { color: #fff; }
+  .post-meta .dot { color: rgba(255,255,255,0.30); }
+
+  .post-head h1 {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: #fff;
+    margin: 4px 0 28px;
+  }
+  @media (min-width: 720px)  { .post-head h1 { font-size: 38px; } }
+  @media (min-width: 1024px) { .post-head h1 { font-size: 44px; } }
+
+  .post-cover {
+    margin: 0 -16px 32px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #1f2228;
+    aspect-ratio: 16 / 9;
+  }
+  @media (min-width: 720px) { .post-cover { margin: 0 0 36px; } }
+  .post-cover :global(img) {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+
+  .post-body :global(p) {
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.88);
+    margin: 0 0 18px;
+  }
+  @media (min-width: 720px) {
+    .post-body :global(p) { font-size: 17px; }
+  }
+  .post-body :global(strong) { color: #fff; font-weight: 600; }
+  .post-body :global(em)     { color: rgba(255,255,255,0.95); }
+  .post-body :global(a) {
+    color: #c4a8ee;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196,168,238,0.4);
+  }
+  .post-body :global(a:hover) {
+    color: #fff;
+    border-bottom-color: #fff;
+  }
+  .post-body :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 24px 0;
+    display: block;
+  }
+  .post-body :global(blockquote) {
+    border-left: 3px solid #9669d8;
+    padding: 4px 0 4px 16px;
+    margin: 18px 0;
+    color: rgba(255,255,255,0.85);
+    font-style: italic;
+  }
+  .post-body :global(code) {
+    background: rgba(255,255,255,0.06);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+  .post-body :global(ul), .post-body :global(ol) {
+    margin: 0 0 18px 22px;
+    color: rgba(255,255,255,0.88);
+  }
+  .post-body :global(li) { margin: 0 0 6px; line-height: 1.65; }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+  }
+  .tag {
+    display: inline-flex;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.78);
+    font-size: 12px;
+    text-decoration: none;
+  }
+  .tag:hover {
+    background: rgba(150,105,216,0.12);
+    border-color: rgba(150,105,216,0.35);
+    color: #fff;
+  }
+
+  .related {
+    padding: 16px 0 96px;
+  }
+  .related h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 24px;
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 720px) {
+    .related-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  }
+  @media (min-width: 1024px) {
+    .related-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  }
+</style>

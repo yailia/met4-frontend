@@ -1,4 +1,20 @@
 ---
+import { Image } from "astro:assets";
+import centrRazvitiya from "../assets/clients/centr-razvitiya.png";
+import cpoGrupp from "../assets/clients/cpo-grupp.png";
+import mmoma from "../assets/clients/mmoma.png";
+import tBuro from "../assets/clients/t-buro.png";
+import testo from "../assets/clients/testo.png";
+import zadachi from "../assets/clients/zadachi.png";
+
+const clients = [
+  { src: centrRazvitiya, alt: "Центр развития" },
+  { src: cpoGrupp, alt: "ЦПО Групп" },
+  { src: mmoma, alt: "ММОМА" },
+  { src: tBuro, alt: "Т-Бюро" },
+  { src: testo, alt: "Testo" },
+  { src: zadachi, alt: "Задачи" },
+];
 ---
 
 <section class="section section-grid-bg">
@@ -8,28 +24,29 @@
       <h2 class="section-h-left">Работаем с командами от 50 до 5 000 человек</h2>
     </div>
     <div class="logos-row">
-      <div class="logo-ph"><span>лого клиента</span></div>
-      <div class="logo-ph"><span>лого клиента</span></div>
-      <div class="logo-ph"><span>лого клиента</span></div>
-      <div class="logo-ph"><span>лого клиента</span></div>
-      <div class="logo-ph"><span>лого клиента</span></div>
-      <div class="logo-ph"><span>лого клиента</span></div>
+      {clients.map((c) => (
+        <div class="logo-cell">
+          <Image src={c.src} alt={c.alt} loading="lazy" />
+        </div>
+      ))}
     </div>
     <div class="testimonial glass-container">
       <div class="tm-quote">«</div>
       <blockquote>
-        Тренинг оказался первым за много лет, после которого команда реально
-        изменила поведение в стрессовых ситуациях. Метрики вовлечённости
-        выросли на 18% за квартал.
+        Ваш мастер-класс на тему «Новые подходы в HR при работе с молодым
+        поколением» вызвал большой интерес и живой отклик среди участников.
+        Профессионализм и умение увлекательно раскрывать актуальные вопросы
+        сделали выступление значимым событием программы. Участники отметили
+        практическую ценность представленных идей и получили важные инсайты для
+        построения эффективных HR-практик.
       </blockquote>
       <div class="tm-author">
-        <div class="tm-avatar"></div>
+        <div class="tm-avatar">ЭР</div>
         <div>
-          <div class="tm-name">Имя Фамилия</div>
-          <div class="tm-role">HR-директор · Компания</div>
+          <div class="tm-name">Э. М. Ребко</div>
+          <div class="tm-role">Директор Корпоративного университета Санкт-Петербурга</div>
         </div>
       </div>
-      <div class="tm-note">отзыв-плейсхолдер · ждём реальный кейс от клиента</div>
     </div>
   </div>
 </section>
@@ -75,18 +92,26 @@
   @media (min-width: 640px) { .logos-row { grid-template-columns: repeat(3, 1fr); } }
   @media (min-width: 960px) { .logos-row { grid-template-columns: repeat(6, 1fr); } }
 
-  .logo-ph {
+  .logo-cell {
     height: 72px;
-    border: 1px dashed rgba(255,255,255,0.18);
-    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255,255,255,0.02);
-    color: rgba(255,255,255,0.6);
-    font-size: 11px;
-    font-family: ui-monospace, Menlo, monospace;
-    letter-spacing: 0.04em;
+    padding: 8px 12px;
+  }
+
+  .logo-cell :global(img) {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.78;
+    transition: opacity 0.2s ease;
+  }
+
+  .logo-cell:hover :global(img) {
+    opacity: 1;
   }
 
   .testimonial {
@@ -138,16 +163,15 @@
     background: linear-gradient(135deg, rgba(150,105,216,0.6), rgba(63,143,107,0.4));
     border: 1px solid rgba(255,255,255,0.12);
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
 
   .tm-name { font-size: 14px; font-weight: 600; color: #fff; }
   .tm-role { font-size: 12px; color: rgba(255,255,255,0.6); }
-
-  .tm-note {
-    margin-top: 20px;
-    font-size: 11px;
-    color: rgba(255,255,255,0.6);
-    font-family: ui-monospace, Menlo, monospace;
-    opacity: 0.7;
-  }
 </style>
