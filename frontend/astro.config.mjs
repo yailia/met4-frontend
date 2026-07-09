@@ -18,5 +18,21 @@ export default defineConfig({
   site: 'https://met4.ru',
   output: 'static',
   trailingSlash: 'always',
-  integrations: [svelte(), sitemap()]
+  integrations: [
+    svelte(),
+    sitemap({
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        // /assessment holds hash-parameterized private links — keep out of the sitemap
+        // (also Disallowed in robots.txt). 404 should never be indexed.
+        if (path.startsWith('/assessment') || path === '/404/') return false;
+        return true;
+      },
+      serialize(item) {
+        item.changefreq = 'monthly';
+        item.priority = item.url === 'https://met4.ru/' ? 1.0 : 0.7;
+        return item;
+      },
+    })
+  ]
 });
