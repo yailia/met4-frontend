@@ -58,8 +58,12 @@ curl -s https://api.met4.ru/health   # ожидается {"ok":true}
 ```env
 RESEND_KEY=your_resend_api_key
 LEAD_INBOX=bolkunatz@gmail.com
-PUBLIC_METRIKA_ID=        # опционально, пусто = без счётчика
 ```
+
+Яндекс.Метрика (`PUBLIC_METRIKA_ID`) настраивается **не на VPS**: счётчик вшивается
+в статику фронтенда при сборке в CI. Задаётся в GitHub → Settings → Secrets and
+variables → Actions → Variables → `PUBLIC_METRIKA_ID` (см. `.github/workflows/deploy.yml`).
+Не задана — сайт собирается без счётчика.
 
 ### Локальная разработка
 
