@@ -5,7 +5,8 @@
 ## Структура проекта
 
 - `frontend/` - Astro фронтенд приложение
-- `bot/` - Telegram бот для обработки форм
+- `bot/` - Telegram бот (не деплоится, legacy)
+- `api/` - Hono API (сессии Q12, ответы, отчёты, заявки с форм)
 - `docker-compose.yml` - Оркестрация контейнеров
 
 ## Быстрый старт
@@ -20,8 +21,8 @@
 
 1. Скопируйте `.env.example` в `.env` и заполните:
    ```env
-   BOT_TOKEN=your_bot_token_here
-   CHAT_ID=your_chat_id_here
+   RESEND_KEY=your_resend_api_key
+   LEAD_INBOX=owner@example.com
    ```
 
 2. Для получения CHAT_ID используйте [@userinfobot](https://t.me/userinfobot) в Telegram

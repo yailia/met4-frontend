@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Страница не найдена — МЭТЧ" description="Страница не существует или была перемещена.">
+  <main class="nf-page">
+    <div class="container">
+      <p class="nf-code">404</p>
+      <h1>Страница не найдена</h1>
+      <p class="nf-text">Такой страницы нет — возможно, она была перемещена или ссылка устарела.</p>
+      <a href="/" class="button-primary">На главную</a>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .nf-page {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 80px 0;
+  }
+  .nf-page .container {
+    width: 100%;
+  }
+  .nf-code {
+    font-size: 72px;
+    font-weight: 700;
+    opacity: 0.25;
+    margin-bottom: 8px;
+  }
+  .nf-text {
+    margin: 16px auto 32px;
+    max-width: 420px;
+    opacity: 0.75;
+  }
+</style>

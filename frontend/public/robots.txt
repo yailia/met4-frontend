@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assessment
+
+Sitemap: https://met4.ru/sitemap-index.xml

@@ -32,6 +32,7 @@ jobs:
         working-directory: ./frontend
         env:
           PUBLIC_API_URL: https://api.met4.ru
+          PUBLIC_METRIKA_ID: ${{ vars.PUBLIC_METRIKA_ID }}
 
       - name: Copy frontend dist to VPS
         uses: appleboy/scp-action@v0.1.7

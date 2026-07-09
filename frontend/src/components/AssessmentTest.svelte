@@ -39,7 +39,16 @@
   let errorMsg = '';
 
   function generateHash() {
-    return Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+    return crypto.randomUUID();
+  }
+
+  function getRespondentId() {
+    let id = localStorage.getItem('met4-respondent-id');
+    if (!id) {
+      id = crypto.randomUUID();
+      localStorage.setItem('met4-respondent-id', id);
+    }
+    return id;
   }
 
   onMount(() => {
@@ -96,7 +105,7 @@
       const res = await fetch(`${API}/answers`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ hash, answers }),
+        body: JSON.stringify({ hash, answers, respondentId: getRespondentId() }),
       });
       if (!res.ok) throw new Error(await res.text());
       mode = 'done';

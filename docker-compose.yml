@@ -4,15 +4,23 @@ services:
     container_name: met4-api
     restart: unless-stopped
     environment:
+      - NODE_ENV=production
       - RESEND_KEY=${RESEND_KEY}
       - FRONTEND_ORIGIN=https://met4.ru
       - DB_PATH=/data/db.sqlite
+      - LEAD_INBOX=${LEAD_INBOX:-bolkunatz@gmail.com}
     volumes:
       - sqlite_data:/data
     networks:
       - met4-net
     expose:
       - "3001"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3001/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   nginx:
     image: nginx:alpine

@@ -7,7 +7,9 @@
   let submitting = false;
   let error = '';
 
-  const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
+  let website = ''; // honeypot — real users never fill this
+
+  const API_URL = import.meta.env.PUBLIC_API_URL;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -26,6 +28,7 @@
           email,
           phone,
           telegram,
+          website,
         }),
       });
 
@@ -60,6 +63,10 @@
     {/if}
 
     <form on:submit={handleSubmit}>
+      <div class="hp-field" aria-hidden="true">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" bind:value={website} tabindex="-1" autocomplete="off" />
+      </div>
       <div class="form-group">
         <label for="name">Имя *</label>
         <input
@@ -110,6 +117,14 @@
 </div>
 
 <style>
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
   .contact-form {
     width: 100%;
   }
