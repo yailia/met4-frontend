@@ -15,7 +15,7 @@
 
 - Docker и Docker Compose
 - Node.js 20+ (для локальной разработки)
-- Telegram бот токен (получить через [@BotFather](https://t.me/botfather))
+- Resend API key (для отправки email — https://resend.com)
 
 ### Настройка
 
@@ -25,8 +25,6 @@
    LEAD_INBOX=owner@example.com
    ```
 
-2. Для получения CHAT_ID используйте [@userinfobot](https://t.me/userinfobot) в Telegram
-
 ### Запуск через Docker
 
 ```bash
@@ -34,8 +32,6 @@ docker-compose up -d
 ```
 
 Сайт будет доступен по адресу: http://localhost
-
-API бота: http://localhost:3000
 
 ### Локальная разработка
 
@@ -47,21 +43,22 @@ npm install
 npm run dev
 ```
 
-#### Bot
+#### API
 
 ```bash
-cd bot
+cd api
 npm install
-npm start
+npm run dev    # http://localhost:3001
+npm test       # vitest
 ```
 
 Не забудьте создать `.env` файлы в каждой папке с соответствующими переменными.
 
 ## Технологии
 
-- **Frontend**: Astro + Svelte
-- **Backend**: Node.js + Express + Telegraf
-- **Deployment**: Docker + Docker Compose + Nginx
+- **Frontend**: Astro 5 + Svelte 5
+- **API**: Hono 4 + @libsql/client (sqlite) + Resend
+- **Deployment**: Docker + Docker Compose + Nginx + GitHub Actions
 
 ## Структура сайта
 
@@ -76,12 +73,15 @@ npm start
 
 ### POST /api/submit
 
-Принимает данные форм и отправляет уведомления в Telegram.
+Принимает данные форм (contact / webinar), сохраняет заявку в sqlite и отправляет email владельцу через Resend.
 
 Типы запросов:
 - `contact` - контактная форма
-- `assessment` - результаты теста Q12
 - `webinar` - регистрация на вебинар
+
+### POST /sessions, POST /answers, GET /report/:hash
+
+Диагностика Q12: создание сессии, ответы сотрудников, отчёт с процентами по 12 вопросам.
 
 ## Лицензия
 
