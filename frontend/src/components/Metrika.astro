@@ -4,7 +4,7 @@ import { METRIKA_ID } from '../lib/metrika';
 const id = METRIKA_ID;
 ---
 
-{id && (
+{id ? (
   <>
     <script is:inline define:vars={{ id }}>
       (function(m,e,t,r,i,k,a){
@@ -20,4 +20,4 @@ const id = METRIKA_ID;
       <div><img src={`https://mc.yandex.ru/watch/${id}`} style="position:absolute; left:-9999px;" alt="" /></div>
     </noscript>
   </>
-)}
+) : null}
