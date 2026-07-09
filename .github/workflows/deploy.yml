@@ -53,5 +53,8 @@ jobs:
           script: |
             cd /app
             git pull origin master
-            docker-compose up -d --build api
+            docker-compose build api
+            # api runs as user "node"; sqlite volume was created root-owned — idempotent fix
+            docker-compose run --rm --user root api chown -R node:node /data
+            docker-compose up -d api
             docker-compose restart nginx
