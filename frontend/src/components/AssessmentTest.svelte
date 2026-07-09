@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { reachGoal } from '../lib/metrika';
 
   const API = import.meta.env.PUBLIC_API_URL;
 
@@ -79,6 +80,7 @@
       shareLink = `${base}/assessment?h=${h}`;
       hash = h;
       mode = 'shared';
+      reachGoal('session_created');
     } catch (err) {
       errorMsg = 'Не удалось создать сессию. Попробуйте позже.';
       console.error(err);
@@ -109,6 +111,7 @@
       });
       if (!res.ok) throw new Error(await res.text());
       mode = 'done';
+      reachGoal('assessment_completed');
     } catch (err) {
       errorMsg = 'Не удалось отправить ответы. Попробуйте позже.';
       console.error(err);
@@ -125,6 +128,7 @@
       const res = await fetch(`${API}/report/${hash}`);
       if (!res.ok) throw new Error(await res.text());
       reportData = await res.json();
+      reachGoal('report_viewed');
     } catch (err) {
       errorMsg = 'Не удалось загрузить отчёт.';
       console.error(err);

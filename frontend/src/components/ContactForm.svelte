@@ -1,4 +1,6 @@
 <script>
+  import { reachGoal } from '../lib/metrika';
+
   let name = '';
   let email = '';
   let phone = '';
@@ -37,6 +39,7 @@
       }
 
       submitted = true;
+      reachGoal('contact_submit');
     } catch (err) {
       error = 'Не удалось отправить форму. Попробуйте позже.';
       console.error(err);
