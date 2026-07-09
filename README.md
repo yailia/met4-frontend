@@ -35,7 +35,31 @@ docker-compose up -d
 
 Сайт будет доступен по адресу: http://localhost
 
-API бота: http://localhost:3000
+### Деплой на VPS
+
+Первый деплой (или после смены владельца тома sqlite):
+
+```bash
+# API-контейнер работает от user node, но том /data создан root.
+# Один раз после создания тома — отдать права:
+docker compose run --rm --user root api chown -R node:node /data
+
+# Затем обычный запуск:
+docker compose up -d --build api
+docker compose restart nginx
+
+# Проверка:
+docker compose exec nginx nginx -t
+curl -s https://api.met4.ru/health   # ожидается {"ok":true}
+```
+
+Переменные окружения в `.env` на VPS:
+
+```env
+RESEND_KEY=your_resend_api_key
+LEAD_INBOX=bolkunatz@gmail.com
+PUBLIC_METRIKA_ID=        # опционально, пусто = без счётчика
+```
 
 ### Локальная разработка
 
