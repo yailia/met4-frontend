@@ -15,6 +15,7 @@ const blog = defineCollection({
       cover: image().optional(),
       readingMinutes: z.number().int().positive(),
       telegramId: z.number().int().optional(),
+      hideFromHome: z.boolean().default(false),
     }),
 });
 

@@ -9,6 +9,7 @@ excerpt: "Не смогла сдержаться! Только «из печки
 cover: "./_images/ne-smogla-sderzhatsya/cover.jpg"
 readingMinutes: 1
 telegramId: 359
+hideFromHome: true
 ---
 **Не смогла сдержаться!**
 
