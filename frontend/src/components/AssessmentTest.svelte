@@ -25,6 +25,7 @@
   let company = '';
   let email = '';
   let creating = false;
+  let consent = false;
   let shareLink = '';
 
   // take
@@ -163,14 +164,14 @@
         <span class="field-label">Email HR / руководителя</span>
         <input class="field-input" type="email" bind:value={email} required placeholder="hr@company.ru" />
       </label>
-      <button class="btn-primary full" type="submit" disabled={creating}>
+      <label class="form-consent">
+        <input type="checkbox" bind:checked={consent} required />
+        <span>Я согласен(на) с <a href="/privacy/">политикой обработки персональных данных</a></span>
+      </label>
+
+      <button class="btn-primary full" type="submit" disabled={creating || !consent}>
         {creating ? 'Создаём...' : 'Создать ссылку для команды'}
       </button>
-
-      <p class="form-consent">
-        Нажимая кнопку, вы соглашаетесь с
-        <a href="/privacy/">политикой обработки персональных данных</a>.
-      </p>
     </form>
   </div>
 
@@ -369,11 +370,15 @@
     font-size:14px; text-align:center;
   }
   .form-consent {
-    margin-top: 14px;
-    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 4px 0 14px;
     font-size: 12px;
     line-height: 1.5;
     color: rgba(255,255,255,0.6);
+    cursor: pointer;
   }
+  .form-consent input { margin-top: 2px; flex-shrink: 0; accent-color: var(--color-accent); }
   .form-consent a { color: #d4b8ff; }
 </style>

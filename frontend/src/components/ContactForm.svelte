@@ -9,6 +9,7 @@
   let error = '';
 
   let website = '';
+  let consent = false;
 
   const API_URL = import.meta.env.PUBLIC_API_URL;
 
@@ -105,14 +106,14 @@
         />
       </div>
 
-      <button type="submit" class="button-primary" disabled={submitting}>
+      <label class="form-consent">
+        <input type="checkbox" bind:checked={consent} required />
+        <span>Я согласен(на) с <a href="/privacy/">политикой обработки персональных данных</a></span>
+      </label>
+
+      <button type="submit" class="button-primary" disabled={submitting || !consent}>
         {submitting ? 'Отправка...' : 'Продолжить'}
       </button>
-
-      <p class="form-consent">
-        Нажимая кнопку, вы соглашаетесь с
-        <a href="/privacy/">политикой обработки персональных данных</a>.
-      </p>
     </form>
 </div>
 
@@ -209,11 +210,15 @@
   }
 
   .form-consent {
-    margin-top: 14px;
-    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 4px 0 14px;
     font-size: 12px;
     line-height: 1.5;
     color: rgba(255,255,255,0.6);
+    cursor: pointer;
   }
+  .form-consent input { margin-top: 2px; flex-shrink: 0; accent-color: var(--color-accent); }
   .form-consent a { color: #d4b8ff; }
 </style>
