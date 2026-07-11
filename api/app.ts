@@ -4,7 +4,15 @@ import type { Client } from '@libsql/client';
 import type { Config } from './config.js';
 import type { Mailer } from './mailer.js';
 import { rateLimit } from './rate-limit.js';
-import { isValidEmail, isValidHash, isValidAnswers, cleanText } from './validate.js';
+import {
+  isValidEmail,
+  isValidHash,
+  isValidAnswers,
+  cleanText,
+  isValidBookingKind,
+  isValidFutureSlot,
+  isSlotAllowed,
+} from './validate.js';
 
 async function parseJson(c: Context): Promise<Record<string, unknown> | null> {
   try {
@@ -165,6 +173,42 @@ export function createApp(deps: { db: Client; mailer: Mailer; config: Config }):
     });
 
     await mailer.leadReceived({ type, fields });
+
+    return c.json({ ok: true });
+  });
+
+  // ── POST /api/book (webinar & meeting bookings) ────────
+  app.post('/api/book', rateLimit({ windowMs: 60_000, max: 5 }), async (c) => {
+    const body = await parseJson(c);
+    if (!body) return c.json({ error: 'Invalid JSON' }, 400);
+    if (isHoneypotTripped(body)) return c.json({ ok: true });
+
+    const kind = isValidBookingKind(body.kind) ? body.kind : null;
+    const name = cleanText(body.name, 200);
+    const slot = typeof body.slot === 'number' ? body.slot : NaN;
+    if (!kind || !name || !isValidEmail(body.email) || !isValidFutureSlot(slot) || !isSlotAllowed(kind, slot)) {
+      return c.json({ error: 'Invalid fields' }, 400);
+    }
+    const email = body.email;
+    const company = cleanText(body.company, 200);
+    const note = cleanText(body.note, 1000);
+
+    await db.execute({
+      sql: 'INSERT INTO bookings (kind, slot_start, name, email, company, note, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      args: [kind, slot, name, email, company, note, Date.now()],
+    });
+
+    await mailer.bookingConfirmed({ to: email, kind, slot, name, company });
+    await mailer.leadReceived({
+      type: `booking:${kind}`,
+      fields: {
+        name,
+        email,
+        slot: new Date(slot).toISOString(),
+        ...(company ? { company } : {}),
+        ...(note ? { note } : {}),
+      },
+    });
 
     return c.json({ ok: true });
   });

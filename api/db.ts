@@ -22,6 +22,16 @@ export async function initDbOn(db: Client): Promise<Client> {
     payload TEXT NOT NULL,
     created_at INTEGER NOT NULL
   )`);
+  await db.execute(`CREATE TABLE IF NOT EXISTS bookings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    kind TEXT NOT NULL,
+    slot_start INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    company TEXT,
+    note TEXT,
+    created_at INTEGER NOT NULL
+  )`);
   try {
     await db.execute('ALTER TABLE answers ADD COLUMN respondent_id TEXT');
   } catch {
