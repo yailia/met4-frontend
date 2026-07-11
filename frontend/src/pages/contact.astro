@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.svelte';
+import BookingWidget from '../components/BookingWidget.svelte';
 ---
 
 <BaseLayout title="Контакты — МЭТЧ" description="Свяжитесь с нами для обсуждения задач вашей компании.">
@@ -10,9 +11,13 @@ import ContactForm from '../components/ContactForm.svelte';
         <span class="eyebrow">Без скриптов и автоворонок</span>
         <h1>Обсудим задачи вашей компании</h1>
         <p class="section-lead">
-          Оставьте контакты — свяжемся в рабочее время, ответ в течение рабочего дня.
+          Забронируйте встречу на удобное время (будни 9:00–19:00 МСК) — или просто напишите нам.
         </p>
       </div>
+
+      <BookingWidget kind="meeting" client:load />
+
+      <div class="alt-divider"><span>или напишите нам</span></div>
 
       <div class="form-wrap glass-container">
         <ContactForm client:load />
@@ -23,10 +28,33 @@ import ContactForm from '../components/ContactForm.svelte';
 
 <style>
   .contact-wrap {
-    padding: 48px 0 80px;
+    padding-block: 48px 80px;
   }
 
-  @media (min-width: 720px) { .contact-wrap { padding: 64px 0 96px; } }
+  @media (min-width: 720px) { .contact-wrap { padding-block: 64px 96px; } }
+
+  .alt-divider {
+    max-width: 640px;
+    margin: 32px auto;
+    text-align: center;
+    position: relative;
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+  }
+  .alt-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255,255,255,0.12);
+  }
+  .alt-divider span {
+    position: relative;
+    background: var(--color-bg, #1a1d24);
+    padding: 0 14px;
+  }
 
   .page-header {
     text-align: center;
