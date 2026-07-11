@@ -5,6 +5,11 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+# Serialize deploys so concurrent runs can't race and clobber the frontend dist.
+concurrency:
+  group: deploy-vps
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
