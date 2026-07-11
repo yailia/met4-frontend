@@ -7,11 +7,12 @@ const base = import.meta.env.BASE_URL;
     <div class="section-head centered">
       <span class="eyebrow">Экспресс-оценка · Q12 по методике Gallup</span>
       <h2 class="section-h">Проверьте устойчивость своей команды<br/>за 10 минут. Прямо сейчас.</h2>
+      <p class="section-lead">Отвечайте как руководитель — за свою команду. 12 коротких вопросов, результат сразу.</p>
     </div>
     <div class="q12-inline glass-container" id="q12-inline">
       <div class="q12-meta">Вопрос 1 из 12</div>
       <div class="q12-progress"><div class="q12-progress-fill" style="width: 8%"></div></div>
-      <div class="q12-q">Знаете ли вы, чего ожидает от вас работодатель?</div>
+      <div class="q12-q">Знают ли ваши сотрудники, чего вы от них ожидаете?</div>
       <div class="q12-row">
         <button class="answer-btn" id="q12-yes" data-value="true">Да</button>
         <button class="answer-btn" id="q12-no"  data-value="false">Нет</button>
@@ -74,6 +75,15 @@ const base = import.meta.env.BASE_URL;
   }
 
   @media (min-width: 720px) { .section-h { font-size: 36px; } }
+
+  .section-lead {
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    max-width: 560px;
+    margin: 14px auto 0;
+  }
 
   .q12-inline {
     max-width: 720px;
