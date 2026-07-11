@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const questions = [
+  'Знаете ли вы, чего ожидает от вас работодатель?',
+  'У вас есть материалы и инструменты для качественной работы?',
+  'У вас есть возможность каждый день делать то, что вы умеете лучше всего?',
+  'За последние 7 дней вы получали признание или похвалу за хорошую работу?',
+  'Считаете ли вы, что ваш руководитель заботится о вас как о личности?',
+  'Кто-нибудь на работе способствует вашему развитию?',
+  'Учитывается ли ваша точка зрения?',
+  'Миссия компании заставляет вас чувствовать, что ваша работа важна?',
+  'Считают ли ваши коллеги своей обязанностью качественно выполнять работу?',
+  'У вас есть лучший друг на работе?',
+  'За последние полгода кто-нибудь говорил с вами о ваших успехах?',
+  'В прошлом году у вас были возможности учиться и расти на работе?',
+];
+---
+
+<BaseLayout
+  title="Опрос вовлечённости Gallup Q12 — бесплатно онлайн"
+  description="Что такое Q12 Gallup, 12 вопросов теста вовлечённости и как считается результат. Запустите опрос для своей команды бесплатно за 10 минут."
+>
+  <main>
+    <section class="section q12-hero">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Методика Gallup</span>
+          <h1 class="q12-h1">Опрос вовлечённости Gallup Q12</h1>
+          <p class="q12-lead">
+            Q12 — это 12 вопросов, по ответам на которые Институт Gallup измеряет
+            вовлечённость сотрудников. Методика опирается на десятилетия
+            исследований и связывает вовлечённость с продуктивностью, текучестью
+            и результатами бизнеса. Ниже — что это, сами вопросы и как считается
+            результат.
+          </p>
+          <a href={`${base}assessment/`} class="button-primary q12-cta"
+            >Запустить для своей команды бесплатно</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="section q12-block">
+      <div class="container narrow">
+        <h2 class="q12-h2">Что такое Q12</h2>
+        <p>
+          Q12 (Gallup Q<sup>12</sup>) — короткий опросник из 12 утверждений,
+          каждое из которых отражает конкретную рабочую потребность: от ясности
+          ожиданий и нужных инструментов до признания, развития и связи с миссией
+          компании. Чем больше потребностей закрыто, тем выше вовлечённость — и
+          тем стабильнее команда под нагрузкой.
+        </p>
+
+        <h2 class="q12-h2">12 вопросов Q12</h2>
+        <ol class="q12-list">
+          {questions.map((q) => <li>{q}</li>)}
+        </ol>
+
+        <h2 class="q12-h2">Как считается результат</h2>
+        <p>
+          Сотрудники отвечают на каждый из 12 пунктов. Ответы агрегируются в
+          индекс вовлечённости по команде — видно, какие потребности закрыты, а
+          какие проседают. Именно проседающие пункты показывают, где риск
+          выгорания и текучести выше всего, и с чего стоит начать изменения.
+        </p>
+        <p>
+          Результаты собираются анонимно и показываются в агрегированном виде —
+          отдельные ответы конкретного сотрудника не раскрываются.
+        </p>
+
+        <div class="q12-final glass-container">
+          <h2>Проверьте свою команду за 10 минут</h2>
+          <p>Бесплатно, без регистрации. Результат — сразу после прохождения.</p>
+          <a href={`${base}assessment/`} class="button-primary">Запустить опрос Q12</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .q12-hero { background: transparent; padding-bottom: 24px; }
+  .q12-block { background: transparent; padding-top: 24px; }
+
+  .section-head { max-width: 760px; }
+  .container.narrow { max-width: 760px; }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+
+  .q12-h1 {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: #fff;
+    margin: 0 0 16px;
+  }
+
+  @media (min-width: 720px) { .q12-h1 { font-size: 44px; } }
+
+  .q12-lead {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 24px;
+  }
+
+  .q12-cta { display: inline-block; }
+
+  .q12-h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+    margin: 36px 0 14px;
+  }
+
+  .q12-block p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 16px;
+  }
+
+  .q12-list {
+    margin: 0 0 16px;
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .q12-list li {
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.88);
+    padding-left: 6px;
+  }
+
+  .q12-list li::marker {
+    color: #d4b8ff;
+    font-weight: 700;
+  }
+
+  .q12-final {
+    text-align: center;
+    padding: 40px 32px;
+    margin-top: 44px;
+  }
+
+  .q12-final h2 {
+    font-size: 26px;
+    color: #fff;
+    margin: 0 0 10px;
+  }
+
+  .q12-final p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 22px;
+  }
+</style>
