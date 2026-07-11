@@ -166,6 +166,11 @@
       <button class="btn-primary full" type="submit" disabled={creating}>
         {creating ? 'Создаём...' : 'Создать ссылку для команды'}
       </button>
+
+      <p class="form-consent">
+        Нажимая кнопку, вы соглашаетесь с
+        <a href="/privacy/">политикой обработки персональных данных</a>.
+      </p>
     </form>
   </div>
 
@@ -363,4 +368,12 @@
     color:#ff9090; padding:12px 16px; border-radius:8px; margin-bottom:16px;
     font-size:14px; text-align:center;
   }
+  .form-consent {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.6);
+  }
+  .form-consent a { color: #d4b8ff; }
 </style>
