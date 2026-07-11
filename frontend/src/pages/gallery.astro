@@ -2,10 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Галерея - МЭТЧ" description="Фото мероприятий, процессов работы и живых людей - реальные подтверждения нашей работы.">
+<BaseLayout title="Галерея - МЭТЧ" description="Фото мероприятий, процессов работы и живых людей - реальные подтверждения нашей работы." noindex>
   <main>
     <section class="gallery-hero section">
       <div class="container">
+        <div class="gallery-wip">Раздел в разработке - скоро добавим фото</div>
         <h1>Галерея</h1>
         <p class="gallery-intro">
           Реальные люди, реальные процессы, реальные результаты
@@ -62,6 +63,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .gallery-hero {
     background: var(--color-bg);
     text-align: center;
+  }
+
+  .gallery-wip {
+    display: inline-block;
+    margin: 0 auto var(--spacing-lg);
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(150, 105, 216, 0.15);
+    border: 1px solid rgba(150, 105, 216, 0.35);
+    color: #d4b8ff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
 
   .gallery-hero h1 {
