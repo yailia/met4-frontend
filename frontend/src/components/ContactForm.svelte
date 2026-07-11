@@ -115,6 +115,11 @@
       <button type="submit" class="button-primary" disabled={submitting}>
         {submitting ? 'Отправка...' : 'Продолжить'}
       </button>
+
+      <p class="form-consent">
+        Нажимая кнопку, вы соглашаетесь с
+        <a href="/privacy/">политикой обработки персональных данных</a>.
+      </p>
     </form>
   {/if}
 </div>
@@ -210,4 +215,14 @@
     font-size: 14px;
     text-align: center;
   }
+
+  .form-consent {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .form-consent a { color: #d4b8ff; }
 </style>
