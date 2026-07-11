@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import WebinarForm from '../components/WebinarForm.svelte';
+import BookingWidget from '../components/BookingWidget.svelte';
 
 const audience = [
   'HR BP и HRD, которым нужны цифры для руководства',
@@ -16,7 +16,7 @@ const audience = [
         <span class="eyebrow">Онлайн-разбор</span>
         <h1>Почему устойчивость = деньги</h1>
         <p class="section-lead">
-          Для HR и руководителей — с кейсами и метриками.
+          Для HR и руководителей — с кейсами и метриками. Каждую среду в 17:00 МСК, онлайн.
         </p>
       </div>
 
@@ -29,19 +29,67 @@ const audience = [
         ))}
       </div>
 
-      <div class="form-wrap glass-container">
-        <WebinarForm client:load />
+      <div class="webinar-about">
+        <h2>Что разбираем</h2>
+        <ul>
+          <li>Что такое устойчивость команд и почему это бизнес-KPI, а не «мягкая тема»</li>
+          <li>Как устойчивость влияет на продуктивность, текучесть и результаты компании</li>
+          <li>Что делать руководителю, чтобы сотрудники не теряли продуктивность в сложных ситуациях</li>
+          <li>Несколько практик, которые можно применить сразу после вебинара</li>
+        </ul>
       </div>
+
+      <BookingWidget kind="webinar" client:load />
     </div>
   </main>
 </BaseLayout>
 
 <style>
   .webinar-wrap {
-    padding: 48px 0 80px;
+    padding-block: 48px 80px;
   }
 
-  @media (min-width: 720px) { .webinar-wrap { padding: 64px 0 96px; } }
+  @media (min-width: 720px) { .webinar-wrap { padding-block: 64px 96px; } }
+
+  .webinar-about {
+    max-width: 640px;
+    margin: 0 auto 32px;
+  }
+
+  .webinar-about h2 {
+    color: #fff;
+    font-size: 22px;
+    margin: 0 0 16px;
+    text-align: center;
+  }
+
+  .webinar-about ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .webinar-about li {
+    position: relative;
+    padding-left: 26px;
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .webinar-about li::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 9px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
 
   .webinar-hero {
     text-align: center;
