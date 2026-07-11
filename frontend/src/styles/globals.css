@@ -313,13 +313,7 @@ a:hover {
 
 @media (min-width: 768px) {
   .section {
-    padding: var(--spacing-4xl) 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section {
-    padding: calc(var(--spacing-4xl) * 1.5) 0;
+    padding: 80px 0;
   }
 }
 
