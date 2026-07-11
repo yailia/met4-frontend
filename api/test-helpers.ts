@@ -4,7 +4,7 @@ import type { Config } from './config.js';
 import type { Mailer } from './mailer.js';
 
 export interface SentMail {
-  kind: 'session' | 'answer' | 'lead';
+  kind: 'session' | 'answer' | 'lead' | 'booking';
   payload: unknown;
 }
 
@@ -15,6 +15,7 @@ export async function makeTestApp() {
     sessionCreated: async (p) => void sent.push({ kind: 'session', payload: p }),
     answerSubmitted: async (p) => void sent.push({ kind: 'answer', payload: p }),
     leadReceived: async (p) => void sent.push({ kind: 'lead', payload: p }),
+    bookingConfirmed: async (p) => void sent.push({ kind: 'booking', payload: p }),
   };
   const config: Config = {
     resendKey: 're_test',
