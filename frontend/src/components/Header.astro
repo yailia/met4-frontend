@@ -7,9 +7,7 @@ const navItems = [
   { href: `${base}products/`, label: 'Продукты' },
   { href: `${base}team/`, label: 'Команда' },
   { href: `${base}blog/`, label: 'Блог' },
-  { href: `${base}assessment/`, label: 'Оценка' },
   { href: `${base}webinar/`, label: 'Вебинар' },
-  { href: `${base}gallery/`, label: 'Галерея' },
   { href: `${base}contact/`, label: 'Контакты' },
 ];
 ---
@@ -24,6 +22,8 @@ const navItems = [
         <span>МЭТЧ</span>
       </a>
 
+      <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+
       <ul class="nav-menu" id="nav-menu">
         {navItems.map((item) => (
           <li>
@@ -36,6 +36,9 @@ const navItems = [
             </a>
           </li>
         ))}
+        <li class="nav-cta-item">
+          <a href={`${base}assessment/`} class="nav-cta">Оценить команду</a>
+        </li>
       </ul>
       
       <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню">
@@ -52,29 +55,46 @@ const navItems = [
   const navMenu = document.getElementById('nav-menu');
   
   if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      menuToggle.classList.toggle('active');
-      document.body.classList.toggle('menu-open');
+    const navOverlay = document.getElementById('nav-overlay');
+
+    function closeMenu() {
+      navMenu.classList.remove('active');
+      menuToggle.classList.remove('active');
+      document.body.classList.remove('menu-open');
+      if (navOverlay) navOverlay.classList.remove('active');
+    }
+
+    function openMenu() {
+      navMenu.classList.add('active');
+      menuToggle.classList.add('active');
+      document.body.classList.add('menu-open');
+      if (navOverlay) navOverlay.classList.add('active');
+    }
+
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (navMenu.classList.contains('active')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
-    
+
     // Закрытие меню при клике на ссылку
-    const navLinks = navMenu.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        menuToggle.classList.remove('active');
-        document.body.classList.remove('menu-open');
-      });
+    const navLinks = navMenu.querySelectorAll('.nav-link, .nav-cta');
+    navLinks.forEach((link) => {
+      link.addEventListener('click', closeMenu);
     });
-    
-    // Закрытие меню при клике вне его
-    document.addEventListener('click', (e) => {
-      const target = e.target as Element | null;
-      if (target && !navMenu.contains(target) && !menuToggle.contains(target)) {
-        navMenu.classList.remove('active');
-        menuToggle.classList.remove('active');
-        document.body.classList.remove('menu-open');
+
+    // Закрытие меню при клике на overlay
+    if (navOverlay) {
+      navOverlay.addEventListener('click', closeMenu);
+    }
+
+    // Закрытие по Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        closeMenu();
       }
     });
   }
@@ -159,6 +179,35 @@ const navItems = [
     width: 100%;
   }
 
+  .nav-overlay {
+    display: none;
+  }
+
+  .nav-cta-item {
+    list-style: none;
+  }
+
+  .nav-cta {
+    display: inline-block;
+    background: var(--color-accent);
+    color: #fff !important;
+    border-radius: 10px;
+    padding: 8px 18px;
+    font-size: var(--text-sm);
+    font-weight: var(--fw-semibold);
+    text-decoration: none;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .nav-cta:hover {
+    background: var(--color-accent-hover);
+  }
+
+  .nav-cta::after {
+    display: none;
+  }
+
   /* Мобильное меню */
   .menu-toggle {
     display: none;
@@ -198,11 +247,12 @@ const navItems = [
       display: flex;
     }
 
-    .nav-menu {
+.nav-menu {
       position: fixed;
       top: 0;
-      right: -100%;
+      right: 0;
       width: 280px;
+      max-width: 85vw;
       height: 100vh;
       background: rgba(31, 42, 36, 0.98);
       backdrop-filter: blur(16px);
@@ -211,13 +261,31 @@ const navItems = [
       align-items: flex-start;
       padding: var(--spacing-3xl) var(--spacing-xl);
       gap: var(--spacing-xl);
-      transition: right 0.3s ease;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
-      z-index: 1000;
+      z-index: 1001;
+      will-change: transform;
     }
 
     .nav-menu.active {
-      right: 0;
+      transform: translateX(0);
+    }
+
+    .nav-overlay {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 1000;
+    }
+
+    .nav-overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
 
     .nav-link {
@@ -242,11 +310,6 @@ const navItems = [
 
     .logo {
       font-size: var(--text-lg);
-    }
-
-    .nav-menu {
-      width: 100%;
-      right: -100%;
     }
   }
 
