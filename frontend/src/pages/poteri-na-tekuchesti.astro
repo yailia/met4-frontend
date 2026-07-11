@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="Сколько компания теряет на текучести — калькулятор"
+  description="Посчитайте годовые потери компании на текучести персонала за минуту. Численность, зарплата, коэффициент замены — и оцените, кто в зоне риска."
+>
+  <main>
+    <section class="section calc-hero">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Калькулятор</span>
+          <h1 class="calc-h1">Сколько компания теряет на текучести персонала</h1>
+          <p class="calc-lead">
+            Уход сотрудника — это не только «минус человек». Это подбор, адаптация,
+            просадка продуктивности и нагрузка на команду. Посчитайте свои годовые
+            потери и прикиньте, где стоит вмешаться раньше.
+          </p>
+        </div>
+
+        <div class="calc glass-container">
+          <div class="calc-grid">
+            <label class="calc-field">
+              <span>Численность сотрудников</span>
+              <input type="number" id="calc-headcount" min="1" step="1" value="200" />
+            </label>
+            <label class="calc-field">
+              <span>Средняя зарплата, ₽/мес</span>
+              <input type="number" id="calc-salary" min="0" step="5000" value="90000" />
+            </label>
+            <label class="calc-field">
+              <span>Годовая текучесть, %</span>
+              <input type="number" id="calc-turnover" min="0" max="100" step="1" value="20" />
+            </label>
+            <label class="calc-field">
+              <span>Стоимость замены, мес. зарплат</span>
+              <input type="number" id="calc-months" min="0" step="1" value="6" />
+            </label>
+          </div>
+
+          <div class="calc-result">
+            <div class="calc-result-label">Ориентировочные потери в год</div>
+            <div class="calc-result-value" id="calc-output">—</div>
+            <div class="calc-result-note" id="calc-breakdown"></div>
+          </div>
+
+          <p class="calc-disclaimer">
+            Расчёт оценочный. Стоимость замены сотрудника по разным исследованиям
+            составляет от 3 до 12 месячных зарплат в зависимости от роли и уровня —
+            подставьте значение под свою специфику.
+          </p>
+
+          <a href={`${base}assessment/`} class="button-primary calc-cta"
+            >Узнать, кто в зоне риска — диагностика команды</a
+          >
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  const rub = new Intl.NumberFormat('ru-RU', {
+    style: 'currency',
+    currency: 'RUB',
+    maximumFractionDigits: 0,
+  });
+
+  const ids = ['calc-headcount', 'calc-salary', 'calc-turnover', 'calc-months'];
+  const inputs = ids.map((id) => document.getElementById(id));
+  const output = document.getElementById('calc-output');
+  const breakdown = document.getElementById('calc-breakdown');
+
+  function num(el) {
+    const v = parseFloat(el?.value ?? '');
+    return Number.isFinite(v) && v > 0 ? v : 0;
+  }
+
+  function recalc() {
+    const headcount = num(inputs[0]);
+    const salary = num(inputs[1]);
+    const turnover = num(inputs[2]);
+    const months = num(inputs[3]);
+
+    const leaving = headcount * (turnover / 100);
+    const perExit = salary * months;
+    const loss = leaving * perExit;
+
+    if (output) output.textContent = rub.format(Math.round(loss));
+    if (breakdown) {
+      const people = leaving.toFixed(leaving < 10 ? 1 : 0);
+      breakdown.textContent =
+        loss > 0
+          ? `≈ ${people} чел./год × ${rub.format(Math.round(perExit))} за замену`
+          : '';
+    }
+  }
+
+  inputs.forEach((el) => el?.addEventListener('input', recalc));
+  recalc();
+</script>
+
+<style>
+  .calc-hero { background: transparent; }
+
+  .section-head { max-width: 760px; margin-bottom: 32px; }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+
+  .calc-h1 {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: #fff;
+    margin: 0 0 16px;
+  }
+
+  @media (min-width: 720px) { .calc-h1 { font-size: 44px; } }
+
+  .calc-lead {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  .calc {
+    max-width: 760px;
+    padding: 36px 32px;
+  }
+
+  @media (max-width: 720px) { .calc { padding: 28px 20px; } }
+
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+
+  @media (min-width: 560px) { .calc-grid { grid-template-columns: 1fr 1fr; } }
+
+  .calc-field { display: flex; flex-direction: column; gap: 8px; }
+
+  .calc-field span {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+  }
+
+  .calc-field input {
+    background: rgba(45, 48, 56, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit;
+    min-height: 44px;
+  }
+
+  .calc-field input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  .calc-result {
+    text-align: center;
+    padding: 24px;
+    border-radius: 14px;
+    background: rgba(150, 105, 216, 0.12);
+    border: 1px solid rgba(150, 105, 216, 0.28);
+    margin-bottom: 20px;
+  }
+
+  .calc-result-label {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 8px;
+  }
+
+  .calc-result-value {
+    font-size: 34px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+  }
+
+  @media (min-width: 720px) { .calc-result-value { font-size: 42px; } }
+
+  .calc-result-note {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 10px;
+  }
+
+  .calc-disclaimer {
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 24px;
+  }
+
+  .calc-cta { display: inline-block; }
+</style>
