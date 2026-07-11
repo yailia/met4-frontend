@@ -1,5 +1,6 @@
 ---
 const base = import.meta.env.BASE_URL;
+const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
@@ -11,17 +12,19 @@ const base = import.meta.env.BASE_URL;
       </div>
       <div class="footer-section">
         <h3>Контакты</h3>
-        <p>Свяжитесь с нами для обсуждения задач вашей компании</p>
+        <p><a href="mailto:hello@met4.ru" class="footer-contact-link">hello@met4.ru</a></p>
+        <p><a href="tel:+79001234567" class="footer-contact-link">+7 (900) 123-45-67</a></p>
+        <p><a href={`${base}contact/`} class="footer-contact-link">Форма связи</a></p>
       </div>
       <div class="footer-section">
         <h3>Следите за нами</h3>
         <div class="footer-social">
-          <a href="#" class="social-link">Telegram</a>
+          <a href="https://t.me/met4_ru" class="social-link" target="_blank" rel="noopener noreferrer">Telegram</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2024 МЭТЧ. Все права защищены.</p>
+      <p>&copy; {year} МЭТЧ. Все права защищены.</p>
       <a href={`${base}privacy/`} class="footer-link">Политика конфиденциальности</a>
     </div>
   </div>
@@ -61,6 +64,17 @@ const base = import.meta.env.BASE_URL;
     color: rgba(255, 255, 255, 0.7);
     font-size: var(--text-sm);
     line-height: var(--lh-loose);
+  }
+
+  .footer-contact-link {
+    color: #d4b8ff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .footer-contact-link:hover {
+    color: #fff;
   }
 
   .footer-social {

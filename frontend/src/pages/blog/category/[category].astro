@@ -27,12 +27,14 @@ for (const p of allPosts) {
 }
 const categories = [...categoryCounts.entries()].sort((a, b) => b[1] - a[1]);
 const base = import.meta.env.BASE_URL;
+const isThin = posts.length < 3;
 ---
 
 <BaseLayout
   title={`${categoryName} — Блог МЭТЧ`}
   description={`Статьи в категории «${categoryName}» — блог МЭТЧ.`}
 >
+  {isThin && <meta name="robots" content="noindex" />}
   <main>
     <div class="container blog-wrap">
       <header class="page-header">

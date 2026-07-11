@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Спасибо — МЭТЧ" description="Ваша заявка принята. Мы свяжемся с вами в ближайшее время.">
+  <main>
+    <div class="container thanks-wrap">
+      <div class="thanks-card glass-container">
+        <div class="check-icon">✓</div>
+        <h1>Спасибо!</h1>
+        <p class="thanks-lead">Ваша заявка принята. Мы свяжемся с вами в течение рабочего дня.</p>
+
+        <div class="thanks-next">
+          <h3>А пока — попробуйте прямо сейчас</h3>
+          <p>Пройдите Q12-диагностику вашей команды за 10 минут и получите отчёт с рекомендациями.</p>
+          <a href={`${base}assessment/`} class="button-primary">Пройти диагностику</a>
+        </div>
+
+        <div class="thanks-links">
+          <a href={`${base}`} class="thanks-link">← На главную</a>
+          <a href={`${base}blog/`} class="thanks-link">Читать блог</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .thanks-wrap {
+    padding: 64px 0 96px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 60vh;
+  }
+
+  @media (min-width: 720px) {
+    .thanks-wrap { padding: 96px 0 120px; }
+  }
+
+  .thanks-card {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    padding: 40px 24px;
+  }
+
+  @media (min-width: 720px) {
+    .thanks-card { padding: 56px 40px; }
+  }
+
+  .check-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(63, 143, 107, 0.2);
+    border: 2px solid var(--color-success);
+    color: var(--color-success);
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+
+  .thanks-card h1 {
+    color: #fff;
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  @media (min-width: 720px) {
+    .thanks-card h1 { font-size: 40px; }
+  }
+
+  .thanks-lead {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .thanks-next {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+  }
+
+  .thanks-next h3 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .thanks-next p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .thanks-links {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .thanks-link {
+    color: #9669d8;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .thanks-link:hover {
+    color: #d4b8ff;
+  }
+</style>

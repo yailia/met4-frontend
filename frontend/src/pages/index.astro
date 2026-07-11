@@ -11,9 +11,21 @@ import BlogSection from '../components/BlogSection.astro';
 import FaqSection from '../components/FaqSection.astro';
 import FinalCTA from '../components/FinalCTA.astro';
 import Footer from '../components/Footer.astro';
+
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : 'https://met4.ru';
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "МЭТЧ",
+  "url": siteUrl,
+  "logo": `${siteUrl}/og-image.png`,
+  "description": "Повышаем эффективность компании через устойчивость команд",
+  "sameAs": ["https://t.me/met4_ru"]
+};
 ---
 
-<BaseLayout title="МЭТЧ — Повышаем эффективность компании через устойчивость команд">
+<BaseLayout title="МЭТЧ — Повышаем эффективность компании через устойчивость команд" description="Бесплатная Q12-диагностика команды за 10 минут. Измерим вовлечённость, выявим зоны риска, дадим рекомендации.">
+  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
   <main>
     <Hero />
     <WhoSection />
