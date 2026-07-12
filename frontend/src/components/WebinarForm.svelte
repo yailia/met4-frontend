@@ -5,11 +5,10 @@
   let email = '';
   let company = '';
   let position = '';
-  let submitted = false;
   let submitting = false;
   let error = '';
 
-  let website = ''; // honeypot — real users never fill this
+  let website = '';
 
   const API_URL = import.meta.env.PUBLIC_API_URL;
 
@@ -38,8 +37,8 @@
         throw new Error('Ошибка отправки формы');
       }
 
-      submitted = true;
       reachGoal('webinar_submit');
+      window.location.href = '/thanks/';
     } catch (err) {
       error = 'Не удалось отправить форму. Попробуйте позже.';
       console.error(err);
@@ -50,20 +49,14 @@
 </script>
 
 <div class="webinar-form">
-  {#if submitted}
-    <div class="success-message">
-      <h3>Спасибо за регистрацию!</h3>
-      <p>Мы отправили вам подтверждение на указанный email. До встречи на вебинаре!</p>
-    </div>
-  {:else}
-    <h3>Регистрация на вебинар</h3>
-    <p class="form-description">
-      "Почему устойчивость = деньги"
-    </p>
-    
-    {#if error}
-      <div class="error-message">{error}</div>
-    {/if}
+  <h3>Регистрация на вебинар</h3>
+  <p class="form-description">
+    "Почему устойчивость = деньги"
+  </p>
+  
+  {#if error}
+    <div class="error-message">{error}</div>
+  {/if}
 
     <form on:submit={handleSubmit}>
       <div class="hp-field" aria-hidden="true">
@@ -116,7 +109,6 @@
         {submitting ? 'Отправка...' : 'Зарегистрироваться'}
       </button>
     </form>
-  {/if}
 </div>
 
 <style>

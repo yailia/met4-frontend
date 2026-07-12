@@ -41,6 +41,30 @@ for (const p of [...sameCat.sort((a, b) => b.data.date.getTime() - a.data.date.g
 
 const base = import.meta.env.BASE_URL;
 const dateStr = formatRuDate(post.data.date);
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : 'https://met4.ru';
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.data.title,
+  "datePublished": post.data.date.toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": post.data.author
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "МЭТЧ",
+    "url": siteUrl,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${siteUrl}/og-image.png`
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `${siteUrl}${base}blog/${post.id}/`
+  }
+};
 ---
 
 <BaseLayout
@@ -48,6 +72,7 @@ const dateStr = formatRuDate(post.data.date);
   description={post.data.excerpt}
 >
   <main>
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
     <article class="post container">
       <div class="post-head">
         <a class="back-link" href={`${base}blog/`}>← Все статьи</a>
@@ -71,6 +96,15 @@ const dateStr = formatRuDate(post.data.date);
 
       <div class="post-body">
         <Content />
+      </div>
+
+      <div class="post-cta">
+        <div class="post-cta-inner glass-container">
+          <span class="eyebrow">Проверьте свою команду</span>
+          <h3>Пройдите Q12-диагностику за 10 минут</h3>
+          <p>Узнайте уровень вовлечённости вашей команды и получите отчёт с рекомендациями.</p>
+          <a href={`${base}assessment/`} class="button-primary">Пройти диагностику</a>
+        </div>
       </div>
 
       {post.data.tags.length > 0 && (
@@ -216,6 +250,37 @@ const dateStr = formatRuDate(post.data.date);
     margin-top: 36px;
     padding-top: 24px;
     border-top: 1px solid rgba(255,255,255,0.10);
+  }
+
+  .post-cta {
+    margin: 40px 0;
+  }
+
+  .post-cta-inner {
+    text-align: center;
+    padding: 32px 24px;
+  }
+
+  .post-cta-inner .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+
+  .post-cta-inner h3 {
+    color: #fff;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .post-cta-inner p {
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+    margin-bottom: 20px;
   }
   .tag {
     display: inline-flex;
