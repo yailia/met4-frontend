@@ -319,6 +319,39 @@ a:hover {
   }
 }
 
+/* Scrollbar — brand accent thumb on a soft dark track (global default) */
+:root {
+  --scrollbar-thumb: var(--color-accent, #9669d8);
+  --scrollbar-thumb-hover: var(--color-accent-hover, #8555c4);
+  --scrollbar-track: rgba(255, 255, 255, 0.04);
+  --scrollbar-track-bg: var(--color-bg, #24272e);
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Chromium / WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid var(--scrollbar-track-bg);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-clip: padding-box;
+}
+
 /* Utilities */
 .text-center {
   text-align: center;
