@@ -1,5 +1,6 @@
 export interface Config {
-  resendKey: string;
+  rusenderKey: string;
+  rusenderKeyId: string;
   frontendOrigin: string;
   dbUrl: string;
   leadInbox: string;
@@ -7,12 +8,15 @@ export interface Config {
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
-  const resendKey = env.RESEND_KEY;
-  if (!resendKey) throw new Error('RESEND_KEY env var is required');
+  const rusenderKey = env.RUSENDER_KEY;
+  if (!rusenderKey) throw new Error('RUSENDER_KEY env var is required');
+  const rusenderKeyId = env.RUSENDER_KEY_ID;
+  if (!rusenderKeyId) throw new Error('RUSENDER_KEY_ID env var is required');
   const frontendOrigin = env.FRONTEND_ORIGIN;
   if (!frontendOrigin) throw new Error('FRONTEND_ORIGIN env var is required');
   return {
-    resendKey,
+    rusenderKey,
+    rusenderKeyId,
     frontendOrigin,
     dbUrl: `file:${env.DB_PATH || './db.sqlite'}`,
     leadInbox: env.LEAD_INBOX || 'bolkunatz@gmail.com',

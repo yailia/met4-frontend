@@ -28,9 +28,6 @@ export function bookingConfirmedEmail(p: { kind: 'webinar' | 'meeting'; whenText
               <td style="padding:10px 0;color:#ffffff;font-size:14px;font-weight:600;">${escapeHtml(p.whenText)} (МСК)</td>
             </tr>
           </table>
-          <p style="margin:16px 0 0;font-size:13px;color:rgba(255,255,255,0.55);">
-            Во вложении — файл-приглашение для календаря (.ics).
-          </p>
         </td></tr>
       </table>
     </td></tr>

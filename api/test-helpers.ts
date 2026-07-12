@@ -18,7 +18,8 @@ export async function makeTestApp() {
     bookingConfirmed: async (p) => void sent.push({ kind: 'booking', payload: p }),
   };
   const config: Config = {
-    resendKey: 're_test',
+    rusenderKey: 're_test',
+    rusenderKeyId: '1',
     frontendOrigin: 'https://met4.ru',
     dbUrl: ':memory:',
     leadInbox: 'leads@test.co',
