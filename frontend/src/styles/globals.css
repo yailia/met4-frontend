@@ -238,6 +238,7 @@ a:hover {
 
 .button-primary:hover {
   background: var(--color-accent-hover);
+  color: #fff;
   box-shadow: 0 4px 12px rgba(150, 105, 216, 0.4);
   transform: translateY(-1px);
 }
@@ -264,6 +265,7 @@ a:hover {
 .button-secondary:hover {
   background: var(--color-accent-soft);
   border-color: var(--color-accent-hover);
+  color: var(--color-accent);
 }
 
 /* Cards */
