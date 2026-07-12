@@ -5,7 +5,8 @@ services:
     restart: unless-stopped
     environment:
       - NODE_ENV=production
-      - RESEND_KEY=${RESEND_KEY}
+      - RUSENDER_KEY=${RUSENDER_KEY}
+      - RUSENDER_KEY_ID=${RUSENDER_KEY_ID}
       - FRONTEND_ORIGIN=https://met4.ru
       - DB_PATH=/data/db.sqlite
       - LEAD_INBOX=${LEAD_INBOX:-bolkunatz@gmail.com}

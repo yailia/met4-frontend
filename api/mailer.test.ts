@@ -4,6 +4,8 @@ import { leadReceivedEmail } from './emails/lead-received.js';
 
 afterEach(() => vi.restoreAllMocks());
 
+const CFG = { rusenderKey: 'rs_test', rusenderKeyId: '42', leadInbox: 'leads@met4.ru' };
+
 describe('maskEmail', () => {
   it('keeps first char and domain', () => {
     expect(maskEmail('bolkunatz@gmail.com')).toBe('b***@gmail.com');
@@ -15,22 +17,28 @@ describe('mailer never throws', () => {
   it('sessionCreated survives network failure', async () => {
     vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('network down'));
     const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    const mailer = createMailer({ resendKey: 're_test', leadInbox: 'x@y.co' });
+    const mailer = createMailer(CFG);
     await expect(
       mailer.sessionCreated({ to: 'a@b.co', company: 'ACME', employeeLink: 'l1', reportLink: 'l2' })
     ).resolves.toBeUndefined();
     expect(errSpy).toHaveBeenCalled();
   });
 
-  it('leadReceived posts to Resend with lead inbox as recipient', async () => {
+  it('leadReceived posts to Rusender with lead inbox as recipient', async () => {
     const fetchSpy = vi
       .spyOn(globalThis, 'fetch')
-      .mockResolvedValue(new Response(JSON.stringify({ id: 'ok' }), { status: 200 }));
-    const mailer = createMailer({ resendKey: 're_test', leadInbox: 'leads@met4.ru' });
+      .mockResolvedValue(new Response(JSON.stringify({ uuid: 'ok' }), { status: 200 }));
+    const mailer = createMailer(CFG);
     await mailer.leadReceived({ type: 'contact', fields: { name: 'Ivan', email: 'i@v.an' } });
-    const body = JSON.parse(fetchSpy.mock.calls[0][1]!.body as string);
-    expect(body.to).toBe('leads@met4.ru');
-    expect(body.subject).toContain('contact');
+
+    const [url, init] = fetchSpy.mock.calls[0];
+    expect(String(url)).toContain('api.rusender.ru');
+    expect(String(url)).toContain('/42');
+    expect((init!.headers as Record<string, string>).Authorization).toBe('Bearer rs_test');
+    const body = JSON.parse(init!.body as string);
+    expect(body.mail.to.email).toBe('leads@met4.ru');
+    expect(body.mail.from.email).toBe('noreply@met4.ru');
+    expect(body.mail.subject).toContain('contact');
   });
 });
 
