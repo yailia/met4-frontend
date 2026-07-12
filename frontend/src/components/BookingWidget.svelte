@@ -298,7 +298,16 @@
     color: rgba(255, 255, 255, 0.6);
     cursor: pointer;
   }
-  .form-consent input { margin-top: 2px; flex-shrink: 0; accent-color: var(--color-accent); }
+  .form-consent input {
+    width: 16px;
+    height: 16px;
+    min-height: auto;
+    padding: 0;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: var(--color-accent);
+    cursor: pointer;
+  }
   .form-consent a { color: #d4b8ff; }
 
   .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
