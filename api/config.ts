@@ -5,6 +5,8 @@ export interface Config {
   dbUrl: string;
   leadInbox: string;
   port: number;
+  mailbotUrl?: string;
+  mailbotToken?: string;
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
@@ -21,5 +23,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     dbUrl: `file:${env.DB_PATH || './db.sqlite'}`,
     leadInbox: env.LEAD_INBOX || 'bolkunatz@gmail.com',
     port: Number(env.PORT) || 3001,
+    mailbotUrl: env.MAILBOT_URL,
+    mailbotToken: env.MAILBOT_TOKEN,
   };
 }

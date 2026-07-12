@@ -3,6 +3,7 @@ import { cors } from 'hono/cors';
 import type { Client } from '@libsql/client';
 import type { Config } from './config.js';
 import type { Mailer } from './mailer.js';
+import type { Notifier } from './notifier.js';
 import { rateLimit } from './rate-limit.js';
 import {
   isValidEmail,
@@ -27,8 +28,8 @@ function isHoneypotTripped(body: Record<string, unknown>): boolean {
   return typeof body.website === 'string' && body.website.length > 0;
 }
 
-export function createApp(deps: { db: Client; mailer: Mailer; config: Config }): Hono {
-  const { db, mailer, config } = deps;
+export function createApp(deps: { db: Client; mailer: Mailer; config: Config; notifier: Notifier }): Hono {
+  const { db, mailer, config, notifier } = deps;
   const app = new Hono();
 
   app.onError((err, c) => {
@@ -173,6 +174,7 @@ export function createApp(deps: { db: Client; mailer: Mailer; config: Config }):
     });
 
     await mailer.leadReceived({ type, fields });
+    await notifier.lead({ type, fields });
 
     return c.json({ ok: true });
   });
@@ -199,16 +201,15 @@ export function createApp(deps: { db: Client; mailer: Mailer; config: Config }):
     });
 
     await mailer.bookingConfirmed({ to: email, kind, slot, name, company });
-    await mailer.leadReceived({
-      type: `booking:${kind}`,
-      fields: {
-        name,
-        email,
-        slot: new Date(slot).toISOString(),
-        ...(company ? { company } : {}),
-        ...(note ? { note } : {}),
-      },
-    });
+    const leadFields = {
+      name,
+      email,
+      slot: new Date(slot).toISOString(),
+      ...(company ? { company } : {}),
+      ...(note ? { note } : {}),
+    };
+    await mailer.leadReceived({ type: `booking:${kind}`, fields: leadFields });
+    await notifier.lead({ type: `booking:${kind}`, fields: leadFields });
 
     return c.json({ ok: true });
   });

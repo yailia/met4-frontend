@@ -2,9 +2,10 @@ import { initDb } from './db.js';
 import { createApp } from './app.js';
 import type { Config } from './config.js';
 import type { Mailer } from './mailer.js';
+import type { Notifier } from './notifier.js';
 
 export interface SentMail {
-  kind: 'session' | 'answer' | 'lead' | 'booking';
+  kind: 'session' | 'answer' | 'lead' | 'booking' | 'notify';
   payload: unknown;
 }
 
@@ -17,6 +18,9 @@ export async function makeTestApp() {
     leadReceived: async (p) => void sent.push({ kind: 'lead', payload: p }),
     bookingConfirmed: async (p) => void sent.push({ kind: 'booking', payload: p }),
   };
+  const notifier: Notifier = {
+    lead: async (p) => void sent.push({ kind: 'notify', payload: p }),
+  };
   const config: Config = {
     rusenderKey: 're_test',
     rusenderKeyId: '1',
@@ -25,7 +29,7 @@ export async function makeTestApp() {
     leadInbox: 'leads@test.co',
     port: 0,
   };
-  const app = createApp({ db, mailer, config });
+  const app = createApp({ db, mailer, config, notifier });
   let ipCounter = 0;
   // unique IP per call so rate limiting does not interfere with functional tests
   const post = (path: string, body: unknown) =>

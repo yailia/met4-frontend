@@ -10,6 +10,8 @@ services:
       - FRONTEND_ORIGIN=https://met4.ru
       - DB_PATH=/data/db.sqlite
       - LEAD_INBOX=${LEAD_INBOX:-bolkunatz@gmail.com}
+      - MAILBOT_URL=http://mailbot:3002
+      - MAILBOT_TOKEN=${INTERNAL_TOKEN}
     volumes:
       - sqlite_data:/data
     networks:
@@ -22,6 +24,32 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
+
+  mailbot:
+    build: ./mailbot
+    container_name: met4-mailbot
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - BOT_TOKEN=${BOT_TOKEN}
+      - OWNER_CHAT_IDS=${OWNER_CHAT_IDS:-152579925}
+      - RUSENDER_KEY=${RUSENDER_KEY}
+      - RUSENDER_KEY_ID=${RUSENDER_KEY_ID}
+      - INTERNAL_TOKEN=${INTERNAL_TOKEN}
+      - MAIL_DOMAIN=met4.ru
+      - FROM_EMAIL=hello@met4.ru
+      - DB_PATH=/data/mailbot.sqlite
+      - SMTP_PORT=2525
+      - HTTP_PORT=3002
+    volumes:
+      - mailbot_data:/data
+    networks:
+      - met4-net
+    expose:
+      - "3002"
+    ports:
+      # host :25 (inbound SMTP) → container :2525 (listens as non-root)
+      - "25:2525"
 
   nginx:
     image: nginx:alpine
@@ -41,6 +69,7 @@ services:
 
 volumes:
   sqlite_data:
+  mailbot_data:
 
 networks:
   met4-net:

@@ -54,20 +54,25 @@ jobs:
         env:
           RUSENDER_KEY: ${{ secrets.RUSENDER_KEY }}
           RUSENDER_KEY_ID: ${{ secrets.RUSENDER_KEY_ID }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          OWNER_CHAT_IDS: ${{ vars.OWNER_CHAT_IDS }}
+          INTERNAL_TOKEN: ${{ secrets.INTERNAL_TOKEN }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: root
           key: ${{ secrets.VPS_SSH_KEY }}
-          envs: RUSENDER_KEY,RUSENDER_KEY_ID
+          envs: RUSENDER_KEY,RUSENDER_KEY_ID,BOT_TOKEN,OWNER_CHAT_IDS,INTERNAL_TOKEN
           script: |
             cd /app
             git pull origin master
-            # sync Rusender creds from GitHub secrets into .env for docker-compose
+            # sync secrets from GitHub into .env for docker-compose
             touch .env
-            sed -i '/^RUSENDER_KEY=/d;/^RUSENDER_KEY_ID=/d' .env
+            sed -i '/^RUSENDER_KEY=/d;/^RUSENDER_KEY_ID=/d;/^BOT_TOKEN=/d;/^OWNER_CHAT_IDS=/d;/^INTERNAL_TOKEN=/d' .env
             printf 'RUSENDER_KEY=%s\nRUSENDER_KEY_ID=%s\n' "$RUSENDER_KEY" "$RUSENDER_KEY_ID" >> .env
-            docker-compose build api
-            # api runs as user "node"; sqlite volume was created root-owned — idempotent fix
+            printf 'BOT_TOKEN=%s\nOWNER_CHAT_IDS=%s\nINTERNAL_TOKEN=%s\n' "$BOT_TOKEN" "${OWNER_CHAT_IDS:-152579925}" "$INTERNAL_TOKEN" >> .env
+            docker-compose build api mailbot
+            # services run as user "node"; sqlite volumes were created root-owned — idempotent fix
             docker-compose run --rm --user root api chown -R node:node /data
-            docker-compose up -d api
+            docker-compose run --rm --user root mailbot chown -R node:node /data
+            docker-compose up -d api mailbot
             docker-compose restart nginx
