@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import { OPERATOR } from '../lib/legal';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="Политика конфиденциальности — МЭТЧ"
+  description="Политика конфиденциальности сайта met4.ru: какие персональные данные мы собираем, как храним и обрабатываем."
+>
+  <main>
+    <section class="section policy">
+      <div class="container narrow">
+        <h1>Политика конфиденциальности</h1>
+        <p class="muted">Последнее обновление: {OPERATOR.updated}</p>
+
+        <div class="policy-section">
+          <p><strong>Оператор персональных данных:</strong> {OPERATOR.fio}</p>
+          <p><strong>Статус:</strong> {OPERATOR.status}</p>
+          <p><strong>ИНН:</strong> {OPERATOR.inn}</p>
+          <p><strong>Город:</strong> {OPERATOR.city}</p>
+          <p><strong>E-mail для связи:</strong> <a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a></p>
+        </div>
+
+        <div class="policy-section">
+          <h2>1. Общие положения</h2>
+          <p>Настоящая Политика описывает, как мы собираем, храним и обрабатываем персональные данные пользователей сайта {OPERATOR.site}. Полная версия — «Политика обработки персональных данных» по ФЗ-152 — доступна <a href={`${base}privacy-policy/`}>по ссылке</a>.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>2. Какие данные мы собираем</h2>
+          <p><strong>Через формы на сайте</strong> (заявка, регистрация/бронирование вебинара, бронирование встречи, обратная связь):</p>
+          <ul>
+            <li>имя;</li>
+            <li>e-mail;</li>
+            <li>телефон, компания, должность, Telegram — если указаны.</li>
+          </ul>
+          <p><strong>Технические данные и аналитика (Яндекс.Метрика):</strong></p>
+          <ul>
+            <li>IP-адрес, данные о браузере и устройстве;</li>
+            <li>информация о поведении на сайте, файлы cookie.</li>
+          </ul>
+          <p>Паспортные данные и другие особо чувствительные данные мы не собираем.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>3. Цели обработки данных</h2>
+          <ul>
+            <li>обработка заявок и обратная связь;</li>
+            <li>отправка результатов диагностики, подтверждений записи на встречи и вебинары;</li>
+            <li>аналитика посещений для улучшения сайта.</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>4. Срок хранения</h2>
+          <p>Персональные данные хранятся до достижения целей обработки или до отзыва согласия пользователем.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>5. Передача данных третьим лицам</h2>
+          <p>Данные не передаются третьим лицам, кроме сервисов доставки писем и веб-аналитики (в объёме, необходимом для работы сайта), а также случаев, предусмотренных законодательством РФ.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>6. Права пользователя</h2>
+          <p>Вы имеете право узнать, какие данные мы обрабатываем, требовать их уточнения, блокировки или удаления, а также отозвать согласие, написав на <a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a>.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>7. Согласие</h2>
+          <p>Отправляя форму на сайте, вы даёте согласие на обработку ваших персональных данных в соответствии с настоящей Политикой и <a href={`${base}privacy-policy/`}>Политикой обработки персональных данных</a>.</p>
+        </div>
+
+        <p class="back"><a href={`${base}`}>← На главную</a></p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .policy { background: transparent; }
+  .container.narrow { max-width: 820px; }
+
+  .policy h1 { font-size: 30px; font-weight: 600; color: #fff; margin: 0 0 8px; }
+  @media (min-width: 720px) { .policy h1 { font-size: 38px; } }
+
+  .muted { color: rgba(255,255,255,0.55); font-size: 14px; margin: 0 0 28px; }
+
+  .policy-section {
+    margin-bottom: 16px;
+    padding: 24px 26px;
+    background: rgba(45,48,56,0.55);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 14px;
+  }
+
+  .policy-section h2 { font-size: 19px; font-weight: 600; color: #fff; margin: 0 0 12px; }
+
+  .policy-section p,
+  .policy-section li {
+    font-size: 15px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.82);
+  }
+  .policy-section p { margin: 0 0 10px; }
+  .policy-section p:last-child { margin-bottom: 0; }
+
+  .policy-section ul {
+    margin: 0 0 10px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .policy-section li::marker { color: #d4b8ff; }
+
+  .policy-section a { color: #d4b8ff; text-decoration: none; }
+  .policy-section a:hover { text-decoration: underline; }
+
+  .back { margin-top: 28px; }
+  .back a { color: #d4b8ff; text-decoration: none; }
+</style>

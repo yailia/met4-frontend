@@ -21,6 +21,7 @@
   let company = '';
   let note = '';
   let website = '';
+  let consent = false;
 
   onMount(() => {
     if (kind === 'webinar') {
@@ -131,14 +132,14 @@
         <input id="bk-note" bind:value={note} placeholder="Что хотите обсудить (необязательно)" />
       </div>
 
-      <button type="submit" class="button-primary" disabled={submitting}>
+      <label class="form-consent">
+        <input type="checkbox" bind:checked={consent} required />
+        <span>Я согласен(на) с <a href="/privacy/">политикой обработки персональных данных</a></span>
+      </label>
+
+      <button type="submit" class="button-primary" disabled={submitting || !consent}>
         {submitting ? 'Бронируем...' : 'Забронировать'}
       </button>
-
-      <p class="form-consent">
-        Нажимая кнопку, вы соглашаетесь с
-        <a href="/privacy/">политикой обработки персональных данных</a>.
-      </p>
     </form>
   {:else}
     <div class="done">
@@ -288,12 +289,16 @@
   .button-primary:disabled { opacity: 0.45; cursor: not-allowed; }
 
   .form-consent {
-    margin-top: 14px;
-    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 4px 0 14px;
     font-size: 12px;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
   }
+  .form-consent input { margin-top: 2px; flex-shrink: 0; accent-color: var(--color-accent); }
   .form-consent a { color: #d4b8ff; }
 
   .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
