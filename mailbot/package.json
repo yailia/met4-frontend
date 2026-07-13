@@ -14,6 +14,7 @@
     "hono": "^4.7.7",
     "mailparser": "^3.7.1",
     "smtp-server": "^3.13.4",
+    "socks-proxy-agent": "^8.0.4",
     "telegraf": "^4.16.3"
   },
   "devDependencies": {

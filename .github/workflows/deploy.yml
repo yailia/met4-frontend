@@ -57,19 +57,20 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           OWNER_CHAT_IDS: ${{ vars.OWNER_CHAT_IDS }}
           INTERNAL_TOKEN: ${{ secrets.INTERNAL_TOKEN }}
+          TELEGRAM_PROXY: ${{ secrets.TELEGRAM_PROXY }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: root
           key: ${{ secrets.VPS_SSH_KEY }}
-          envs: RUSENDER_KEY,RUSENDER_KEY_ID,BOT_TOKEN,OWNER_CHAT_IDS,INTERNAL_TOKEN
+          envs: RUSENDER_KEY,RUSENDER_KEY_ID,BOT_TOKEN,OWNER_CHAT_IDS,INTERNAL_TOKEN,TELEGRAM_PROXY
           script: |
             cd /app
             git pull origin master
             # sync secrets from GitHub into .env for docker-compose
             touch .env
-            sed -i '/^RUSENDER_KEY=/d;/^RUSENDER_KEY_ID=/d;/^BOT_TOKEN=/d;/^OWNER_CHAT_IDS=/d;/^INTERNAL_TOKEN=/d' .env
+            sed -i '/^RUSENDER_KEY=/d;/^RUSENDER_KEY_ID=/d;/^BOT_TOKEN=/d;/^OWNER_CHAT_IDS=/d;/^INTERNAL_TOKEN=/d;/^TELEGRAM_PROXY=/d' .env
             printf 'RUSENDER_KEY=%s\nRUSENDER_KEY_ID=%s\n' "$RUSENDER_KEY" "$RUSENDER_KEY_ID" >> .env
-            printf 'BOT_TOKEN=%s\nOWNER_CHAT_IDS=%s\nINTERNAL_TOKEN=%s\n' "$BOT_TOKEN" "${OWNER_CHAT_IDS:-152579925}" "$INTERNAL_TOKEN" >> .env
+            printf 'BOT_TOKEN=%s\nOWNER_CHAT_IDS=%s\nINTERNAL_TOKEN=%s\nTELEGRAM_PROXY=%s\n' "$BOT_TOKEN" "${OWNER_CHAT_IDS:-152579925}" "$INTERNAL_TOKEN" "$TELEGRAM_PROXY" >> .env
             docker-compose build api mailbot
             # services run as user "node"; sqlite volumes were created root-owned — idempotent fix
             docker-compose run --rm --user root api chown -R node:node /data

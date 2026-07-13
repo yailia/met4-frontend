@@ -12,6 +12,7 @@ export interface Config {
   httpPort: number;
   dbUrl: string;
   textLimit: number;
+  telegramProxy?: string;
 }
 
 function parseChatIds(raw: string): number[] {
@@ -54,5 +55,6 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     httpPort: Number(env.HTTP_PORT) || 3002,
     dbUrl: `file:${env.DB_PATH || './mailbot.sqlite'}`,
     textLimit: Number(env.TEXT_LIMIT) || 3000,
+    telegramProxy: env.TELEGRAM_PROXY || undefined,
   };
 }

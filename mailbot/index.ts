@@ -1,4 +1,5 @@
 import { serve } from '@hono/node-server';
+import { SocksProxyAgent } from 'socks-proxy-agent';
 import { loadConfig } from './config.js';
 import { initDb } from './db.js';
 import { createStore } from './store.js';
@@ -13,13 +14,20 @@ const db = await initDb(config.dbUrl);
 const store = createStore(db);
 const mailer = createMailer(config);
 
-const bot = createBot(config.botToken, {
-  store,
-  mailer,
-  owners: config.ownerChatIds,
-  fromEmail: config.fromEmail,
-  fromName: config.fromName,
-});
+const agent = config.telegramProxy ? new SocksProxyAgent(config.telegramProxy) : undefined;
+if (agent) console.log('Telegram traffic routed through proxy');
+
+const bot = createBot(
+  config.botToken,
+  {
+    store,
+    mailer,
+    owners: config.ownerChatIds,
+    fromEmail: config.fromEmail,
+    fromName: config.fromName,
+  },
+  { agent }
+);
 
 const telegram: TelegramSender = {
   sendMessage: (chatId, text, extra) =>
