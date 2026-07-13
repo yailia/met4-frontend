@@ -68,9 +68,14 @@ jobs:
             git pull origin master
             # sync secrets from GitHub into .env for docker-compose
             touch .env
-            sed -i '/^RUSENDER_KEY=/d;/^RUSENDER_KEY_ID=/d;/^BOT_TOKEN=/d;/^OWNER_CHAT_IDS=/d;/^INTERNAL_TOKEN=/d;/^TELEGRAM_PROXY=/d' .env
+            sed -i '/^RUSENDER_KEY=/d;/^RUSENDER_KEY_ID=/d;/^BOT_TOKEN=/d;/^OWNER_CHAT_IDS=/d;/^INTERNAL_TOKEN=/d' .env
             printf 'RUSENDER_KEY=%s\nRUSENDER_KEY_ID=%s\n' "$RUSENDER_KEY" "$RUSENDER_KEY_ID" >> .env
-            printf 'BOT_TOKEN=%s\nOWNER_CHAT_IDS=%s\nINTERNAL_TOKEN=%s\nTELEGRAM_PROXY=%s\n' "$BOT_TOKEN" "${OWNER_CHAT_IDS:-152579925}" "$INTERNAL_TOKEN" "$TELEGRAM_PROXY" >> .env
+            printf 'BOT_TOKEN=%s\nOWNER_CHAT_IDS=%s\nINTERNAL_TOKEN=%s\n' "$BOT_TOKEN" "${OWNER_CHAT_IDS:-152579925}" "$INTERNAL_TOKEN" >> .env
+            # only overwrite TELEGRAM_PROXY when the secret is set; otherwise keep the existing .env value
+            if [ -n "$TELEGRAM_PROXY" ]; then
+              sed -i '/^TELEGRAM_PROXY=/d' .env
+              printf 'TELEGRAM_PROXY=%s\n' "$TELEGRAM_PROXY" >> .env
+            fi
             docker-compose build api mailbot
             # services run as user "node"; sqlite volumes were created root-owned — idempotent fix
             docker-compose run --rm --user root api chown -R node:node /data
