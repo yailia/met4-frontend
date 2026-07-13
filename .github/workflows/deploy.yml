@@ -80,5 +80,5 @@ jobs:
             # services run as user "node"; sqlite volumes were created root-owned — idempotent fix
             docker-compose run --rm --user root api chown -R node:node /data
             docker-compose run --rm --user root mailbot chown -R node:node /data
-            docker-compose up -d api mailbot
+            docker-compose up -d --force-recreate api mailbot
             docker-compose restart nginx
