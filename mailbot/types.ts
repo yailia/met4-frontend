@@ -1,5 +1,6 @@
 export interface InboundMail {
   from: string;
+  fromAddress: string;
   to: string;
   subject: string;
   text: string;

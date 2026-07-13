@@ -1,16 +1,34 @@
 import { describe, it, expect } from 'vitest';
 import net from 'node:net';
-import { buildInbound, createSmtpServer, type SmtpServerHandle } from './smtp.js';
+import { buildInbound, createSmtpServer, extractAddress, type SmtpServerHandle } from './smtp.js';
 import type { InboundMail } from './types.js';
+
+describe('extractAddress', () => {
+  it('pulls the address out of a display-name header', () => {
+    expect(extractAddress('Test Sender <bob@example.com>')).toBe('bob@example.com');
+  });
+  it('returns a bare address unchanged', () => {
+    expect(extractAddress('bob@example.com')).toBe('bob@example.com');
+  });
+  it('returns empty for undefined', () => {
+    expect(extractAddress(undefined)).toBe('');
+  });
+});
 
 describe('buildInbound', () => {
   it('prefers envelope recipients for To', () => {
     const mail = buildInbound(
-      { from: { text: 'A <a@x.com>' }, subject: 'Hi', text: 'body', messageId: '<m@x>' },
+      {
+        from: { text: 'A <a@x.com>', value: [{ address: 'a@x.com', name: 'A' }] },
+        subject: 'Hi',
+        text: 'body',
+        messageId: '<m@x>',
+      },
       { mailFrom: { address: 'a@x.com' }, rcptTo: [{ address: 'hello@met4.ru' }] }
     );
     expect(mail.to).toBe('hello@met4.ru');
     expect(mail.from).toBe('A <a@x.com>');
+    expect(mail.fromAddress).toBe('a@x.com');
     expect(mail.subject).toBe('Hi');
     expect(mail.text).toBe('body');
     expect(mail.messageId).toBe('<m@x>');

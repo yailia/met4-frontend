@@ -32,6 +32,7 @@ describe('replySubject', () => {
 describe('formatInbound', () => {
   const base = {
     from: 'client@example.com',
+    fromAddress: 'client@example.com',
     to: 'hello@met4.ru',
     subject: 'Привет',
     text: 'Тело письма',

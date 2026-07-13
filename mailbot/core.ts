@@ -39,7 +39,7 @@ export async function deliverInbound(deps: DeliverDeps, mail: InboundMail): Prom
   for (const chatId of deps.ownerChatIds) {
     const sent = await deps.telegram.sendMessage(chatId, text, HTML);
     await deps.store.saveThread(chatId, sent.message_id, {
-      fromEmail: mail.from,
+      fromEmail: mail.fromAddress,
       toEmail: mail.to,
       subject: mail.subject,
       messageId: mail.messageId,

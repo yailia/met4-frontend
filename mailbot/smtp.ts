@@ -9,7 +9,7 @@ export interface SmtpServerHandle {
 
 // Loose shapes for the parts of mailparser / smtp-server we touch.
 interface ParsedLike {
-  from?: { text?: string };
+  from?: { text?: string; value?: Array<{ address?: string; name?: string }> };
   to?: { text?: string };
   subject?: string;
   text?: string;
@@ -20,6 +20,14 @@ interface ParsedLike {
 interface EnvelopeLike {
   mailFrom?: { address?: string } | false;
   rcptTo?: Array<{ address: string }>;
+}
+
+// Pull the bare address out of a "Name <addr@host>" header, or return the
+// trimmed input if it is already bare.
+export function extractAddress(text?: string): string {
+  if (!text) return '';
+  const m = text.match(/<([^>]+)>/);
+  return (m ? m[1] : text).trim();
 }
 
 function stripHtml(html: string): string {
@@ -33,11 +41,14 @@ function stripHtml(html: string): string {
 export function buildInbound(parsed: ParsedLike, envelope: EnvelopeLike): InboundMail {
   const rcpts = (envelope.rcptTo ?? []).map((r) => r.address);
   const to = rcpts.join(', ') || parsed.to?.text || '';
-  const from =
-    parsed.from?.text || (envelope.mailFrom ? envelope.mailFrom.address : undefined) || 'unknown';
+  const envelopeFrom = envelope.mailFrom ? envelope.mailFrom.address : undefined;
+  const from = parsed.from?.text || envelopeFrom || 'unknown';
+  const fromAddress =
+    parsed.from?.value?.[0]?.address || extractAddress(parsed.from?.text) || envelopeFrom || '';
   const text = (parsed.text ?? '').trim() || (parsed.html ? stripHtml(parsed.html) : '');
   return {
     from,
+    fromAddress,
     to,
     subject: parsed.subject ?? '',
     text,

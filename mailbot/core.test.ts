@@ -30,7 +30,8 @@ function fakeTelegram(startId = 1000): TelegramSender & { sent: Array<{ chatId: 
 const okMailer: Mailer = { sendReply: vi.fn().mockResolvedValue({ ok: true }) };
 
 const mail: InboundMail = {
-  from: 'client@example.com',
+  from: 'Client <client@example.com>',
+  fromAddress: 'client@example.com',
   to: 'hello@met4.ru',
   subject: 'Вопрос',
   text: 'Тело',
