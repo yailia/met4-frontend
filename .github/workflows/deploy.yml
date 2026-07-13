@@ -76,6 +76,9 @@ jobs:
               sed -i '/^TELEGRAM_PROXY=/d' .env
               printf 'TELEGRAM_PROXY=%s\n' "$TELEGRAM_PROXY" >> .env
             fi
+            # compose interpolates ${TELEGRAM_PROXY} from the shell before .env;
+            # clear it so the .env value (set above / manually) always wins
+            unset TELEGRAM_PROXY
             docker-compose build api mailbot
             # services run as user "node"; sqlite volumes were created root-owned — idempotent fix
             docker-compose run --rm --user root api chown -R node:node /data
