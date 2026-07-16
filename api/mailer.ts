@@ -4,6 +4,8 @@ import { bookingConfirmedEmail } from './emails/booking-confirmed.js';
 import { sessionCreatedEmail } from './emails/session-created.js';
 
 const FROM = { email: 'noreply@met4.ru', name: 'МЭТЧ' };
+// Replies to automated mail land in the hello@ mailbox (mailbot), not the dead noreply@.
+const REPLY_TO = 'hello@met4.ru';
 const RUSENDER_BASE = 'https://api.rusender.ru/api/v1/external-mails/send';
 
 export type BookingKind = 'webinar' | 'meeting';
@@ -43,7 +45,9 @@ export function createMailer(cfg: { rusenderKey: string; rusenderKeyId: string; 
           Authorization: `Bearer ${cfg.rusenderKey}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ mail: { to: { email: to }, from: FROM, subject, html } }),
+        body: JSON.stringify({
+          mail: { to: { email: to }, from: FROM, subject, html, headers: { 'Reply-To': REPLY_TO } },
+        }),
       });
       const result = (await res.json().catch(() => ({}))) as { uuid?: string; message?: string; error?: string };
       if (!res.ok) {

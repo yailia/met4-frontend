@@ -38,6 +38,7 @@ describe('mailer never throws', () => {
     const body = JSON.parse(init!.body as string);
     expect(body.mail.to.email).toBe('leads@met4.ru');
     expect(body.mail.from.email).toBe('noreply@met4.ru');
+    expect(body.mail.headers['Reply-To']).toBe('hello@met4.ru');
     expect(body.mail.subject).toContain('contact');
   });
 });
