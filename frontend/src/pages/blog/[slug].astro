@@ -6,6 +6,7 @@ import Footer from '../../components/Footer.astro';
 import BlogCover from '../../components/BlogCover.astro';
 import BlogCard from '../../components/BlogCard.astro';
 import { slugify, formatRuDate } from '../../lib/blog-slug';
+import { productSlugForCategory } from '../../lib/product-links';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -41,6 +42,11 @@ for (const p of [...sameCat.sort((a, b) => b.data.date.getTime() - a.data.date.g
 
 const base = import.meta.env.BASE_URL;
 const dateStr = formatRuDate(post.data.date);
+
+const productSlug = productSlugForCategory(post.data.category);
+const relatedProduct = productSlug
+  ? (await getCollection('products')).find((p) => p.data.slug === productSlug)
+  : undefined;
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : 'https://met4.ru';
 const articleSchema = {
   "@context": "https://schema.org",
@@ -97,6 +103,14 @@ const articleSchema = {
       <div class="post-body">
         <Content />
       </div>
+
+      {relatedProduct && (
+        <aside class="post-product">
+          <span class="post-product-label">Формат работы по теме</span>
+          <a href={`${base}products/${relatedProduct.data.slug}/`}>{relatedProduct.data.h1}</a>
+          <p>{relatedProduct.data.cardResult}</p>
+        </aside>
+      )}
 
       <div class="post-cta">
         <div class="post-cta-inner glass-container">
@@ -250,6 +264,40 @@ const articleSchema = {
     margin-top: 36px;
     padding-top: 24px;
     border-top: 1px solid rgba(255,255,255,0.10);
+  }
+
+  .post-product {
+    margin: 36px 0 0;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+  }
+
+  .post-product-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .post-product a {
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196,168,238,0.5);
+  }
+  .post-product a:hover { border-bottom-color: #fff; }
+
+  .post-product p {
+    margin: 10px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.75);
   }
 
   .post-cta {

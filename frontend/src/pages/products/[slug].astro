@@ -1,0 +1,276 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map((product) => ({
+    params: { slug: product.data.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props as any;
+const { Content } = await render(product);
+
+const base = import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : 'https://met4.ru';
+
+const others = (await getCollection('products'))
+  .filter((p) => p.data.slug !== product.data.slug)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: product.data.h1,
+  description: product.data.description,
+  serviceType: product.data.format,
+  url: `${siteUrl}${base}products/${product.data.slug}/`,
+  areaServed: { '@type': 'Country', name: 'Россия' },
+  audience: { '@type': 'BusinessAudience', name: 'Компании, HR-подразделения и руководители' },
+  provider: {
+    '@type': 'Organization',
+    name: 'МЭТЧ',
+    url: siteUrl,
+    logo: `${siteUrl}/og-image.png`,
+  },
+};
+---
+
+<BaseLayout title={product.data.title} description={product.data.description}>
+  <main>
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+    <article class="product container">
+      <Breadcrumbs
+        items={[
+          { name: 'Главная', href: base },
+          { name: 'Продукты', href: `${base}products/` },
+          { name: product.data.h1 },
+        ]}
+      />
+
+      <div class="product-head">
+        <span class="eyebrow">{product.data.format}</span>
+        <h1>{product.data.h1}</h1>
+      </div>
+
+      <div class="product-body">
+        <Content />
+      </div>
+
+      {product.data.faq.length > 0 && (
+        <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
+          <h2>Частые вопросы</h2>
+          {product.data.faq.map((item: { q: string; a: string }) => (
+            <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <summary itemprop="name">{item.q}</summary>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">{item.a}</p>
+              </div>
+            </details>
+          ))}
+        </section>
+      )}
+
+      <section class="other-products">
+        <h2>Другие форматы работы</h2>
+        <ul>
+          {others.map((p) => (
+            <li>
+              <a href={`${base}products/${p.data.slug}/`}>
+                <span class="other-format">{p.data.format}</span>
+                <span class="other-title">{p.data.h1}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a class="all-link" href={`${base}products/`}>Все форматы работы →</a>
+      </section>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .product {
+    padding: 32px 0 64px;
+    max-width: 820px;
+  }
+  @media (min-width: 1024px) { .product { padding: 48px 0 80px; } }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+
+  .product-head h1 {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: #fff;
+    margin: 4px 0 28px;
+  }
+  @media (min-width: 720px)  { .product-head h1 { font-size: 38px; } }
+  @media (min-width: 1024px) { .product-head h1 { font-size: 42px; } }
+
+  .product-body :global(h2) {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    margin: 40px 0 16px;
+  }
+  @media (min-width: 720px) { .product-body :global(h2) { font-size: 28px; } }
+
+  .product-body :global(p) {
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.88);
+    margin: 0 0 18px;
+  }
+  @media (min-width: 720px) { .product-body :global(p) { font-size: 17px; } }
+
+  .product-body :global(strong) { color: #fff; font-weight: 600; }
+
+  .product-body :global(ul), .product-body :global(ol) {
+    margin: 0 0 18px 22px;
+    color: rgba(255,255,255,0.88);
+  }
+  .product-body :global(li) { margin: 0 0 10px; line-height: 1.65; }
+
+  .product-body :global(a) {
+    color: #c4a8ee;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196,168,238,0.4);
+  }
+  .product-body :global(a:hover) { color: #fff; border-bottom-color: #fff; }
+
+  .product-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 24px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.88);
+    display: block;
+    overflow-x: auto;
+  }
+  .product-body :global(th) {
+    text-align: left;
+    font-weight: 600;
+    color: #fff;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.16);
+  }
+  .product-body :global(td) {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    line-height: 1.55;
+    vertical-align: top;
+  }
+
+  .faq {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+  }
+
+  .faq h2, .other-products h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 20px;
+  }
+
+  .faq details {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 14px 0;
+  }
+
+  .faq summary {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    list-style: none;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: '+';
+    float: right;
+    color: #d4b8ff;
+    font-weight: 400;
+  }
+  .faq details[open] summary::after { content: '−'; }
+
+  .faq p {
+    margin: 12px 0 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .other-products {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+  }
+
+  .other-products ul {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  @media (min-width: 720px) {
+    .other-products ul { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .other-products a {
+    display: block;
+    text-decoration: none;
+  }
+
+  .other-products li a {
+    padding: 16px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+  }
+  .other-products li a:hover {
+    background: rgba(150,105,216,0.12);
+    border-color: rgba(150,105,216,0.35);
+  }
+
+  .other-format {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #d4b8ff;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .other-title {
+    display: block;
+    color: #fff;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .all-link {
+    color: #c4a8ee;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  .all-link:hover { color: #fff; }
+</style>

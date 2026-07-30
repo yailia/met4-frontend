@@ -1,0 +1,88 @@
+---
+interface Crumb {
+  name: string;
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : 'https://met4.ru';
+
+const abs = (href?: string) => (href ? `${siteUrl}${href.startsWith('/') ? href : `${base}${href}`}` : undefined);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.name,
+    ...(item.href ? { item: abs(item.href) } : {}),
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<nav class="breadcrumbs" aria-label="Хлебные крошки">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    {items.map((item, i) => (
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        {item.href ? (
+          <a itemprop="item" href={item.href}>
+            <span itemprop="name">{item.name}</span>
+          </a>
+        ) : (
+          <span itemprop="name" aria-current="page">{item.name}</span>
+        )}
+        <meta itemprop="position" content={String(i + 1)} />
+        {i < items.length - 1 && <span class="sep" aria-hidden="true">/</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    margin-bottom: 20px;
+  }
+
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .breadcrumbs a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+  }
+
+  .breadcrumbs a:hover {
+    color: #fff;
+  }
+
+  .breadcrumbs [aria-current='page'] {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .sep {
+    color: rgba(255, 255, 255, 0.3);
+  }
+</style>

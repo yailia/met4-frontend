@@ -18,6 +18,17 @@ interface Props {
 }
 
 const { title, description = "Повышаем эффективность компании через устойчивость команд", noindex = false } = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : 'https://met4.ru';
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "МЭТЧ",
+  "url": siteUrl,
+  "logo": `${siteUrl}/og-image.png`,
+  "description": "Повышаем эффективность компании через устойчивость команд",
+  "sameAs": ["https://t.me/met4_ru"]
+};
 ---
 
 <!doctype html>
@@ -46,6 +57,7 @@ const { title, description = "Повышаем эффективность ком
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href={Astro.url} />
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
     <Metrika />
   </head>
   <body>
