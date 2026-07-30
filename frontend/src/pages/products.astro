@@ -1,43 +1,17 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 
-const products = [
-  {
-    format: 'Групповой формат',
-    h: 'Тренинг по устойчивости',
-    p: 'Системное развитие навыков работы с нагрузкой и стрессом.',
-    result: 'Команды работают стабильнее в неопределённости.',
-  },
-  {
-    format: 'Групповой формат',
-    h: 'Тренинг по продуктивности',
-    p: 'Фокус, приоритеты, управление энергией.',
-    result: 'Рост эффективности без выгорания.',
-  },
-  {
-    format: 'Групповой формат',
-    h: 'Работа с поколением Z',
-    p: 'Адаптация подходов управления и взаимодействия.',
-    result: 'Снижение конфликтов и текучки среди молодых сотрудников.',
-  },
-  {
-    format: 'Индивидуальный формат',
-    h: 'Коучинг руководителей',
-    p: 'Развитие устойчивости и ресурсности лидера.',
-    result: 'Руководитель не выгорает и ведёт команду в стрессе.',
-  },
-  {
-    format: 'Индивидуальный формат',
-    h: 'Индивидуальные планы развития',
-    p: 'Программы под конкретные задачи компании.',
-    result: 'Персонализированный путь роста для ключевых сотрудников.',
-  },
-];
+const base = import.meta.env.BASE_URL;
+const products = (await getCollection('products')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout title="Форматы работы — МЭТЧ" description="Тренинги, коучинг и индивидуальные планы развития для повышения устойчивости команд.">
   <main>
     <div class="container products-wrap">
+      <Breadcrumbs items={[{ name: 'Главная', href: base }, { name: 'Продукты' }]} />
+
       <div class="page-header">
         <span class="eyebrow">Продукты</span>
         <h1>Форматы работы</h1>
@@ -46,15 +20,16 @@ const products = [
 
       <div class="products-grid">
         {products.map((p) => (
-          <div class="product-card card-solid">
-            <div class="product-format eyebrow">{p.format}</div>
-            <h3>{p.h}</h3>
-            <p>{p.p}</p>
+          <a class="product-card card-solid" href={`${base}products/${p.data.slug}/`}>
+            <div class="product-format eyebrow">{p.data.format}</div>
+            <h3>{p.data.cardTitle}</h3>
+            <p>{p.data.cardText}</p>
             <div class="product-result">
               <span class="result-label">Результат</span>
-              <span class="result-value">{p.result}</span>
+              <span class="result-value">{p.data.cardResult}</span>
             </div>
-          </div>
+            <span class="product-more">Подробнее →</span>
+          </a>
         ))}
       </div>
 
@@ -117,7 +92,25 @@ const products = [
 
   .product-card {
     padding: 28px;
+    display: block;
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
   }
+
+  .product-card:hover {
+    border-color: rgba(150,105,216,0.45);
+    transform: translateY(-2px);
+  }
+
+  .product-more {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 14px;
+    color: #c4a8ee;
+    font-weight: 500;
+  }
+
+  .product-card:hover .product-more { color: #fff; }
 
   @media (min-width: 720px) { .product-card { padding: 32px; } }
 
