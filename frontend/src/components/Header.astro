@@ -6,6 +6,7 @@ const navItems = [
   { href: base, label: 'Главная' },
   { href: `${base}products/`, label: 'Продукты' },
   { href: `${base}team/`, label: 'Команда' },
+  { href: `${base}guides/`, label: 'Путеводители' },
   { href: `${base}blog/`, label: 'Блог' },
   { href: `${base}webinar/`, label: 'Вебинар' },
   { href: `${base}contact/`, label: 'Контакты' },
@@ -183,6 +184,22 @@ const navItems = [
 
   .nav-overlay {
     display: none;
+  }
+
+  /* Семь пунктов меню не помещаются в узкий десктоп — ужимаем шаг и кегль */
+  @media (min-width: 1024px) and (max-width: 1200px) {
+    .nav-menu {
+      gap: var(--spacing-md);
+    }
+
+    .nav-link {
+      font-size: var(--text-sm);
+    }
+
+    .nav-cta {
+      padding: 8px 14px;
+      white-space: nowrap;
+    }
   }
 
   .nav-cta-item {

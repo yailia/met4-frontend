@@ -7,6 +7,7 @@ const LABELS: Record<string, string> = {
   telegram: 'Telegram',
   company: 'Компания',
   position: 'Должность',
+  guide: 'Путеводитель',
 };
 
 export function leadReceivedEmail(p: { type: string; fields: Record<string, string> }): string {

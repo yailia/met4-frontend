@@ -155,7 +155,8 @@ export function createApp(deps: { db: Client; mailer: Mailer; config: Config; no
     if (!body) return c.json({ error: 'Invalid JSON' }, 400);
     if (isHoneypotTripped(body)) return c.json({ ok: true });
 
-    const type = body.type === 'contact' || body.type === 'webinar' ? body.type : null;
+    const type =
+      body.type === 'contact' || body.type === 'webinar' || body.type === 'guide' ? body.type : null;
     const name = cleanText(body.name, 200);
     if (!type || !name || !isValidEmail(body.email)) {
       return c.json({ error: 'Invalid fields' }, 400);
@@ -163,7 +164,7 @@ export function createApp(deps: { db: Client; mailer: Mailer; config: Config; no
     const email = body.email;
 
     const fields: Record<string, string> = { name, email };
-    for (const key of ['phone', 'telegram', 'company', 'position'] as const) {
+    for (const key of ['phone', 'telegram', 'company', 'position', 'guide'] as const) {
       const v = cleanText(body[key], 200);
       if (v) fields[key] = v;
     }

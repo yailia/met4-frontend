@@ -1,0 +1,163 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const base = import.meta.env.BASE_URL;
+const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Путеводители для руководителей и HR — МЭТЧ"
+  description="Практические материалы МЭТЧ: готовые инструменты для работы с вовлечённостью, выгоранием и удержанием команды. Бесплатно, в PDF."
+>
+  <main>
+    <div class="container guides-wrap">
+      <Breadcrumbs items={[{ name: 'Главная', href: base }, { name: 'Путеводители' }]} />
+
+      <div class="page-header">
+        <span class="eyebrow">Путеводители</span>
+        <h1>Инструменты для руководителей и HR</h1>
+        <p class="section-lead">
+          Практические материалы, которые можно взять и применить на ближайшей встрече с командой.
+          Без теории ради теории — только то, что меняет разговор с сотрудником.
+        </p>
+      </div>
+
+      <div class="guides-list">
+        {guides.map((g) => (
+          <a class="guide-card card-solid" href={`${base}guides/${g.data.slug}/`}>
+            <div class="guide-card-media">
+              <Image src={g.data.thumb} alt={g.data.cardTitle} widths={[280, 420, 560]} loading="eager" />
+            </div>
+            <div class="guide-card-body">
+              <span class="eyebrow">PDF · {g.data.pages} страниц</span>
+              <h2>{g.data.cardTitle}</h2>
+              <p>{g.data.cardText}</p>
+              <div class="guide-card-meta">
+                <span>Чтение ~{g.data.readingMinutes} мин</span>
+                <span class="dot-sep">·</span>
+                <span>Бесплатно</span>
+              </div>
+              <span class="guide-card-more">Смотреть путеводитель →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="page-cta">
+        <a href={`${base}assessment/`} class="button-primary">Оценить устойчивость команды</a>
+        <a href={`${base}contact/`} class="button-secondary">Обсудить задачи компании</a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .guides-wrap {
+    padding: 48px 0 96px;
+  }
+
+  .page-header {
+    max-width: 720px;
+    margin-bottom: 48px;
+  }
+
+  .page-header h1 {
+    margin: 8px 0 16px;
+  }
+
+  .guides-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .guide-card {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 32px;
+    padding: 28px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .guide-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  .guide-card-media {
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-bg);
+    align-self: start;
+  }
+
+  .guide-card-media :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .guide-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .guide-card-body h2 {
+    font-size: 28px;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .guide-card-body p {
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  .guide-card-meta {
+    display: flex;
+    gap: 8px;
+    color: var(--color-text-muted);
+    font-size: 14px;
+  }
+
+  .guide-card-more {
+    margin-top: 6px;
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .page-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 56px;
+  }
+
+  @media (max-width: 767px) {
+    .guide-card {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .guide-card-media {
+      max-width: 220px;
+    }
+
+    .guide-card-body h2 {
+      font-size: 22px;
+    }
+  }
+</style>

@@ -24,6 +24,20 @@ describe('POST /api/submit', () => {
     expect((await db.execute("SELECT * FROM leads WHERE type='webinar'")).rows.length).toBe(1);
   });
 
+  it('saves guide lead with the guide slug', async () => {
+    const { post, db } = await makeTestApp();
+    const res = await post('/api/submit', {
+      type: 'guide',
+      name: 'Pavel',
+      email: 'p@a.vel',
+      guide: 'one-to-one-50-questions',
+    });
+    expect(res.status).toBe(200);
+    const rows = (await db.execute("SELECT * FROM leads WHERE type='guide'")).rows;
+    expect(rows.length).toBe(1);
+    expect(JSON.parse(String(rows[0].payload)).guide).toBe('one-to-one-50-questions');
+  });
+
   it('400 on unknown type, bad email, missing name', async () => {
     const { post } = await makeTestApp();
     expect((await post('/api/submit', { ...CONTACT, type: 'evil' })).status).toBe(400);

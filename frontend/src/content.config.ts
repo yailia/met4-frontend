@@ -43,4 +43,28 @@ const products = defineCollection({
   }),
 });
 
-export const collections = { blog, products };
+const guides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/guides' }),
+  schema: ({ image }) =>
+    z.object({
+      slug: z.string(),
+      order: z.number().int().positive(),
+      title: z.string(),
+      description: z.string(),
+      h1: z.string(),
+      cardTitle: z.string(),
+      cardText: z.string(),
+      lead: z.string(),
+      thumb: image(),
+      cover: image(),
+      pdf: z.string(),
+      pages: z.number().int().positive(),
+      readingMinutes: z.number().int().positive(),
+      audience: z.array(z.string()).min(1),
+      inside: z.array(z.object({ title: z.string(), text: z.string() })).min(1),
+      learn: z.array(z.string()).min(1),
+      contents: z.array(z.object({ title: z.string(), text: z.string() })).default([]),
+    }),
+});
+
+export const collections = { blog, products, guides };

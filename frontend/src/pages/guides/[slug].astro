@@ -1,0 +1,346 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideForm from '../../components/GuideForm.svelte';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((guide) => ({
+    params: { slug: guide.data.slug },
+    props: { guide },
+  }));
+}
+
+const { guide } = Astro.props as any;
+const g = guide.data;
+
+const base = import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : 'https://met4.ru';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'DigitalDocument',
+  name: g.h1,
+  description: g.description,
+  url: `${siteUrl}${base}guides/${g.slug}/`,
+  inLanguage: 'ru-RU',
+  isAccessibleForFree: true,
+  numberOfPages: g.pages,
+  audience: { '@type': 'BusinessAudience', name: 'HR-руководители и руководители команд' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'МЭТЧ',
+    url: siteUrl,
+    logo: `${siteUrl}/og-image.png`,
+  },
+};
+---
+
+<BaseLayout title={g.title} description={g.description}>
+  <main>
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+    <section class="guide-hero">
+      <Image class="guide-hero-bg" src={g.cover} alt="" widths={[900, 1400]} loading="eager" />
+      <div class="guide-hero-veil"></div>
+
+      <div class="container guide-hero-inner">
+        <Breadcrumbs
+          items={[
+            { name: 'Главная', href: base },
+            { name: 'Путеводители', href: `${base}guides/` },
+            { name: g.cardTitle },
+          ]}
+        />
+
+        <div class="guide-hero-grid">
+          <div class="guide-hero-text">
+            <span class="eyebrow">Путеводитель руководителя · PDF, {g.pages} страниц</span>
+            <h1>{g.h1}</h1>
+            <p class="guide-lead">{g.lead}</p>
+            <a href="#get" class="button-primary">Получить путеводитель</a>
+          </div>
+
+          <div class="guide-hero-thumb glass">
+            <Image src={g.thumb} alt={g.cardTitle} widths={[280, 420]} loading="eager" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container guide-section">
+      <h2>Что внутри</h2>
+      <div class="inside-grid">
+        {g.inside.map((item: { title: string; text: string }) => (
+          <article class="card-solid inside-card">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="container guide-section">
+      <div class="two-col">
+        <div>
+          <h2>Для кого</h2>
+          <ul class="marker-list">
+            {g.audience.map((a: string) => <li>{a}</li>)}
+          </ul>
+        </div>
+        <div>
+          <h2>Что вы узнаете</h2>
+          <ul class="marker-list">
+            {g.learn.map((l: string) => <li>{l}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {g.contents.length > 0 && (
+      <section class="container guide-section">
+        <h2>Содержание</h2>
+        <div class="contents-list">
+          {g.contents.map((c: { title: string; text: string }) => (
+            <div class="contents-row">
+              <span class="contents-title">{c.title}</span>
+              <span class="contents-text">{c.text}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section id="get" class="container guide-section">
+      <div class="get-grid glass">
+        <div class="get-text">
+          <span class="eyebrow">Бесплатно</span>
+          <h2>Заберите путеводитель</h2>
+          <p>
+            Оставьте имя и почту — откроем доступ к PDF сразу. Чтение занимает около
+            {g.readingMinutes} минут, применить можно на ближайшей встрече с командой.
+          </p>
+        </div>
+        <div class="get-form">
+          <GuideForm client:visible guide={g.slug} pdf={g.pdf} title={g.cardTitle} />
+        </div>
+      </div>
+    </section>
+
+    <section class="container guide-section guide-next">
+      <h2>Хотите увидеть картину по всей компании?</h2>
+      <p>
+        Личные встречи показывают одного человека. Оценка по методологии Gallup Q12 оцифровывает
+        12 факторов здоровья команды и подсвечивает зоны риска до того, как сотрудники напишут заявления.
+      </p>
+      <div class="page-cta">
+        <a href={`${base}assessment/`} class="button-primary">Пройти оценку устойчивости</a>
+        <a href={`${base}guides/`} class="button-secondary">Все путеводители</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .guide-hero {
+    position: relative;
+    padding: 40px 0 72px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .guide-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    z-index: -2;
+  }
+
+  .guide-hero-veil {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      180deg,
+      rgba(36, 39, 46, 0.62) 0%,
+      rgba(36, 39, 46, 0.88) 55%,
+      var(--color-bg) 100%
+    );
+  }
+
+  .guide-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    align-items: center;
+    margin-top: 32px;
+  }
+
+  .guide-hero-text h1 {
+    margin: 10px 0 16px;
+  }
+
+  .guide-lead {
+    color: var(--color-text-secondary);
+    font-size: 18px;
+    max-width: 60ch;
+    margin-bottom: 28px;
+  }
+
+  .guide-hero-thumb {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .guide-hero-thumb :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .guide-section {
+    padding: 56px 0 0;
+  }
+
+  .guide-section h2 {
+    margin-bottom: 24px;
+  }
+
+  .inside-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .inside-card {
+    padding: 24px;
+    border-radius: 16px;
+  }
+
+  .inside-card h3 {
+    margin: 0 0 8px;
+  }
+
+  .inside-card p {
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+  }
+
+  .marker-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .marker-list li {
+    position: relative;
+    padding-left: 22px;
+    color: var(--color-text-secondary);
+  }
+
+  .marker-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .contents-list {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .contents-row {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contents-title {
+    font-weight: 600;
+  }
+
+  .contents-text {
+    color: var(--color-text-muted);
+  }
+
+  .get-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 48px;
+    padding: 40px;
+    border-radius: 20px;
+    align-items: center;
+  }
+
+  .get-text h2 {
+    margin: 10px 0 12px;
+  }
+
+  .get-text p {
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 50ch;
+  }
+
+  .guide-next {
+    padding-bottom: 96px;
+  }
+
+  .guide-next p {
+    color: var(--color-text-secondary);
+    max-width: 70ch;
+    margin-bottom: 28px;
+  }
+
+  .page-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 900px) {
+    .guide-hero-grid,
+    .inside-grid,
+    .two-col,
+    .get-grid,
+    .contents-row {
+      grid-template-columns: 1fr;
+    }
+
+    .guide-hero-thumb {
+      max-width: 260px;
+    }
+
+    .get-grid {
+      padding: 24px;
+      gap: 28px;
+    }
+
+    .two-col {
+      gap: 32px;
+    }
+  }
+</style>
