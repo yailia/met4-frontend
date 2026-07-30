@@ -1,5 +1,5 @@
 import { chromium } from 'playwright-core';
-import { existsSync, mkdirSync, readdirSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -21,10 +21,14 @@ if (!existsSync(source)) {
 mkdirSync(outDir, { recursive: true });
 const target = join(outDir, `${slug}.pdf`);
 
+/** Running footer title comes from the guide's own <title>, minus the brand suffix. */
+const docTitle = (readFileSync(source, 'utf8').match(/<title>([^<]+)<\/title>/) || [])[1] || slug;
+const footerTitle = docTitle.replace(/\s*[—-]\s*МЭТЧ\s*$/, '').trim();
+
 const footer = `
   <div style="width:100%;font-family:Inter,Segoe UI,sans-serif;font-size:8pt;color:#8b909c;
               padding:0 16mm;display:flex;justify-content:space-between;align-items:center;">
-    <span>МЭТЧ · 50 вопросов для One-to-One</span>
+    <span>МЭТЧ · ${footerTitle}</span>
     <span class="pageNumber"></span>
   </div>`;
 

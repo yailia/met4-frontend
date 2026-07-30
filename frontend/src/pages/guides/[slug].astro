@@ -206,8 +206,15 @@ const schema = {
     border-radius: 12px;
   }
 
+  /* Only vertical padding here — the horizontal one comes from .container */
+  .guide-hero-inner,
   .guide-section {
-    padding: 56px 0 0;
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+
+  .guide-section {
+    padding-block: 56px 0;
   }
 
   .guide-section h2 {
@@ -306,7 +313,7 @@ const schema = {
   }
 
   .guide-next {
-    padding-bottom: 96px;
+    padding-block-end: 96px;
   }
 
   .guide-next p {

@@ -57,8 +57,11 @@ const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.d
 </BaseLayout>
 
 <style>
+  /* Only vertical padding here — the horizontal one comes from .container */
   .guides-wrap {
-    padding: 48px 0 96px;
+    padding-block: 48px 96px;
+    max-width: 1200px;
+    margin-inline: auto;
   }
 
   .page-header {

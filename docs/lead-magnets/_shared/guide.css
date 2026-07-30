@@ -65,6 +65,13 @@ a {
     var(--dark);
 }
 
+.cover-burnout {
+  background:
+    linear-gradient(180deg, rgba(36, 39, 46, 0.5) 0%, rgba(36, 39, 46, 0.84) 40%, rgba(36, 39, 46, 0.97) 60%, #24272e 100%),
+    url('assets/cover-bg-burnout.webp') center top / cover no-repeat,
+    var(--dark);
+}
+
 .brand {
   display: flex;
   align-items: center;
@@ -372,6 +379,235 @@ h3.sub-h {
   font-weight: 700;
   font-size: 10pt;
   white-space: nowrap;
+}
+
+/* ---------- data table ---------- */
+
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9.5pt;
+  margin: 0 0 6mm;
+}
+
+table.data th {
+  text-align: left;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-bottom: 1.5px solid var(--accent-line);
+  padding: 0 4mm 2.5mm 0;
+  vertical-align: bottom;
+}
+
+table.data td {
+  border-bottom: 1px solid var(--line);
+  padding: 3mm 4mm 3mm 0;
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+table.data tr {
+  break-inside: avoid;
+}
+
+table.data td:last-child,
+table.data th:last-child {
+  padding-right: 0;
+}
+
+table.data .m {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+table.data .num {
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+table.data .red {
+  color: var(--sos);
+}
+
+table.data ol,
+table.data ul {
+  margin: 0;
+  padding-left: 4.5mm;
+}
+
+table.data li {
+  margin-bottom: 1mm;
+}
+
+.tag-lead,
+.tag-lag {
+  display: inline-block;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 0.6mm 2mm;
+  white-space: nowrap;
+}
+
+.tag-lead {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.tag-lag {
+  background: rgba(91, 96, 107, 0.12);
+  color: var(--muted);
+}
+
+/* ---------- phase card ---------- */
+
+.phase {
+  break-inside: avoid;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 5mm 6mm;
+  margin: 0 0 4mm;
+}
+
+.phase-head {
+  display: flex;
+  align-items: baseline;
+  gap: 3mm;
+  margin-bottom: 2.5mm;
+}
+
+.phase-num {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 9pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.phase-head h3 {
+  font-size: 12.5pt;
+  font-weight: 700;
+  margin: 0;
+}
+
+.phase p {
+  margin: 0 0 2.5mm;
+  font-size: 10pt;
+}
+
+.phase p:last-child {
+  margin-bottom: 0;
+}
+
+.phase b {
+  font-weight: 600;
+}
+
+/* ---------- column cards ---------- */
+
+.cards-3 {
+  display: flex;
+  gap: 4mm;
+  break-inside: avoid;
+}
+
+.cards-3 .card {
+  flex: 1 1 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 5mm;
+}
+
+.cards-3 .card h3 {
+  font-size: 11pt;
+  font-weight: 700;
+  margin: 0 0 2mm;
+}
+
+.cards-3 .card p {
+  font-size: 9.5pt;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.cards-3 .card .kicker {
+  color: var(--accent);
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}
+
+/* ---------- number strip ---------- */
+
+.stats {
+  display: flex;
+  gap: 4mm;
+  margin: 0 0 6mm;
+  break-inside: avoid;
+}
+
+.stats div {
+  flex: 1 1 0;
+  border-left: 2px solid var(--accent-line);
+  padding-left: 4mm;
+}
+
+.stats .v {
+  font-size: 19pt;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.stats .k {
+  font-size: 9pt;
+  color: var(--muted);
+  line-height: 1.4;
+  margin-top: 1mm;
+}
+
+/* ---------- checklist ---------- */
+
+.checklist {
+  border-top: 1px solid var(--line);
+}
+
+.check-row {
+  display: flex;
+  gap: 4mm;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--line);
+  padding: 3.5mm 0;
+  break-inside: avoid;
+}
+
+.check-box {
+  flex: 0 0 auto;
+  width: 4.5mm;
+  height: 4.5mm;
+  border: 1.5px solid var(--accent-line);
+  border-radius: 3px;
+  margin-top: 0.8mm;
+}
+
+.check-row .t {
+  font-weight: 600;
+  font-size: 10.5pt;
+}
+
+.check-row .d {
+  font-size: 9.5pt;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-top: 0.8mm;
 }
 
 ul.clean {
