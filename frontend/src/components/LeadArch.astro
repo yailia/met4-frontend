@@ -1,0 +1,9 @@
+---
+// LeadArch attribution snippet. The public key is public (visible in page source anyway).
+// Unset PUBLIC_LEADARCH_KEY disables the snippet (e.g. local dev, staging).
+const key = import.meta.env.PUBLIC_LEADARCH_KEY;
+// ?key= lets /s.js carry the site's Cal.com booking-link pattern.
+const src = `${import.meta.env.PUBLIC_LEADARCH_URL || 'https://api.leadarch.e1off.dev'}/s.js?key=${key}`;
+---
+
+{key ? <script is:inline async src={src} data-key={key} data-consent="implied"></script> : null}

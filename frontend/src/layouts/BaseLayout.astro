@@ -9,6 +9,7 @@ import '../styles/backgrounds.css';
 import '../styles/responsive.css';
 import Header from '../components/Header.astro';
 import Metrika from '../components/Metrika.astro';
+import LeadArch from '../components/LeadArch.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
@@ -59,6 +60,7 @@ const orgSchema = {
     <link rel="canonical" href={Astro.url} />
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
     <Metrika />
+    <LeadArch />
   </head>
   <body>
     <Header />
