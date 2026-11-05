@@ -63,14 +63,14 @@ const navItems = [
     function closeMenu() {
       navMenu.classList.remove('active');
       menuToggle.classList.remove('active');
-      document.body.classList.remove('menu-open');
+      document.documentElement.classList.remove('menu-open');
       if (navOverlay) navOverlay.classList.remove('active');
     }
 
     function openMenu() {
       navMenu.classList.add('active');
       menuToggle.classList.add('active');
-      document.body.classList.add('menu-open');
+      document.documentElement.classList.add('menu-open');
       if (navOverlay) navOverlay.classList.add('active');
     }
 
@@ -108,11 +108,20 @@ const navItems = [
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: var(--spacing-md) 0;
+  }
+
+  /* Blur lives on a pseudo-element: backdrop-filter on .header itself would make it
+     the containing block for the fixed mobile menu and widen the page. */
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
     background: rgba(31, 42, 36, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: var(--spacing-md) 0;
   }
 
   .nav {
@@ -244,12 +253,12 @@ const navItems = [
     width: 24px;
     height: 2px;
     background: var(--color-text-primary);
-    transition: all 0.3s ease;
+    transition: transform 0.25s ease, opacity 0.2s ease;
     border-radius: 2px;
   }
 
   .menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
+    transform: translateY(7px) rotate(45deg);
   }
 
   .menu-toggle.active span:nth-child(2) {
@@ -257,7 +266,7 @@ const navItems = [
   }
 
   .menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    transform: translateY(-7px) rotate(-45deg);
   }
 
   /* Адаптивность */
@@ -266,29 +275,32 @@ const navItems = [
       display: flex;
     }
 
-.nav-menu {
+    .nav-menu {
       position: fixed;
       top: 0;
       right: 0;
       width: 280px;
       max-width: 85vw;
       height: 100vh;
-      background: rgba(31, 42, 36, 0.98);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      height: 100dvh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: rgb(31, 42, 36);
       flex-direction: column;
       align-items: flex-start;
       padding: var(--spacing-3xl) var(--spacing-xl);
       gap: var(--spacing-xl);
       transform: translateX(100%);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      visibility: hidden;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.25s;
       box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
       z-index: 1001;
-      will-change: transform;
     }
 
     .nav-menu.active {
       transform: translateX(0);
+      visibility: visible;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s;
     }
 
     .nav-overlay {
@@ -298,7 +310,7 @@ const navItems = [
       background: rgba(0, 0, 0, 0.5);
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
       z-index: 1000;
     }
 
@@ -317,7 +329,7 @@ const navItems = [
       display: none;
     }
 
-    body.menu-open {
+    :global(html.menu-open) {
       overflow: hidden;
     }
   }
