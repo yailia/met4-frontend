@@ -240,11 +240,16 @@ const navItems = [
   .menu-toggle {
     display: none;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin-right: -10px;
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: var(--spacing-sm);
+    padding: 0;
     z-index: 1001;
   }
 
@@ -331,6 +336,10 @@ const navItems = [
 
     :global(html.menu-open) {
       overflow: hidden;
+    }
+
+    :global(html.menu-open #cookie-consent) {
+      display: none;
     }
   }
 

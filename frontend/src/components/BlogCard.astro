@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import BlogCover from './BlogCover.astro';
 import { formatRuDate } from '../lib/blog-slug';
+import { cleanExcerpt } from '../lib/blog-excerpt';
 
 interface Props {
   href: string;
@@ -12,7 +13,8 @@ interface Props {
   cover?: any;
   readingMinutes?: number;
 }
-const { href, title, date, category, excerpt, cover, readingMinutes } = Astro.props;
+const { href, title, date, category, cover, readingMinutes } = Astro.props;
+const excerpt = cleanExcerpt(title, Astro.props.excerpt);
 ---
 
 <article class="blog-card">

@@ -72,7 +72,7 @@ const base = import.meta.env.BASE_URL;
 
 <style>
   .who-section {
-    padding: 56px 0;
+    padding: 48px 0;
     position: relative;
   }
   @media (min-width: 720px) {
@@ -174,23 +174,23 @@ const base = import.meta.env.BASE_URL;
     display: block;
   }
 
+  /* Mobile: avatar beside chip/name/role, bio and tags span the full card width */
   @media (max-width: 719px) {
     .expert-card {
-      grid-template-columns: 72px 1fr;
-      gap: 14px;
-      padding: 14px;
+      grid-template-columns: 64px 1fr;
+      column-gap: 14px;
+      padding: 18px;
       align-items: start;
     }
     .expert-photo {
-      width: 72px;
-      height: 72px;
+      grid-row: 1 / span 3;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
-      flex-shrink: 0;
-      align-self: start;
     }
-    .expert-body {
-      padding: 4px 0 8px;
-    }
+    .expert-card .expert-body { display: contents; }
+    .expert-chip, .expert-name, .expert-role { grid-column: 2; }
+    .expert-credentials, .expert-tags { grid-column: 1 / -1; }
   }
 
   .expert-chip {
@@ -288,6 +288,7 @@ const base = import.meta.env.BASE_URL;
   .who-foot-link {
     display: inline-flex;
     align-items: center;
+    min-height: 44px;
     gap: 8px;
     color: #9669d8;
     font-weight: 600;
